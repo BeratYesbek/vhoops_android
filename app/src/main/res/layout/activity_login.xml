@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".Activities.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+  >
+
+        <EditText
+            android:id="@+id/editText_login_email"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_input_background"
+            android:drawableStart="@drawable/custom_email_icon"
+            android:drawablePadding="5dp"
+            android:hint="e-posta"
+            android:padding="10dp"
+            android:textSize="14dp"
+
+            >
+        </EditText>
+
+        <EditText
+            android:id="@+id/editText_login_password"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/editText_login_email"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_input_background"
+            android:drawableStart="@drawable/custom_lock_icon"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="15dp"
+            android:hint="password"
+            android:padding="10dp"
+            android:textSize="14dp">
+
+        </EditText>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_orange_transparent_button"
+            android:layout_below="@id/editText_login_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="login"
+            android:textColor="@color/orange_color"
+            android:textSize="14dp"
+            android:drawableLeft="@drawable/ic_login"
+            android:paddingRight="35dp"
+            >
+        </Button>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
