@@ -1,6 +1,6 @@
-package com.beratyesbek.Vhoops.Core.Utilities.Concrete
+package com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete
 
-import com.beratyesbek.Vhoops.Core.Utilities.Abstract.IResult
+import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
 
 open class Result(success: Boolean, message: String) : IResult {
 

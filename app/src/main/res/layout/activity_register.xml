@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    tools:context=".Activities.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/register_app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/app_title">
+    </ImageView>
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_back"
+        android:textColor="#fff"
+        android:layout_marginTop="40dp"
+        >
+
+    </ImageView>
+    <ImageView
+        android:id="@+id/register_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_profile"
+        android:layout_below="@id/register_app_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        >
+
+    </ImageView>
+    <EditText
+        android:id="@+id/editText_register_userID"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/register_profile"
+        android:layout_centerHorizontal="true"
+        android:hint="Kullanıcı adı"
+        android:layout_marginTop="15dp"
+        android:textSize="14dp"
+        android:textColor="#fff"
+        android:theme="@style/EditTextTheme"
+        android:padding="5dp"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText_register_email"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/editText_register_userID"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:hint="E-posta"
+        android:textSize="14dp"
+        android:textColor="#fff"
+        android:theme="@style/EditTextTheme"
+        android:padding="5dp"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText_register_firstName"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/editText_register_email"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:hint="Ad"
+        android:textSize="14dp"
+        android:textColor="#fff"
+        android:theme="@style/EditTextTheme"
+        android:padding="5dp"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText_register_lastName"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/editText_register_firstName"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:hint="Soyad"
+        android:textSize="14dp"
+        android:textColor="#fff"
+        android:theme="@style/EditTextTheme"
+        android:padding="5dp"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText_register_password"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/editText_register_lastName"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:hint="Şifre"
+        android:textSize="14dp"
+        android:textColor="#fff"
+        android:theme="@style/EditTextTheme"
+        android:padding="5dp"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText_register_passwordAgain"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/editText_register_password"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="5dp"
+        android:hint="Şifre tekrar"
+        android:textSize="14dp"
+        android:textColor="#fff"
+        android:theme="@style/EditTextTheme"
+        android:padding="5dp"
+        >
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_registerActivity_register"
+        android:onClick="btnRegister"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_button_second"
+        android:layout_below="@id/editText_register_passwordAgain"
+        android:drawableStart="@drawable/ic_register"
+        android:text="Kayıt ol"
+        android:textColor="#fff"
+        android:drawablePadding="-15dp"
+        android:paddingLeft="15dp"
+        android:elevation="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="200dp"
+
+
+        >
+    </Button>
+
+</RelativeLayout>

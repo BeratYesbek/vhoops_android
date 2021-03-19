@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/android-studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/login/baseline_login_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/android-studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/arrow_back/baseline_arrow_back_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ff8000" />
-                            <entry key="outputName" value="ic_login" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_back" />
                             <entry key="sourceFile" value="C:\Users\berat\Documents\AndroidStudioProject\Vhoops" />
                           </map>
                         </option>

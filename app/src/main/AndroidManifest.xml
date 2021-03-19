@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.beratyesbek.Vhoops">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Vhoops">
-        <activity android:name=".Activities.LoginActivity"></activity>
-        <activity android:name=".Activities.MainActivity">
+        <activity android:theme="@style/AppTheme_NoActionBar" android:name=".Activities.RegisterActivity"></activity>
+        <activity
+            android:name=".Activities.NavigationBottomActivity"
+            android:theme="@style/AppTheme_NoActionBar"></activity>
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:theme="@style/AppTheme_NoActionBar" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:theme="@style/AppTheme_NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/second_background"
     tools:context=".Activities.MainActivity">
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/icon"
         >
     </ImageView>
@@ -19,8 +20,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="70dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="130dp"
-        android:src="@drawable/background_text"
+        android:src="@drawable/app_title"
         android:layout_below="@+id/imageView_icon"
         >
 
@@ -29,11 +31,12 @@
     <ProgressBar
         android:layout_width="70dp"
         android:layout_height="60dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="350dp"
         android:layout_centerHorizontal="true"
-
+        android:indeterminateDrawable="@drawable/progressbar"
         >
     </ProgressBar>
+
 </RelativeLayout>
 
 

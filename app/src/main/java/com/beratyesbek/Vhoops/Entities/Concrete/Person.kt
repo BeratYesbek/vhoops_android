@@ -1,8 +1,10 @@
 package com.beratyesbek.Vhoops.Entities.Concrete
 
 import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
+import org.jetbrains.annotations.NotNull
 
-open class Person(firstName: String, lastName: String, email: String, userID: String, userUUID: String):IEntity {
+open class Person(firstName: String, lastName: String, email: String):IEntity {
+
 
     var firstName: String? = firstName
         get
@@ -15,13 +17,7 @@ open class Person(firstName: String, lastName: String, email: String, userID: St
         get
         private set;
 
-    var userID: String? = userID
-        get
-        private set;
 
-    var userUUID: String? = userUUID
-        get
-        private set;
 
 
 }
