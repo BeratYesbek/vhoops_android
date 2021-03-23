@@ -36,7 +36,7 @@
 
     </ImageView>
     <EditText
-        android:id="@+id/editText_register_userID"
+        android:id="@+id/editText_register_userName"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_below="@id/register_profile"
@@ -54,10 +54,11 @@
         android:id="@+id/editText_register_email"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_below="@id/editText_register_userID"
+        android:layout_below="@id/editText_register_userName"
         android:layout_centerHorizontal="true"
         android:layout_margin="5dp"
         android:hint="E-posta"
+        app:errorEnabled="true"
         android:textSize="14dp"
         android:textColor="#fff"
         android:theme="@style/EditTextTheme"

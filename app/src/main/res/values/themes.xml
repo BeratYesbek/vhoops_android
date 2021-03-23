@@ -1,16 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Vhoops" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Vhoops" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/orange_color</item>
         <item name="colorPrimaryVariant">@color/orange_color</item>
         <item name="colorOnPrimary">#fff</item>
+        <item name="android:windowNoTitle">true</item>
+
         <!-- Secondary brand color. -->
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="AppTheme_NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/orange_color</item>
@@ -19,6 +22,12 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="AppTheme_NoActionBar_NonFullscreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/orange_color</item>
+        <item name="colorPrimaryDark">#ef3810</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlNormal">@color/dark_color</item>
         <item name="colorControlActivated">#fff</item>

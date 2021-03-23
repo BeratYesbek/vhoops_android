@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.ProfileActivity">
+
+    <include
+        android:id="@+id/include_profile_activity"
+        layout="@layout/toolbar">
+
+    </include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_background_white_second"
+        android:elevation="15dp"
+        android:orientation="vertical"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bottom_border"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_profile_activity"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_profile_blue">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/textView_userName_profile_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_name_profile_activity"
+                android:layout_toEndOf="@id/imageView_profile_activity"
+                android:padding="5dp"
+                android:text="Vhoops"
+                android:textColor="@color/dark_color"
+                android:textSize="16dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/textView_name_profile_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@id/imageView_profile_activity"
+                android:padding="5dp"
+                android:text="lorem aaum"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:textStyle="bold|italic">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/textView_email_profile_activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_userName_profile_activity"
+                android:layout_toEndOf="@id/imageView_profile_activity"
+                android:padding="5dp"
+                android:text="vhoops@vhoops.com"
+                android:textColor="@color/dark_color"
+                android:textSize="14dp">
+
+            </TextView>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView_about_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:elevation="5dp"
+                android:padding="5dp"
+                android:text="About"
+                android:textColor="@color/dark_blue_color"
+                android:textSize="20dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/textView_about_profileActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_about_text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="8dp"
+                android:padding="5dp"
+                android:text="lorem dsadpsadıasndıusanduısabdsavdtvsadtavsdshaıopdkaslidklasdbasdıhhabs"
+                android:textColor="@color/dark_color"
+                android:textSize="16dp">
+
+            </TextView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_margin="15dp"
+        android:background="@drawable/custom_button_second"
+        android:drawableStart="@drawable/ic_edit"
+        android:drawablePadding="-45dp"
+        android:paddingLeft="45dp"
+        android:text="Düzenle"
+        android:textColor="#fff"
+        android:textSize="16dp"
+        android:textStyle="bold">
+
+    </Button>
+
+
+</LinearLayout>

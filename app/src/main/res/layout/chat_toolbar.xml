@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#db330f"
+    android:theme="@style/ThemeOverlay.AppCompat.Light"
+    android:id="@+id/toolbar"
+    android:elevation="15dp"
+    >
+
+    <ImageButton
+        android:id="@+id/imageButton_back_chat_toolbar"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_back"
+        android:layout_marginRight="5dp"
+        >
+
+    </ImageButton>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_profile_chat_toolbar"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_profile"
+        >
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vhoops"
+        android:textColor="#fff"
+        android:padding="5dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        >
+    </TextView>
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:foregroundGravity="right"
+        android:layout_gravity="end"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/ic_videocam"
+        >
+
+    </ImageButton>
+
+</androidx.appcompat.widget.Toolbar>

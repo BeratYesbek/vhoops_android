@@ -16,7 +16,7 @@ class UserManager(userDal: IUserDal) : IUserService {
 
     private val _userDal: IUserDal = userDal;
 
-    override fun addData(entity: User, result: (IResult) -> Unit) {
+    override fun add(entity: User, result: (IResult) -> Unit) {
         val resultRules = BusinessRules.run(
             arrayOf
                 (
@@ -32,7 +32,7 @@ class UserManager(userDal: IUserDal) : IUserService {
                 }
                 else {
                     // if here is throw exception you have to apply try and catch
-                        _userDal.addData(entity, result);
+                        _userDal.add(entity, result);
                 }
             }
 
@@ -41,16 +41,16 @@ class UserManager(userDal: IUserDal) : IUserService {
         }
     }
 
-    override fun updateData(entity: User, result: (IResult) -> Unit) {
+    override fun update(entity: User, result: (IResult) -> Unit) {
 
     }
 
-    override fun deleteData(entity: User, result: (IResult) -> Unit) {
+    override fun delete(entity: User, result: (IResult) -> Unit) {
         TODO("Not yet implemented")
     }
 
-    override fun getData(iDataResult: (IDataResult<ArrayList<User>>) -> Unit) {
-        _userDal.getData(iDataResult);
+    override fun getAll(iDataResult: (IDataResult<ArrayList<User>>) -> Unit) {
+        _userDal.getAll(iDataResult);
     }
 
     override fun createUser(entity: User, result: (IResult) -> Unit) {

@@ -6,11 +6,11 @@ import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
 
 interface IEntityRepository<T : IEntity> {
 
-    fun addData(entity: T, result: (IResult) -> Unit)
+    fun add(entity: T, result: (IResult) -> Unit)
 
-    fun updateData(entity: T, result: (IResult) -> Unit)
+    fun update(entity: T, result: (IResult) -> Unit)
 
-    fun deleteData(entity: T, result: (IResult) -> Unit)
+    fun delete(entity: T, result: (IResult) -> Unit)
 
-    fun getData(iDataResult: (IDataResult<ArrayList<T>>) -> Unit)
+    fun getAll(iDataResult: (IDataResult<ArrayList<T>>) -> Unit)
 }

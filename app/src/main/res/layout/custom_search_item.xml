@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/custom_background_white_second"
+    android:elevation="15dp"
+    android:layout_height="80dp">
+    <EditText
+        android:id="@+id/editText_search"
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_height="50dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="5dp"
+        android:drawableEnd="@drawable/ic_search_blue"
+        android:textColor="@color/dark_color"
+        android:inputType="text"
+        android:hint="Arama yapınız"
+        android:textSize="14dp"
+        android:padding="10dp"
+        style="@style/EditTextTheme"
+        android:layout_toEndOf="@id/btn_search_back"
+        >
+
+    </EditText>
+
+    <ImageButton
+        android:id="@+id/btn_search_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_back_blue"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        >
+
+    </ImageButton>
+
+</RelativeLayout>

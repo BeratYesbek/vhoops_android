@@ -31,6 +31,16 @@ class LoginActivity() : AppCompatActivity() {
             val intent = Intent(this, NavigationBottomActivity::class.java);
             startActivity(intent)
         })
+
+
+
+
+
+
+
+
+
+
 //
 //        val userDal: UserDal = UserDal();
 //        val userManager = UserManager(userDal);

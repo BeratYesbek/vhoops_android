@@ -4,30 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Activities.NavigationBottomActivity">
+
     <include
         android:id="@+id/include"
-        layout="@layout/toolbar">
+        layout="@layout/nav_toolbar">
 
     </include>
 
+    <FrameLayout
+        android:id="@+id/nav_activity_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/include"
+        android:layout_marginBottom="40dp">
+
+    </FrameLayout>
+
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/menu"
+        android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:cnb_menuResource="@menu/nav_menu"
         android:layout_alignParentBottom="true"
-        app:cnb_orientationMode="horizontal"
-        app:cnb_addBottomInset="false"
-        app:cnb_addLeftInset="false"
+        android:background="@drawable/custom_background_bottom_navigation"
         android:clickable="false"
         android:longClickable="false"
-
-        android:background="@drawable/custom_background_bottom_navigation"
+        app:cnb_addBottomInset="false"
+        app:cnb_addLeftInset="false"
         app:cnb_addRightInset="false"
+
         app:cnb_badgeColor="@color/orange_color"
-        app:cnb_unselectedColor="#fff"
+        app:cnb_iconSize="24dp"
+        app:cnb_menuResource="@menu/nav_menu"
+        app:cnb_orientationMode="horizontal"
         app:cnb_radius="8dp"
-        app:cnb_iconSize="24dp"/>
+        app:cnb_unselectedColor="#fff" />
+
+<RelativeLayout
+    android:id="@+id/relative_include_navbar"
+    android:layout_width="match_parent"
+    android:translationZ="150dp"
+    android:layout_height="100dp">
+    <include
+        android:id="@+id/search_include"
+        layout="@layout/custom_search_item"
+        >
+    </include>
+</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/search_people_frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="1600dp"
+        >
+
+    </FrameLayout>
 
 </RelativeLayout>

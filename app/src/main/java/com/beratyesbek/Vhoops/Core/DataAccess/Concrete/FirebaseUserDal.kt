@@ -1,6 +1,7 @@
 package com.beratyesbek.Vhoops.Core.DataAccess.Concrete
 
 import android.net.Uri
+import com.beratyesbek.Vhoops.Core.Constants.Messages
 import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseUserDal
 import com.beratyesbek.Vhoops.Core.DataAccess.Constants.FirebaseCollection
 import com.beratyesbek.Vhoops.Core.DataAccess.IEntityRepository
@@ -21,7 +22,7 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
     private lateinit var cloudFirebase: FirebaseFirestore;
     private lateinit var firebaseAuth: FirebaseAuth;
 
-    override  fun addData(entity: User, result: (IResult) -> Unit) {
+    override fun add(entity: User, result: (IResult) -> Unit) {
 
         cloudFirebase = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -32,11 +33,11 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
             "LastName" to entity.lastName,
             "Email" to entity.email,
             "UserName" to entity.userName,
-            )
+        )
         cloudFirebase.collection(FirebaseCollection.USER_COLLECTION)
             .add(hashmap)
             .addOnSuccessListener {
-                 result(SuccessResult("user created"));
+                result(SuccessResult("user created"));
 
 
             }.addOnFailureListener {
@@ -45,16 +46,34 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
             }
     }
 
-    override fun updateData(entity: User, result: (IResult) -> Unit) {
+    override fun update(entity: User, result: (IResult) -> Unit) {
         TODO("Not yet implemented")
     }
 
-    override fun deleteData(entity: User, result: (IResult) -> Unit) {
+    override fun delete(entity: User, result: (IResult) -> Unit) {
         TODO("Not yet implemented")
     }
 
-    override fun getData(iDataResult: (IDataResult<ArrayList<User>>) -> Unit) {
-        TODO("Not yet implemented")
+    override fun getAll(iDataResult: (IDataResult<ArrayList<User>>) -> Unit) {
+        cloudFirebase = FirebaseFirestore.getInstance()
+        val userList = ArrayList<User>()
+        cloudFirebase.collection(FirebaseCollection.USER_COLLECTION)
+            .get()
+            .addOnSuccessListener { result ->
+                for (item in result) {
+                    val firstName = item.get("FirstName").toString()
+                    val lastName = item.get("LastName").toString()
+                    val email = item.get("Email").toString()
+                    val userName = item.get("UserName").toString()
+
+                    userList.add(User(firstName, lastName, email, userName, ""))
+
+                }
+                iDataResult(SuccessDataResult<ArrayList<User>>(userList,Messages.GET_DATA_SUCCESS))
+            }.addOnFailureListener {
+
+            }
+
     }
 
     override fun createUser(entity: User, result: (IResult) -> Unit) {
@@ -78,16 +97,19 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
         TODO("Not yet implemented")
     }
 
-    override fun getByUserName(userName: String, iDataResult: (IDataResult<ArrayList<User>>) -> Unit) {
+    override fun getByUserName(
+        userName: String,
+        iDataResult: (IDataResult<ArrayList<User>>) -> Unit
+    ) {
         val userList = ArrayList<User>()
         cloudFirebase = FirebaseFirestore.getInstance();
         cloudFirebase.collection(FirebaseCollection.USER_COLLECTION)
-            .whereEqualTo("UserName",userName)
+            .whereEqualTo("UserName", userName)
             .get()
             .addOnSuccessListener { documents ->
 
-                if(!documents.isEmpty){
-                    for (document in documents){
+                if (!documents.isEmpty) {
+                    for (document in documents) {
 
                         val firstName = document.get("FirstName").toString()
                         val lastName = document.get("LastName").toString()
@@ -96,18 +118,28 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
                         val token = document.get("Token").toString()
                         val email = document.get("Email").toString()
                         val profileImage = document.get("ProfileImage")
-                        var uriImage : Uri? = null
-                        if(profileImage != null){
+                        var uriImage: Uri? = null
+                        if (profileImage != null) {
                             uriImage = Uri.parse(profileImage.toString());
                         }
-                        userList.add(User(firstName,lastName,email,_userName,"",userID,token,uriImage))
-                        iDataResult(SuccessDataResult<ArrayList<User>>(userList,""))
+                        userList.add(
+                            User(
+                                firstName,
+                                lastName,
+                                email,
+                                _userName,
+                                "",
+                                userID,
+                                token,
+                                uriImage
+                            )
+                        )
+                        iDataResult(SuccessDataResult<ArrayList<User>>(userList, ""))
                     }
-                }else{
-                    iDataResult(ErrorDataResult<ArrayList<User>>(userList,""))
+                } else {
+                    iDataResult(ErrorDataResult<ArrayList<User>>(userList, ""))
                 }
-
-        }
+            }
     }
 
 }

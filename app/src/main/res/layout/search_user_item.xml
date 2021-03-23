@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView_search_item_profile"
+            android:src="@drawable/ic_profile_blue"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            >
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/textView_search_item_userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imageView_search_item_profile"
+            android:text="lorem ipsum"
+            android:padding="5dp"
+            android:textColor="#000"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView_search_item_Name"
+            android:layout_toEndOf="@id/imageView_search_item_profile"
+            android:layout_below="@id/textView_search_item_userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vhoops"
+            android:padding="5dp"
+            android:textSize="14dp"
+            android:textStyle="italic"
+            android:textColor="@color/dark_color"
+            >
+        </TextView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

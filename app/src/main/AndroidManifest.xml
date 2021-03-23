@@ -11,10 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Vhoops">
-        <activity android:theme="@style/AppTheme_NoActionBar" android:name=".Activities.RegisterActivity"></activity>
+        <activity android:name=".Activities.ProfileActivity">
+
+        </activity>
         <activity
-            android:name=".Activities.NavigationBottomActivity"
-            android:theme="@style/AppTheme_NoActionBar"></activity>
+            android:name=".Activities.ChatActivity"
+            android:theme="@style/AppTheme_NoActionBar_NonFullscreen" />
+        <activity
+            android:name=".Activities.RegisterActivity"
+            android:theme="@style/AppTheme_NoActionBar" />
+        <activity android:name=".Activities.NavigationBottomActivity" />
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/AppTheme_NoActionBar" />
