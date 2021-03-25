@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_background_white_top_radius"
+
+    android:layout_gravity="center"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        >
+        <RelativeLayout
+            android:id="@+id/relative_custom_gallery_dialog_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            >
+            <ImageButton
+                android:id="@+id/btn_delete_photo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/custom_button_circle_orange"
+                android:src="@drawable/ic_delete"
+                >
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sil"
+                android:layout_below="@id/btn_delete_photo"
+                android:textColor="@color/dark_blue_color"
+                android:textSize="14dp"
+                android:layout_centerHorizontal="true"
+
+                >
+
+            </TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative_custom_gallery_dialog_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/relative_custom_gallery_dialog_1"
+            android:layout_marginLeft="15dp"
+
+            >
+            <ImageButton
+                android:id="@+id/btn_gallery_photo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/custom_circle_button_blue"
+                android:src="@drawable/ic_photo_library"
+                >
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Galeri"
+                android:layout_below="@id/btn_gallery_photo"
+                android:textColor="@color/dark_blue_color"
+                android:textSize="14dp"
+                android:layout_centerHorizontal="true"
+
+                >
+
+            </TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative_custom_gallery_dialog_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/relative_custom_gallery_dialog_2"
+            android:layout_marginLeft="15dp"
+
+            >
+            <ImageButton
+                android:id="@+id/btn_camera_photo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/custom_circle_button"
+                android:src="@drawable/ic_camera_white"
+                >
+            </ImageButton>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Camera"
+                android:layout_below="@id/btn_camera_photo"
+                android:textColor="@color/dark_blue_color"
+                android:textSize="14dp"
+                android:layout_centerHorizontal="true"
+
+                >
+
+            </TextView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

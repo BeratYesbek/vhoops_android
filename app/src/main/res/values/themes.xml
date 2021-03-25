@@ -33,4 +33,16 @@
         <item name="colorControlActivated">#fff</item>
         <item name="colorControlHighlight">#fff</item>
     </style>
+    <style name="EditTextTheme_second" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/dark_color</item>
+        <item name="colorControlActivated">@color/orange_color</item>
+        <item name="colorControlHighlight">@color/orange_color</item>
+    </style>
+
+    <style name="BottonSheetTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

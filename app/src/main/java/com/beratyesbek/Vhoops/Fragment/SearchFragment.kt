@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
 
         binding = FragmentSearchBinding.inflate(layoutInflater)
-        var view = binding.root
+        val view = binding.root
         runRecyclerView()
         searchData()
 

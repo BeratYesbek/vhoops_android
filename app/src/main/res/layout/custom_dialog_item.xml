@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/custom_background_white_top_radius"
+    android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_custom_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter your Name"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:textStyle="bold"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <EditText
+            android:id="@+id/editText_customDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_custom_dialog_title"
+            android:layout_marginLeft="20dp"
+            android:maxLength="25"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:theme="@style/EditTextTheme_second"
+            />
+        <Button
+            android:id="@+id/btn_save_customDialog"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/editText_customDialog"
+            android:background="@drawable/custom_button_blue"
+            android:text="Kaydet"
+            android:textSize="14dp"
+            android:textColor="#fff"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="10dp"
+
+            />
+
+        <Button
+            android:id="@+id/btn_cancel_customDialog"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/editText_customDialog"
+            android:background="@drawable/custom_button_second"
+            android:text="Sil"
+            android:textSize="14dp"
+            android:textColor="#fff"
+            android:layout_toStartOf="@id/btn_save_customDialog"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:elevation="10dp"
+
+            />
+</RelativeLayout>
