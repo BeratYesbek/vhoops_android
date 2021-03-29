@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+    android:clickable="true"
     android:background="#fff"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SearchFragment">
+    tools:context=".Views.Fragment.SearchFragment">
 <RelativeLayout
     android:id="@+id/relative_search_fragment"
     android:layout_width="match_parent"
@@ -63,5 +63,13 @@
         >
 
     </androidx.recyclerview.widget.RecyclerView>
+    <FrameLayout
+        android:id="@+id/frameLayout_search_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+    </FrameLayout>
 
 </RelativeLayout>

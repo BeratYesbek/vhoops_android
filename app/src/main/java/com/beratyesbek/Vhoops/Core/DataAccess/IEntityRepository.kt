@@ -13,4 +13,6 @@ interface IEntityRepository<T : IEntity> {
     fun delete(entity: T, result: (IResult) -> Unit)
 
     fun getAll(iDataResult: (IDataResult<ArrayList<T>>) -> Unit)
+
+    fun getById(id :String,iDataResult: (IDataResult<ArrayList<T>>) -> Unit)
 }

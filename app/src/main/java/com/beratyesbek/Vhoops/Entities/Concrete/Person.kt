@@ -1,22 +1,24 @@
 package com.beratyesbek.Vhoops.Entities.Concrete
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
 import org.jetbrains.annotations.NotNull
+import java.io.Serializable
 
 open class Person(firstName: String, lastName: String, email: String):IEntity {
 
 
     var firstName: String? = firstName
         get
-        private set;
+        set;
     var lastName: String? = lastName
         get
-        private set;
+        set;
 
     var email: String? = email
         get
-        private set;
-
+        set;
 
 
 

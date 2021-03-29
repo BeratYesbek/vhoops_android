@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="#000"
-    tools:context=".Fragment.CameraFragment">
+    tools:context=".Views.Fragment.CameraFragment">
 
 
     <ImageView

@@ -1,18 +1,9 @@
 package com.beratyesbek.Vhoops.Business.Rules
 
-import androidx.lifecycle.LiveData
-import com.beratyesbek.Vhoops.Business.Validation.UserValidator
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
-import com.beratyesbek.Vhoops.DataAccess.IUserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.markodevcic.kvalidation.onError
-import com.markodevcic.kvalidation.rules
-import kotlinx.coroutines.*
-import kotlinx.coroutines.android.awaitFrame
-import java.lang.Error
-import java.util.regex.Pattern
 
 class CustomUserRules {
 
@@ -39,8 +30,8 @@ class CustomUserRules {
             return SuccessResult("");
         }
 
-        fun checkUserName(userName: String, iUserDal: IUserDal): IResult {
-
+        fun checkUserName(userName: String): IResult {
+            //validation of username
             val USERNAME_PATTERN = """^(?=[a-zA-Z0-9._]{8,20}${'$'})(?!.*[_.]{2})[^_.].*[^_.]${'$'}""".toRegex();
 
             var message = "";

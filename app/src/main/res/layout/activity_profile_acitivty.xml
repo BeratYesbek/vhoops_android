@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffff"
     android:orientation="vertical"
-    tools:context=".Activities.ProfileActivity">
+    tools:context=".Views.Activities.ProfileActivity">
 
     <include
         android:id="@+id/include_profile_activity"
@@ -16,9 +16,12 @@
 
 
     <LinearLayout
+        android:layout_below="@id/include_profile_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -91,7 +94,6 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bottom_border"
                 android:padding="5dp"
-                android:text="lorem"
                 android:textColor="#000"
                 android:textSize="18dp"
                 android:textStyle="italic">
@@ -121,7 +123,6 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bottom_border"
                 android:padding="5dp"
-                android:text="aaum"
                 android:textColor="#000"
                 android:textSize="18dp"
                 android:textStyle="italic">
@@ -153,7 +154,6 @@
                 android:layout_toEndOf="@id/imageView_profile_activity"
                 android:background="@drawable/bottom_border"
                 android:padding="5dp"
-                android:text="Vhoops"
                 android:textColor="#000"
                 android:textSize="16dp">
 
@@ -216,7 +216,6 @@
                 android:background="@drawable/bottom_border"
                 android:drawablePadding="15dp"
                 android:padding="5dp"
-                android:text="lorem dsadpsadıasndıusanduısabdsavdtvsadtavsdshaıopdkaslidklasdbasdıhhabs"
                 android:textColor="#000"
                 android:textSize="15dp">
 
@@ -235,6 +234,13 @@
         </LinearLayout>
 
     </LinearLayout>
+    <FrameLayout
+        android:id="@+id/frameLayout_profile_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="215dp"
 
+        >
+    </FrameLayout>
 
-</LinearLayout>
+</RelativeLayout>

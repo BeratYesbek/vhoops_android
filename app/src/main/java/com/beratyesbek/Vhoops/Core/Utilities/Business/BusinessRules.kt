@@ -7,6 +7,7 @@ import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
 class BusinessRules {
 
     companion object {
+        //  business rules method is run by this class and method
         fun run(array : Array<IResult> ) : IResult{
             for (item in array){
                 if(!item.success()){

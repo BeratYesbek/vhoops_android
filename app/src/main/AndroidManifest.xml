@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -14,22 +16,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Vhoops">
-        <activity android:name=".Activities.CameraActivity"/>
+        <activity android:name="com.beratyesbek.Vhoops.Views.Activities.UserActivity"></activity>
+        <activity android:name="com.beratyesbek.Vhoops.Views.Activities.CameraActivity" />
         <activity android:name=".Core.Permission.GalleryPermission" />
-        <activity android:name=".Activities.ProfileEditActivity" />
-        <activity android:name=".Activities.ProfileActivity" />
+        <activity android:name="com.beratyesbek.Vhoops.Views.Activities.ProfileEditActivity" />
+        <activity android:name="com.beratyesbek.Vhoops.Views.Activities.ProfileActivity" />
         <activity
-            android:name=".Activities.ChatActivity"
+            android:name="com.beratyesbek.Vhoops.Views.Activities.ChatActivity"
             android:theme="@style/AppTheme_NoActionBar_NonFullscreen" />
         <activity
-            android:name=".Activities.RegisterActivity"
+            android:name="com.beratyesbek.Vhoops.Views.Activities.RegisterActivity"
             android:theme="@style/AppTheme_NoActionBar" />
-        <activity android:name=".Activities.NavigationBottomActivity" />
+        <activity android:name="com.beratyesbek.Vhoops.Views.Activities.NavigationBottomActivity" />
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name="com.beratyesbek.Vhoops.Views.Activities.LoginActivity"
             android:theme="@style/AppTheme_NoActionBar" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name="com.beratyesbek.Vhoops.Views.Activities.MainActivity"
             android:theme="@style/AppTheme_NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
