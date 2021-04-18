@@ -151,7 +151,7 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseStorage = FirebaseStorage.getInstance()
         val userId = firebaseAuth.currentUser.uid
-        val path = "UserProfileImage/" + userId
+        val path = "UserProfileImage/" + userId + "/profileImage/"
         firebaseStorage.reference.child(path)
             .putFile(uri)
             .addOnSuccessListener {
@@ -160,8 +160,6 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
             }.addOnFailureListener {
                 result(SuccessResult(Messages.USER_PHOTO_UPLOAD_FAILED))
             }
-
-
     }
 
     override fun getPhoto(userId: String, result: (IDataResult<Uri>) -> Unit) {
@@ -269,14 +267,14 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
 
     override fun updateUserProfileImage(uri: Uri?, documentId: String, result: (IResult) -> Unit) {
         cloudFirebase = FirebaseFirestore.getInstance()
-            var imageUri : String? = null
+        var imageUri: String? = null
 
-            if(uri != null){
-                imageUri = uri.toString()
-            }
-           val hashMap = hashMapOf(
-                "ProfileImage" to imageUri
-            )
+        if (uri != null) {
+            imageUri = uri.toString()
+        }
+        val hashMap = hashMapOf(
+            "ProfileImage" to imageUri
+        )
 
 
         cloudFirebase.collection(FirebaseCollection.USER_COLLECTION)

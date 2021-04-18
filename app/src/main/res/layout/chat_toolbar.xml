@@ -3,11 +3,11 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#db330f"
     android:theme="@style/ThemeOverlay.AppCompat.Light"
     android:id="@+id/toolbar"
-    android:elevation="15dp"
-    >
+    android:elevation="15dp">
 
     <ImageButton
         android:id="@+id/imageButton_back_chat_toolbar"
@@ -22,12 +22,16 @@
         android:id="@+id/imageView_profile_chat_toolbar"
         android:layout_width="70dp"
         android:layout_height="60dp"
+        android:layout_margin="5dp"
+        app:civ_border_color="@color/dark_blue_color"
+        app:civ_border_width="1dp"
         android:src="@drawable/ic_profile"
         >
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
+        android:id="@+id/textView_user_fullName_chatActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vhoops"

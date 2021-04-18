@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.UserDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
 import com.beratyesbek.Vhoops.databinding.ActivityRegisterBinding
 

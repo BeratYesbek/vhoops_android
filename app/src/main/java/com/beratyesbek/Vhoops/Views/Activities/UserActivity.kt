@@ -2,12 +2,24 @@ package com.beratyesbek.Vhoops.Views.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import com.beratyesbek.Vhoops.Business.Concrete.FellowManager
+import com.beratyesbek.Vhoops.Business.Concrete.FriendRequestManager
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
+import com.beratyesbek.Vhoops.Core.DataAccess.Concrete.FirebaseFriendRequestDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.FellowDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.FriendRequestDal
 
-import com.beratyesbek.Vhoops.DataAccess.UserDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
+import com.beratyesbek.Vhoops.Entities.Concrete.FriendRequest
 import com.beratyesbek.Vhoops.Entities.Concrete.User
 import com.beratyesbek.Vhoops.databinding.ActivityUserBinding
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
+import java.util.*
 
 class UserActivity : AppCompatActivity() {
     private lateinit var binding:ActivityUserBinding
@@ -20,10 +32,18 @@ class UserActivity : AppCompatActivity() {
         setContentView(view)
 
         val userId = intent.getStringExtra("userId")
-        getData(userId!!)
+
+        getFellowInfo(userId!!);
+
+        getData(userId)
+        println(userId);
+        binding.btnAddFriendUserProfile.setOnClickListener {
+            sendFriendRequest(userId)
+        }
+
     }
     private fun getData(userId:String){
-        val userDal :UserDal = UserDal()
+        val userDal : UserDal = UserDal()
         val userManager = UserManager(userDal)
         userManager.getById(userId){ result ->
             if (result.success()){
@@ -46,4 +66,27 @@ class UserActivity : AppCompatActivity() {
             }
         }
     }
+    private fun getFellowInfo(userId : String){
+        //val fellow = Fellow(userId,false)
+        val fellowDal : FellowDal = FellowDal()
+        val fellowManager = FellowManager(fellowDal)
+        fellowManager.getById(userId){ dataResult ->
+            if(dataResult.success()){
+               // binding.btnAddFriendUserProfile.visibility = View.INVISIBLE
+
+            }
+        }
+    }
+
+    private fun sendFriendRequest(receiverId : String){
+        val senderId = FirebaseAuth.getInstance().currentUser.uid
+        val friendRequestDal = FriendRequestDal()
+        val friendRequestManager = FriendRequestManager(friendRequestDal)
+        val documentID = UUID.randomUUID().toString()
+        friendRequestDal.add(FriendRequest(senderId,receiverId,documentID,false, Timestamp.now())){
+
+        }
+
+    }
+
 }

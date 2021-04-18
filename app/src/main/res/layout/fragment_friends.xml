@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:background="#fff"
     tools:context=".Views.Fragment.FriendsFragment">
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_friend_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

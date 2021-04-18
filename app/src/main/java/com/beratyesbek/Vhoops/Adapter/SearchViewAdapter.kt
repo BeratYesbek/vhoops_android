@@ -12,7 +12,7 @@ import com.beratyesbek.Vhoops.R
 import com.squareup.picasso.Picasso
 
 
-class SearchViewAdapter(var userList: ArrayList<User>,private val clickListener: OnItemClickListener) :
+class SearchViewAdapter(var userList: ArrayList<User>,val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<SearchViewAdapter.SearchViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {

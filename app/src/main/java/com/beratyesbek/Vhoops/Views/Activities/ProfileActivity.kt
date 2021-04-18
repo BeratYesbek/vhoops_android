@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
 import com.beratyesbek.Vhoops.Core.Permission.GalleryPermission
-import com.beratyesbek.Vhoops.DataAccess.UserDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
 import com.beratyesbek.Vhoops.Views.Fragment.CameraFragment
 import com.beratyesbek.Vhoops.R

@@ -8,5 +8,8 @@ class FirebaseCollection {
 
         var CHAT_COLLECTION: String = "Chats"
 
+        var FELLOW_COLLECTION: String = "Fellows"
+
+        var FRIEND_REQUEST_COLLECTION : String = "FriendRequests"
     }
 }

@@ -8,7 +8,7 @@ import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
-import com.beratyesbek.Vhoops.DataAccess.IUserDal
+import com.beratyesbek.Vhoops.DataAccess.Abstract.IUserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
 
 class UserManager(userDal: IUserDal) : IUserService {

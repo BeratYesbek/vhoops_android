@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.beratyesbek.Vhoops.Views.Activities.UserActivity
 import com.beratyesbek.Vhoops.Adapter.SearchViewAdapter
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.UserDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
 import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.Vhoops.databinding.FragmentSearchBinding

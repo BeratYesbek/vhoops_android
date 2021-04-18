@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.UserDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.databinding.FragmentCameraBinding
 import com.google.firebase.auth.FirebaseAuth
 

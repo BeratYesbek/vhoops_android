@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.UserDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
 import com.beratyesbek.Vhoops.Views.Fragment.CallFragment
 import com.beratyesbek.Vhoops.Views.Fragment.FriendsFragment
@@ -38,7 +38,7 @@ class NavigationBottomActivity : AppCompatActivity() {
         setSupportActionBar(binding.include.toolbar)
         getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
 
-       inVisibleSearchBar()
+           inVisibleSearchBar()
 
 
         val homeFragment = HomeFragment()
@@ -49,8 +49,8 @@ class NavigationBottomActivity : AppCompatActivity() {
 
         updateTokenAndUserId()
 
-        binding.bottomMenu.setOnItemSelectedListener {
-            when (it) {
+        binding.bottomMenu.setOnItemSelectedListener { click ->
+            when (click) {
                 R.id.home -> makeCurrentFragment(homeFragment, "homeFragment")
                 R.id.friends -> makeCurrentFragment(friendsFragment, "friendFragment")
                 R.id.call -> makeCurrentFragment(callFragment, "callFragment")
@@ -70,6 +70,11 @@ class NavigationBottomActivity : AppCompatActivity() {
         }
         binding.searchInclude.btnSearchBack.setOnClickListener {
             inVisibleSearchBar()
+        }
+
+        binding.include.btnToolbarNotification.setOnClickListener {
+            val intent = Intent(this,NotificationActivity::class.java)
+            startActivity(intent)
         }
 
     }
