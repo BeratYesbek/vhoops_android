@@ -10,7 +10,7 @@ English
 
 FIREBASE, VIDEO TALK and more thing
 
-Hello reader, I have been developing this project approximately for 3 week. it did not finished yet. As a database I use Fireebase. 
+Hello reader, I have been developing this project approximately for 3 week. it did not finish yet. As a database I use Fireebase. 
 
 Free chat with your friends .If you want to share location,image,video or file you can share easily with Vhoops
 
