@@ -6,5 +6,6 @@ open class Constants {
         val FULL_NAME = "fullName"
         val USER_ID = "userId"
         val PROFILE_IMAGE = "profileImage"
+
     }
 }

@@ -45,4 +45,13 @@
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/fragment_fade_enter</item>
+
+
+        <item name="android:windowExitAnimation">@anim/fragment_fade_exit</item>
+
+
+    </style>
 </resources>

@@ -19,6 +19,6 @@ open class Messages {
         val USER_PHOTO_UPLOAD_FAILED : String = "Fotoğraf eklenemedi"
         val USER_NAME_UPDATED : String = "Kullanıcı güncellendi."
         val USER_NAME_UPDATE_FAILED : String = "Kullanıcı adı güncelle sırasında bir hata oluştu."
-
+        val LOCATION_FAILED : String = "Konumunuz alınamadı tekrar deneyiniz."
     }
 }

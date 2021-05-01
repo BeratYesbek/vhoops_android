@@ -5,4 +5,9 @@
     <color name="light_blue_color">#3086D9</color>
     <color name="dark_color">#25383C</color>
     <color name="white">#fff</color>
+    <color name="danger">#d9534f</color>
+    <color name="warning">#f0ad4e</color>
+    <color name="success">#5cb85c</color>
+    <color name="primary">#0275d8</color>
+    <color name="info">#5bc0de</color>
 </resources>

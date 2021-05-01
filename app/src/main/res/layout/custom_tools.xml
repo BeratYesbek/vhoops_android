@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/custom_background_white_top_radius"
+    android:layout_height="wrap_content">
+   <RelativeLayout
+       android:id="@+id/relative1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="10dp"
+       android:layout_centerHorizontal="true"
+       >
+       <LinearLayout
+           android:id="@+id/linearLayout_document"
+           android:layout_width="wrap_content"
+           android:orientation="vertical"
+           android:layout_height="wrap_content">
+           <ImageButton
+               android:id="@+id/btn_document"
+               android:layout_width="50dp"
+               android:background="@drawable/custom_oval_background_primary"
+               android:src="@drawable/ic_document"
+               android:layout_height="50dp">
+
+           </ImageButton>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/dark_blue_color"
+               android:text="Document"
+               >
+
+           </TextView>
+       </LinearLayout>
+       <LinearLayout
+           android:id="@+id/linearLayout_camera"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_marginLeft="25dp"
+           android:layout_toEndOf="@id/linearLayout_document"
+           >
+           <ImageButton
+               android:id="@+id/btn_camera"
+               android:layout_width="50dp"
+               android:layout_height="50dp"
+               android:background="@drawable/custom_circle_button"
+               android:src="@drawable/ic_camera_white"
+               >
+           </ImageButton>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/dark_blue_color"
+               android:text="Camera"
+               >
+
+           </TextView>
+       </LinearLayout>
+
+       <LinearLayout
+           android:id="@+id/linearLayout_gallery"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="30dp"
+
+           android:orientation="vertical"
+
+           android:layout_toEndOf="@id/linearLayout_camera"
+           >
+           <ImageButton
+               android:id="@+id/btn_gallery"
+               android:layout_width="50dp"
+               android:layout_height="50dp"
+               android:background="@drawable/custom_oval_background_success"
+               android:src="@drawable/ic_photo_library"
+               >
+
+           </ImageButton>
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/dark_blue_color"
+               android:text="Gallery"
+               >
+
+           </TextView>
+       </LinearLayout>
+   </RelativeLayout>
+  <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_below="@id/relative1"
+      android:layout_marginTop="20dp"
+
+
+      >
+      <LinearLayout
+          android:id="@+id/linearLayout_audio"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+
+          >
+          <ImageButton
+              android:id="@+id/btn_audio"
+              android:layout_width="50dp"
+              android:layout_height="50dp"
+              android:layout_marginRight="30dp"
+              android:layout_below="@id/btn_document"
+              android:background="@drawable/custom_oval_danger_background"
+              android:src="@drawable/ic_audio"
+              >
+
+          </ImageButton>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/dark_blue_color"
+              android:text="Audio"
+              >
+
+          </TextView>
+      </LinearLayout>
+
+      <LinearLayout
+          android:id="@+id/linearLayout_location"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_toEndOf="@id/linearLayout_audio"
+          android:orientation="vertical"
+
+          >
+          <ImageButton
+              android:id="@+id/btn_location"
+              android:layout_width="50dp"
+              android:background="@drawable/custom_circle_button_blue"
+              android:src="@drawable/ic_location"
+              android:layout_height="50dp">
+
+          </ImageButton>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/dark_blue_color"
+              android:text="Location"
+              >
+
+          </TextView>
+
+      </LinearLayout>
+      <LinearLayout
+          android:id="@+id/linearLayout_temp"
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_toEndOf="@id/linearLayout_location"
+          android:orientation="vertical"
+          android:layout_marginLeft="30dp"
+
+          >
+
+
+      </LinearLayout>
+
+  </RelativeLayout>
+
+
+
+</RelativeLayout>

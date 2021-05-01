@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 open class FirebaseFellowDal : IFirebaseFellowDal<Fellow> {
+
     private lateinit var cloudFirebase: FirebaseFirestore;
 
     override fun add(entity: Fellow, result: (IResult) -> Unit) {

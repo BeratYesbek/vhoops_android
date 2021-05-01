@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.markodevcic.kvalidation:KValidation:1.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.markodevcic.kvalidation/KValidation/1.0.0/80b48bdae0921a958330f1367aa6d9a758e04d41/KValidation-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.markodevcic.kvalidation/KValidation/1.0.0/b6348bc3f0bf1b7ef2b7c5bc24be9b9eb311eaf9/KValidation-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.markodevcic.kvalidation/KValidation/1.0.0/356f74cd9737507ff0fc3a73a44f7be8474800cf/KValidation-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

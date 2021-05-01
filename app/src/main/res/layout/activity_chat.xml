@@ -14,6 +14,7 @@
         android:id="@+id/recyclerView_chat_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/include_chat_activity"
         android:layout_marginBottom="50dp"
         >
@@ -56,6 +57,7 @@
             android:background="@drawable/ic_attach_file"
             android:transformPivotX="15dp"
             android:rotation="-45"
+            android:onClick="openTools"
             android:layout_marginTop="13dp"
             android:layout_marginRight="10dp"
             >
@@ -82,9 +84,11 @@
             android:transformPivotX="15dp"
             android:layout_toEndOf="@id/editText_enter_message"
             android:layout_margin="5dp"
+            android:onClick="sendMessage"
             >
         </ImageButton>
 
     </RelativeLayout>
+
 
 </RelativeLayout>

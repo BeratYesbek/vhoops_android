@@ -75,13 +75,17 @@ dependencies {
     //circleImage
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-//camera
-// CameraX core library using camera2 implementation
+    //camera
+    // CameraX core library using camera2 implementation
     implementation "androidx.camera:camera-camera2:$camerax_version"
-// CameraX Lifecycle Library
+    // CameraX Lifecycle Library
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
-// CameraX View class
+    // CameraX View class
     implementation "androidx.camera:camera-view:1.0.0-alpha14"
+
+    // google maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
 
 
 }
