@@ -2,10 +2,11 @@ package com.beratyesbek.Vhoops.Entities.Concrete
 
 import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
 import com.google.firebase.Timestamp
+import java.util.*
 
-class Chat(senderId: String, receiverId: String, message: String, isSeen: Boolean, timeToSend: Timestamp) : IEntity {
+class Chat(senderId: String, receiverId: String, message: Any, isSeen: Boolean, timeToSend: Timestamp) : IEntity {
 
-    constructor(senderId: String,receiverId: String,message: String,documentId: String,isSeen: Boolean,timeToSend: Timestamp)
+    constructor(senderId: String,receiverId: String,message: Any,documentId: String,isSeen: Boolean,timeToSend: Timestamp)
             : this(senderId,receiverId,message,isSeen,timeToSend){
         this.documentId = documentId
     }
@@ -22,7 +23,7 @@ class Chat(senderId: String, receiverId: String, message: String, isSeen: Boolea
     var receiverId: String = receiverId
         get
 
-    var message: String = message
+    var message: Any = message
         get
 
     var timeToSend: Timestamp = timeToSend

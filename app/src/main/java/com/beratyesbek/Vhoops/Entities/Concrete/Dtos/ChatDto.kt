@@ -5,7 +5,7 @@ import com.beratyesbek.Vhoops.Entities.Abstract.IDto
 import com.google.firebase.Timestamp
 
 class ChatDto(
-    senderId: String, receiverId: String, message:String,
+    senderId: String, receiverId: String, message:Any,
     documentId:String, isSeen:Boolean, timeToSend:Timestamp,
     userPicture: Uri?, userFullName:String) : IDto {
 
@@ -15,7 +15,7 @@ class ChatDto(
     var receiverId : String = receiverId
         get
 
-    var message : String = message
+    var message : Any = message
         get
 
     var documentId : String = documentId

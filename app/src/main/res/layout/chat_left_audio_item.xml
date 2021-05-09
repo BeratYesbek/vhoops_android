@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="@drawable/custom_background_gray"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/btn_play_and_stop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_play_orange"
+            >
+
+        </ImageView>
+        <SeekBar
+            android:id="@+id/seekBar_audio"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/btn_play_and_stop"
+            android:layout_centerVertical="true"
+            android:theme="@style/SeekBar"
+            >
+
+        </SeekBar>
+    </RelativeLayout>
+</RelativeLayout>

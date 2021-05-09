@@ -1,5 +1,6 @@
 package com.beratyesbek.Vhoops.Business.Concrete
 
+import android.net.Uri
 import com.beratyesbek.Vhoops.Business.Abstract.IChatService
 import com.beratyesbek.Vhoops.Business.Abstract.IUserService
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
@@ -32,6 +33,14 @@ class ChatManager(val chatDal : IChatDal,val userService : IUserService) : IChat
         chatDal.getById(id,iDataResult)
     }
 
+    override fun uploadFile(uri: Uri,type : String, result: (IDataResult<String>) -> Unit) {
+       chatDal.uploadFile(uri,type,result)
+    }
+
+    override fun getFile(path: String, iDataResult: (IDataResult<Uri>) -> Unit) {
+        chatDal.getFile(path,iDataResult)
+    }
+
     override fun getChatDetail(id: String, iDataResult: (IDataResult<ArrayList<ChatDto>>) -> Unit) {
 
        chatDal.getChatDetail(id){ iDataResult ->
@@ -49,6 +58,8 @@ class ChatManager(val chatDal : IChatDal,val userService : IUserService) : IChat
        }
 
     }
+
+
 
 
 }

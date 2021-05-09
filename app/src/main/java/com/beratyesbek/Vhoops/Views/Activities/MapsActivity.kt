@@ -10,12 +10,18 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.beratyesbek.Vhoops.Business.Concrete.ChatManager
+import com.beratyesbek.Vhoops.Business.Concrete.UserManager
 import com.beratyesbek.Vhoops.Core.Constants.Messages
+import com.beratyesbek.Vhoops.DataAccess.Concrete.ChatDal
+import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.Vhoops.Entities.Concrete.Chat
 import com.beratyesbek.Vhoops.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,6 +29,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 
@@ -31,14 +39,30 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var locationManager : LocationManager
     private lateinit var locationListener: LocationListener
-
+    private lateinit var userLocation : LatLng
+    private lateinit var receiverId : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         checkGpsProvider()
 
+         receiverId = intent.getStringExtra("receiverId+").toString()
 
+
+
+
+
+    }
+    fun shareLocation(view : View) {
+        val senderId = FirebaseAuth.getInstance().currentUser.uid
+        val chatManager = ChatManager(ChatDal(),UserManager(UserDal()))
+        chatManager.add(Chat(senderId,receiverId,userLocation,false, Timestamp.now())){ result ->
+            if(result.success()) {
+                onBackPressed()
+                finish()
+            }
+        }
 
     }
 
@@ -87,7 +111,7 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        mMap.clear()
         mMap.setOnMapLongClickListener(clickListener)
 
 
@@ -96,7 +120,7 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             override fun onLocationChanged(location: Location) {
                 if(location != null){
-                    val userLocation = LatLng(location.latitude,location.longitude)
+                    userLocation = LatLng(location.latitude,location.longitude)
                     mMap.addMarker(MarkerOptions().position(userLocation).title("Your Location"))
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15f))
 
@@ -106,7 +130,7 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         val addressList = geocoder.getFromLocation(location.latitude,location.longitude,1)
 
                         if(addressList != null && addressList.size > 0){
-                            println(addressList.get(0).toString())
+
                         }
                     }catch (e : Exception){
 
@@ -123,9 +147,9 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5,10f,locationListener)
             val lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             if(lastLocation != null){
-                val lastKnownLatLng = LatLng(lastLocation.latitude,lastLocation.longitude)
-                mMap.addMarker(MarkerOptions().position(lastKnownLatLng).title("Your Location"))
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastKnownLatLng,15f))
+                userLocation = LatLng(lastLocation.latitude,lastLocation.longitude)
+                mMap.addMarker(MarkerOptions().position(userLocation).title("Your last Location"))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15f))
             }
 
         }
@@ -157,6 +181,7 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }catch (e : Exception){
 
                 }
+                userLocation = p0
                 mMap.addMarker(MarkerOptions().position(p0).title(address))
             }else{
                 Toast.makeText(applicationContext,Messages.LOCATION_FAILED,Toast.LENGTH_LONG).show()

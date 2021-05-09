@@ -1,31 +1,46 @@
 package com.beratyesbek.Vhoops.Core.DataAccess.Concrete
 
+import android.net.Uri
 import com.beratyesbek.Vhoops.Core.Constants.Constants
 import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseChatDal
+import com.beratyesbek.Vhoops.Core.DataAccess.Constants.ExtensionConstants
 import com.beratyesbek.Vhoops.Core.DataAccess.Constants.FirebaseCollection
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorDataResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
 import com.beratyesbek.Vhoops.Entities.Concrete.Chat
+import com.google.android.gms.maps.model.LatLng
+import com.google.common.collect.Maps
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.storage.FirebaseStorage
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 open class FirebaseChatDal : IFirebaseChatDal<Chat> {
 
     private lateinit var cloudFirebase: FirebaseFirestore
+    private lateinit var firebaseStorage: FirebaseStorage
 
     override fun add(entity: Chat, result: (IResult) -> Unit) {
+        val hashMap = HashMap<String,Any>()
 
-        val hashMap = hashMapOf(
-            "SenderId" to entity.senderId,
-            "ReceiverId" to entity.receiverId,
-            "Message" to entity.message,
-            "TimeToSend" to entity.timeToSend,
-            "IsSeen" to entity.isSeen
-        );
+
+        hashMap.put("SenderId",entity.senderId)
+        hashMap.put("ReceiverId",entity.receiverId)
+        hashMap.put("TimeToSend",entity.timeToSend)
+        hashMap.put("IsSeen",entity.isSeen)
+
+        if(entity.message is LatLng){
+            hashMap.put("Message",entity.message)
+        }else{
+            hashMap.put("Message",entity.message.toString())
+        }
 
         cloudFirebase = FirebaseFirestore.getInstance()
 
@@ -79,6 +94,47 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
 
     }
 
+    override fun uploadFile(uri: Uri,type : String, result: (IDataResult<String>) -> Unit) {
+        firebaseStorage = FirebaseStorage.getInstance()
+
+        val uuid = UUID.randomUUID()
+        var path = "ChatFiles/" + uuid.toString()
+
+        if(type.equals(ExtensionConstants.VIDEO)) {
+            path = path  + "--.video--"
+        }
+        else if (type.equals(ExtensionConstants.IMAGE))  {
+            path = path + "--.image--"
+        }
+        else if(type.equals(ExtensionConstants.DOCUMENT)) {
+            path = path + "--.document--"
+        }
+
+        firebaseStorage.reference.child(path)
+            .putFile(uri)
+            .addOnSuccessListener { result ->
+                result(SuccessDataResult(path,""))
+
+        }
+    }
+
+    override fun getFile(path: String, iDataResult: (IDataResult<Uri>) -> Unit) {
+        firebaseStorage = FirebaseStorage.getInstance()
+        firebaseStorage.reference.child(path).downloadUrl.
+        addOnSuccessListener {
+            if(it != null){
+
+                iDataResult(SuccessDataResult(it,""))
+
+            }
+            iDataResult(ErrorDataResult(it,""))
+
+        }.addOnFailureListener {
+
+            }
+    }
+
+
     fun setData(value: QuerySnapshot, oppositeUserId: String): ArrayList<Chat> {
 
         val chatList = ArrayList<Chat>()
@@ -105,4 +161,6 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
         return chatList
 
     }
+
+
 }

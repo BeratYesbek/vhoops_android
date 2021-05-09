@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/custom_background_white_top_radius"
+    android:elevation="10dp"
+    android:layout_margin="5dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btn_cancel_recorder"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ic_close_gray"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            >
+
+        </ImageButton>
+        <LinearLayout
+            android:id="@+id/linearLayout_recorder_dialog"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="7dp"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btn_listen_recorder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_circle"
+                android:src="@drawable/ic_headset_blue"
+                android:layout_gravity="center_vertical"
+                android:visibility="invisible"
+                android:layout_margin="5dp"
+                android:elevation="5dp"
+
+                >
+
+            </ImageButton>
+            <ImageButton
+                android:id="@+id/btn_recorderView_dialog"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:src="@drawable/ic_mic_blue"
+                android:elevation="5dp"
+                android:layout_margin="5dp"
+
+                android:layout_toEndOf="@+id/btn_listen_recorder"
+                android:background="@drawable/btn_circle"
+
+
+                >
+
+            </ImageButton>
+            <ImageButton
+                android:id="@+id/btn_send_recorder"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_circle"
+                android:src="@drawable/ic_send_blue"
+                android:layout_gravity="center_vertical"
+                android:visibility="invisible"
+                android:layout_margin="5dp"
+                android:elevation="5dp"
+
+
+                >
+
+            </ImageButton>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_info_recorder_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayout_recorder_dialog"
+            android:text="Recording..."
+            android:layout_centerHorizontal="true"
+            android:padding="3dp"
+            android:textColor="@color/dark_blue_color"
+            />
+            <Chronometer
+                android:id="@+id/chronometer_recorder_dialog"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="20sp"
+                android:textColor="@color/dark_color"
+                android:layout_below="@id/textView_info_recorder_dialog"
+                android:textAlignment="center"
+                >
+
+            </Chronometer>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

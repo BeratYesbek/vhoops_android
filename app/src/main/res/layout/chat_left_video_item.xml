@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_show_message_ProfileImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_profile_blue">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_toEndOf="@id/imageView_show_message_ProfileImage"
+        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content">
+        <VideoView
+            android:id="@+id/videoView_chat"
+            android:layout_width="280dp"
+            android:layout_height="165dp"
+
+            >
+        </VideoView>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

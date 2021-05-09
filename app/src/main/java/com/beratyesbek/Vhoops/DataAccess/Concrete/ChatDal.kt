@@ -38,7 +38,7 @@ class ChatDal: FirebaseChatDal(),IChatDal {
                             val documentId = document.id
                             val senderId = document.get("SenderId").toString()
                             val receiverId = document.get("ReceiverId").toString()
-                            val message = document.get("Message").toString()
+                            val message = document.get("Message") as Any
                             val isSeen = document.get("IsSeen") as Boolean
                             val timeToSend = document.get("TimeToSend") as Timestamp
 
