@@ -6,8 +6,8 @@
 
     android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="170dp"
+        android:layout_width="280dp"
+        android:layout_height="150dp"
         >
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="40dp"
@@ -19,10 +19,11 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_toEndOf="@id/imageView_show_message_ProfileImage"
-            app:cardBackgroundColor="@color/dark_blue_color"
+            android:background="@drawable/custom_background_chat_left"
+            app:cardBackgroundColor="@color/orange_color"
             app:cardCornerRadius="8dp"
             android:layout_height="match_parent">
-            <fragment
+            <com.google.android.gms.maps.MapView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/map_chat"
@@ -30,7 +31,7 @@
                 android:layout_margin="5dp"
                 >
 
-            </fragment>
+            </com.google.android.gms.maps.MapView>
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>

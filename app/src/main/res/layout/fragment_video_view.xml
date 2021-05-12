@@ -4,14 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:background="#800000"
+    android:background="@android:color/black"
     tools:context=".Views.Fragment.VideoViewFragment">
+
 
     <VideoView
         android:id="@+id/videoView_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+
         >
     </VideoView>
+    <ImageButton
+        android:id="@+id/btn_back_videoView_fragment"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/ic_back"
+        android:layout_margin="10dp"
+        android:translationZ="25dp"
+        >
+
+    </ImageButton>
 
 </FrameLayout>

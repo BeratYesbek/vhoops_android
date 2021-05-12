@@ -174,7 +174,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         btnCamera!!.setOnClickListener {
             val intentToCamera = Intent(this, CameraActivity::class.java)
-            intentToCamera.putExtra("documentId",user.documentID)
+            intentToCamera.putExtra("documentId", user.documentID)
             startActivity(intentToCamera)
         }
         btnRemove!!.setOnClickListener {
@@ -182,10 +182,11 @@ class ProfileActivity : AppCompatActivity() {
             userManager = UserManager(userDal)
             userManager.removeProfileImage {
 
-                if (it.success()){
-                    userManager.updateUserProfileImage(null,user.documentID){
-                        if(it.success()){
-                            Toast.makeText(this,"remove successfully",Toast.LENGTH_LONG).show()
+                if (it.success()) {
+                    userManager.updateUserProfileImage(null, user.documentID) {
+                        if (it.success()) {
+                            Toast.makeText(this, "has been removed successfully", Toast.LENGTH_LONG)
+                                .show()
 
                         }
                     }
@@ -215,19 +216,19 @@ class ProfileActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var imageSource : Uri? = null
-        var bitmap : Bitmap? = null
+        var imageSource: Uri? = null
+        var bitmap: Bitmap? = null
 
         if (resultCode !== RESULT_CANCELED) {
-            if(data != null){
+            if (data != null) {
                 imageSource = data.data!!
                 if (Build.VERSION.SDK_INT >= 28) {
 
                     val source = ImageDecoder.createSource(contentResolver, imageSource!!)
-                     bitmap = ImageDecoder.decodeBitmap(source)
+                    bitmap = ImageDecoder.decodeBitmap(source)
 
                 } else {
-                     bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageSource)
+                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageSource)
 
                 }
 
@@ -235,8 +236,8 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         super.onActivityResult(requestCode, resultCode, data)
-        if(bitmap != null && imageSource != null){
-            runCameraFragment(bitmap,imageSource)
+        if (bitmap != null && imageSource != null) {
+            runCameraFragment(bitmap, imageSource)
         }
     }
 
@@ -250,13 +251,12 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun runCameraFragment(bitmap: Bitmap,uri: Uri) {
+    private fun runCameraFragment(bitmap: Bitmap, uri: Uri) {
 
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-        transaction.replace(R.id.frameLayout_profile_activity, CameraFragment(bitmap,uri,user.documentID))
+        transaction.replace(R.id.frameLayout_profile_activity,CameraFragment( uri, user.documentID))
         transaction.commit()
-
     }
 
     private fun removeCameraFragment() {

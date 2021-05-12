@@ -34,7 +34,7 @@ class SearchFragment : OnItemClickListener, Fragment() {
         searchData()
 
         binding.btnFragmentSearchBack.setOnClickListener {
-            activity!!.onBackPressed()
+            activity?.onBackPressed()
         }
 
         binding.editTextSearchFragment.addTextChangedListener(object : TextWatcher{

@@ -24,14 +24,17 @@
                 android:background="@color/orange_color"
                 />
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:background="#fff"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginRight="15dp"
 
                 >
 
                 <ImageButton
+                    android:id="@+id/btn_userDetail_chatActivity"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/ic_message"
@@ -58,6 +61,7 @@
                     android:layout_marginBottom="5dp"
                     />
                 <ImageButton
+                    android:id="@+id/btn_userDetail_infoActivity"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/ic_info"

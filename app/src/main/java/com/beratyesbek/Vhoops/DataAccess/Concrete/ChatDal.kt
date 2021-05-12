@@ -14,7 +14,7 @@ import com.google.firebase.firestore.Query
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ChatDal: FirebaseChatDal(),IChatDal {
+class ChatDal : FirebaseChatDal(), IChatDal {
 
     private lateinit var cloudFirebase: FirebaseFirestore
 
@@ -30,10 +30,11 @@ class ChatDal: FirebaseChatDal(),IChatDal {
         cloudFirebase.collection(FirebaseCollection.CHAT_COLLECTION)
             .document(userId)
             .collection(userId)
-            .orderBy("TimeToSend",Query.Direction.ASCENDING)
+            .orderBy("TimeToSend", Query.Direction.ASCENDING)
             .addSnapshotListener { value, error ->
+                chatList.clear()
                 if (value != null) {
-                    if(!value.isEmpty){
+                    if (!value.isEmpty) {
                         for (document in value) {
                             val documentId = document.id
                             val senderId = document.get("SenderId").toString()
@@ -42,18 +43,33 @@ class ChatDal: FirebaseChatDal(),IChatDal {
                             val isSeen = document.get("IsSeen") as Boolean
                             val timeToSend = document.get("TimeToSend") as Timestamp
 
-                            if ((userId.equals(senderId)  && id.equals(receiverId))
-                                || (id.equals(senderId) && userId.equals(receiverId))) {
-                                chatList.add(ChatDto(senderId,receiverId,message,documentId,isSeen,timeToSend,null,""))
+                            if ((userId.equals(senderId) && id.equals(receiverId))
+                                || (id.equals(senderId) && userId.equals(receiverId))
+                            ) {
+                                chatList.add(
+                                    ChatDto(
+                                        senderId,
+                                        receiverId,
+                                        message,
+                                        documentId,
+                                        isSeen,
+                                        timeToSend,
+                                        null,
+                                        ""
+                                    )
+                                )
                             }
                         }
-                        iDataResult(SuccessDataResult(chatList,""))
+                        iDataResult(SuccessDataResult(chatList, ""))
+                    } else {
+                        iDataResult(ErrorDataResult(chatList, ""))
                     }
-                    iDataResult(ErrorDataResult(chatList,""))
 
+
+                } else {
+                    iDataResult(ErrorDataResult(chatList, ""))
 
                 }
-                iDataResult(ErrorDataResult(chatList,""))
             }
     }
 }

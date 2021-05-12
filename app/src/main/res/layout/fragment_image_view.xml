@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".Views.Fragment.ImageViewFragment">
+    <ImageView
+        android:id="@+id/imageView_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        >
+    </ImageView>
+    <ImageButton
+        android:id="@+id/btn_close_imageView_fragment"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:translationZ="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/ic_back"
+        />
+
+</FrameLayout>

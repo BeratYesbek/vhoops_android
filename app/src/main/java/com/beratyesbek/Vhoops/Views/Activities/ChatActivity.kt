@@ -20,12 +20,17 @@ import android.view.ViewAnimationUtils
 import android.widget.Chronometer
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.beratyesbek.Vhoops.Adapter.ChatViewAdapter
 import com.beratyesbek.Vhoops.Business.Concrete.ChatManager
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
 import com.beratyesbek.Vhoops.Core.Constants.Constants
+import com.beratyesbek.Vhoops.Core.DataAccess.Constants.ExtensionConstants
 import com.beratyesbek.Vhoops.Core.Permission.DocumentPermission
 import com.beratyesbek.Vhoops.Core.Permission.GalleryPermission
 import com.beratyesbek.Vhoops.Core.Permission.RecordAudioPermission
@@ -35,6 +40,7 @@ import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.Chat
 import com.beratyesbek.Vhoops.Entities.Concrete.Dtos.ChatDto
 import com.beratyesbek.Vhoops.R
+import com.beratyesbek.Vhoops.Views.Fragment.CameraFragment
 import com.beratyesbek.Vhoops.databinding.ActivityChatBinding
 import com.gauravk.audiovisualizer.visualizer.WaveVisualizer
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -51,10 +57,12 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var receiverId: String
     private val chatDtoList: ArrayList<ChatDto> = ArrayList()
     private lateinit var chatViewAdapter: ChatViewAdapter
-    private val CREATE_FILE = 1
+    private lateinit var transaction: FragmentTransaction;
     private var editTextControl = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityChatBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -62,6 +70,7 @@ class ChatActivity : AppCompatActivity() {
         receiverId = intent.getStringExtra(Constants.USER_ID)!!
         val fullName = intent.getStringExtra(Constants.FULL_NAME)
         val profileImage = intent.getStringExtra(Constants.PROFILE_IMAGE)
+
         val uri: Uri
 
         val imageView = binding.includeChatActivity.imageViewProfileChatToolbar
@@ -100,6 +109,7 @@ class ChatActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+
         binding.imageButtonMic.setOnClickListener {
             audioRecorder()
         }
@@ -110,9 +120,7 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    fun btnMove(motionEvent: MotionEvent, view: View) {
 
-    }
 
 
     fun runRecyclerView() {
@@ -152,7 +160,6 @@ class ChatActivity : AppCompatActivity() {
                         hideAnim(btnSend!!)
                         record()
                     }
-                    MotionEvent.ACTION_MOVE -> btnMove(motionEvent, view!!)
                     MotionEvent.ACTION_UP -> {
                         textViewInfo!!.setText("Listen or send")
                         chronometer!!.stop()
@@ -169,7 +176,12 @@ class ChatActivity : AppCompatActivity() {
         })
 
         btnListen!!.setOnClickListener {
-            val mediaPlayer = MediaPlayer.create(this,Uri.parse(this.getExternalFilesDir("/")!!.absolutePath +"/" + "fileName.3gp"))
+            val file = File(this.getExternalFilesDir("/")!!.absolutePath + "/" + "fileName.3gp")
+            val mediaPlayer = MediaPlayer.create(
+                this,
+                file.toUri()
+            )
+
             mediaPlayer.start()
         }
 
@@ -179,6 +191,9 @@ class ChatActivity : AppCompatActivity() {
 
         btnSend!!.setOnClickListener {
 
+            val file = File(this.getExternalFilesDir("/")!!.absolutePath + "/" + "fileName.3gp")
+
+            uploadFile(file.toUri(),ExtensionConstants.AUDIO)
         }
 
         alertDialog.show()
@@ -190,6 +205,7 @@ class ChatActivity : AppCompatActivity() {
         val recordPath = this.getExternalFilesDir("/")!!.absolutePath
         val recordFile = "fileName.3gp"
         val result = RecordAudioPermission.checkPermission(this, this)
+
         if (result) {
             mediaRecorder = MediaRecorder()
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -197,7 +213,6 @@ class ChatActivity : AppCompatActivity() {
             mediaRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB)
             mediaRecorder.setOutputFile(recordPath + "/" + recordFile)
             mediaRecorder.prepare()
-
 
 
             mediaRecorder.start()
@@ -221,7 +236,7 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    fun sendMessage(message: Any) {
+    private fun sendMessage(message: Any) {
 
         val senderId = FirebaseAuth.getInstance().currentUser.uid
 
@@ -230,12 +245,13 @@ class ChatActivity : AppCompatActivity() {
         val chatManager = ChatManager(chatDal, userManager)
 
         chatManager.add(Chat(senderId, receiverId, message, false, Timestamp.now())) {
+            chatDtoList.clear()
             getMessages()
         }
 
     }
 
-    fun getMessages() {
+    private fun getMessages() {
 
         val chatDal = ChatDal()
         val userManager = UserManager(UserDal())
@@ -243,12 +259,16 @@ class ChatActivity : AppCompatActivity() {
 
         chatManager.getChatDetail(receiverId) { iDataResult ->
             if (iDataResult.success()) {
-                chatDtoList.removeAll(chatDtoList)
+
+                println(iDataResult.data().size)
                 chatDtoList.clear()
+
                 chatDtoList.addAll(iDataResult.data())
+                println(chatDtoList.size)
                 chatViewAdapter.notifyDataSetChanged()
-                chatViewAdapter.notifyItemInserted(chatDtoList.size);
-                binding.recyclerViewChatActivity.scrollToPosition(chatViewAdapter.getItemCount() - 1);
+
+                chatViewAdapter.notifyItemInserted(chatDtoList.size)
+                binding.recyclerViewChatActivity.scrollToPosition(chatViewAdapter.getItemCount() - 1)
 
             }
 
@@ -256,7 +276,7 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    fun openTools(view: View) {
+     fun openTools(view: View) {
 
         val alertDialog = BottomSheetDialog(this, R.style.BottonSheetTheme)
 
@@ -327,17 +347,21 @@ class ChatActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var uri: Uri? = null
+        super.onActivityResult(requestCode, resultCode, data)
+
 
         if (resultCode !== RESULT_CANCELED) {
             if (data != null) {
-                uri = data.data
-                checkUriExtension(uri)
+
+                if (data.data != null){
+                  //  checkUriExtension(uri)
+                    runImageFragment(data.data!!)
+
+                }
 
             }
         }
 
-        super.onActivityResult(requestCode, resultCode, data)
 
     }
 
@@ -345,13 +369,15 @@ class ChatActivity : AppCompatActivity() {
 
         val type = CheckAndroidUriType.checkUriType(uri, this)
         if (type != null) {
-            uploadFile(uri as Any, type)
+          //  uploadFile(uri as Any, type)
+
         }
 
     }
 
-    fun uploadFile(message: Any, type: String) {
+    private fun uploadFile(message: Any, type: String) {
         val senderId = FirebaseAuth.getInstance().currentUser.uid
+        chatDtoList.clear()
         val chatManager = ChatManager(ChatDal(), UserManager(UserDal()))
         chatManager.uploadFile(message as Uri, type) { iDataResult ->
             getFiles(iDataResult.data())
@@ -359,35 +385,11 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    fun getFiles(path: String) {
+    private fun getFiles(path: String) {
         val chatManager = ChatManager(ChatDal(), UserManager(UserDal()))
         chatManager.getFile(path) { iDataResult ->
             sendMessage(iDataResult.data())
         }
-    }
-
-    private fun zoomInAnim(view: View) {
-        val cx = view.width * 5
-        val cy = view.height * 5
-        val finalRadius = Math.hypot(cx.toDouble(), cy.toDouble()).toFloat()
-        val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, finalRadius)
-
-        anim.start()
-    }
-
-    private fun zoomOutAnim(view: View) {
-        val cx = view.width / 5
-        val cy = view.height / 5
-        val initialRadius = Math.hypot(cx.toDouble(), cy.toDouble()).toFloat()
-        val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, initialRadius, 0f)
-        anim.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-
-
-            }
-        })
-        anim.start()
     }
 
     private fun revealAnim(view: View) {
@@ -413,5 +415,33 @@ class ChatActivity : AppCompatActivity() {
         })
         anim.start()
     }
+
+    override fun onBackPressed() {
+
+        if (supportFragmentManager.findFragmentById(R.id.frameLayout_chat) != null) {
+            removeFragment()
+        } else {
+            super.onBackPressed()
+
+        }
+    }
+
+    private fun runImageFragment(uri : Uri){
+
+        transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
+        transaction.replace(R.id.frameLayout_chat,CameraFragment( uri,"user.documentID"))
+        transaction.commit()
+    }
+
+    private fun removeFragment() {
+
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.frameLayout_chat)
+        transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
+        transaction.remove(fragment!!)
+        transaction.commit()
+    }
+
 
 }

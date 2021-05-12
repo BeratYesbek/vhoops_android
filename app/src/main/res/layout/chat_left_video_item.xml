@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="150dp"
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_show_message_ProfileImage"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_profile_blue">
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="3dp"
+            android:id="@+id/imageView_show_message_ProfileImage"
+            android:src="@drawable/ic_profile_blue"/>
 
-    </de.hdodenhof.circleimageview.CircleImageView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:background="@drawable/custom_background_chat_left"
+            app:cardBackgroundColor="@color/orange_color"
+            app:cardCornerRadius="8dp"
+            android:layout_toEndOf="@id/imageView_show_message_ProfileImage"
+            android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_toEndOf="@id/imageView_show_message_ProfileImage"
-        app:cardCornerRadius="10dp"
-        android:layout_height="wrap_content">
-        <VideoView
-            android:id="@+id/videoView_chat"
-            android:layout_width="280dp"
-            android:layout_height="165dp"
+            <VideoView
+                android:id="@+id/videoView_chat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_horizontal|center_vertical"
 
-            >
-        </VideoView>
-    </androidx.cardview.widget.CardView>
+                >
+            </VideoView>
+
+            <ImageButton
+                android:id="@+id/btn_start_video"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/btn_circle_blue"
+                android:src="@drawable/ic_play_blue"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
+

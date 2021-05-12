@@ -225,7 +225,7 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
 
 
     /*---------------------------SET DATA-------------------------------------*/
-    // this method of property is don't repeat herself
+    // this method of property isn't repeat herself
     // if don't write this method , must write in getById,getByName,getAll
 
 
@@ -316,7 +316,6 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
             }.addOnFailureListener {
                 result(ErrorResult(""));
             }
-
     }
 
 

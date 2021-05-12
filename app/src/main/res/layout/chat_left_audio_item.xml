@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-
+    android:layout_width="270dp"
     android:layout_height="wrap_content">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_show_message_ProfileImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_profile_blue">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
     <RelativeLayout
-        android:background="@drawable/custom_background_gray"
+        android:background="@drawable/custom_background_blue"
         android:layout_margin="5dp"
         android:elevation="10dp"
+        android:layout_toEndOf="@id/imageView_show_message_ProfileImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/btn_play_and_stop"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_play_orange"
+
+
+        <ImageButton
+            android:id="@+id/btn_stop_audio"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_pause_white"
+            android:visibility="invisible"
+
             >
 
-        </ImageView>
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/btn_play_audio"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_play_white"
+
+            >
+
+        </ImageButton>
         <SeekBar
             android:id="@+id/seekBar_audio"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_toEndOf="@id/btn_play_and_stop"
+            android:layout_toEndOf="@id/btn_play_audio"
             android:layout_centerVertical="true"
             android:theme="@style/SeekBar"
             >

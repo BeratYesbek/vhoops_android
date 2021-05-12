@@ -11,18 +11,18 @@ import com.beratyesbek.Vhoops.DataAccess.Concrete.ChatDal
 import com.beratyesbek.Vhoops.Entities.Concrete.Chat
 import com.beratyesbek.Vhoops.Entities.Concrete.Dtos.ChatDto
 
-class ChatManager(val chatDal : IChatDal,val userService : IUserService) : IChatService {
+class ChatManager(val chatDal: IChatDal, val userService: IUserService) : IChatService {
 
     override fun add(entity: Chat, result: (IResult) -> Unit) {
-        chatDal.add(entity,result)
+        chatDal.add(entity, result)
     }
 
     override fun update(entity: Chat, result: (IResult) -> Unit) {
-        chatDal.update(entity,result)
+        chatDal.update(entity, result)
     }
 
     override fun delete(entity: Chat, result: (IResult) -> Unit) {
-        chatDal.delete(entity,result)
+        chatDal.delete(entity, result)
     }
 
     override fun getAll(iDataResult: (IDataResult<ArrayList<Chat>>) -> Unit) {
@@ -30,36 +30,36 @@ class ChatManager(val chatDal : IChatDal,val userService : IUserService) : IChat
     }
 
     override fun getById(id: String, iDataResult: (IDataResult<ArrayList<Chat>>) -> Unit) {
-        chatDal.getById(id,iDataResult)
+        chatDal.getById(id, iDataResult)
     }
 
-    override fun uploadFile(uri: Uri,type : String, result: (IDataResult<String>) -> Unit) {
-       chatDal.uploadFile(uri,type,result)
+    override fun uploadFile(uri: Uri, type: String, result: (IDataResult<String>) -> Unit) {
+        chatDal.uploadFile(uri, type, result)
     }
 
     override fun getFile(path: String, iDataResult: (IDataResult<Uri>) -> Unit) {
-        chatDal.getFile(path,iDataResult)
+        chatDal.getFile(path, iDataResult)
     }
 
     override fun getChatDetail(id: String, iDataResult: (IDataResult<ArrayList<ChatDto>>) -> Unit) {
 
-       chatDal.getChatDetail(id){ iDataResult ->
-           if(iDataResult.success()){
-               userService.getById(id){ result ->
-                   val user = result.data().get(0)
-                   val chatDto = iDataResult.data().get(0)
+        chatDal.getChatDetail(id) { iDataResult ->
+            if (iDataResult.success()) {
 
-                       chatDto.userFullName = user.firstName  + user.lastName
-                       chatDto.userPicture = user.profileImage!!
-                       iDataResult(SuccessDataResult<ArrayList<ChatDto>>(iDataResult.data(),""))
+                userService.getById(id) { result ->
+                    val user = result.data().get(0)
+                    val chatDto = iDataResult.data().get(0)
 
-               }
-           }
-       }
+                    chatDto.userFullName = user.firstName + user.lastName
+                    chatDto.userPicture = user.profileImage!!
+
+                    iDataResult(SuccessDataResult(iDataResult.data(), ""))
+
+                }
+            }
+        }
 
     }
-
-
 
 
 }

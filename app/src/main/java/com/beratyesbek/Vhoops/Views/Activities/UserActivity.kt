@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.beratyesbek.Vhoops.Business.Concrete.FellowManager
 import com.beratyesbek.Vhoops.Business.Concrete.FriendRequestManager
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
+import com.beratyesbek.Vhoops.Core.Constants.Constants
 import com.beratyesbek.Vhoops.Core.DataAccess.Concrete.FirebaseFriendRequestDal
 import com.beratyesbek.Vhoops.DataAccess.Concrete.FellowDal
 import com.beratyesbek.Vhoops.DataAccess.Concrete.FriendRequestDal
@@ -31,7 +32,7 @@ class UserActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val userId = intent.getStringExtra("userId")
+        val userId = intent.getStringExtra(Constants.USER_ID)
 
         getFellowInfo(userId!!);
 

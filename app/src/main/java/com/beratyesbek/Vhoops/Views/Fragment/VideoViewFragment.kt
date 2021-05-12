@@ -34,6 +34,10 @@ class VideoViewFragment(val uri : Uri) : Fragment() {
         videView.requestFocus()
         videView.start()
 
+        binding.btnBackVideoViewFragment.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         return view
     }
 

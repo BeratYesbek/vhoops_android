@@ -28,20 +28,23 @@ import com.beratyesbek.Vhoops.R
 import kotlinx.android.synthetic.main.activity_camera.*
 
 
-
 typealias LumaListener = (luma: Double) -> Unit
 
 
 class CameraActivity : AppCompatActivity() {
 
-    private lateinit var binding : CameraActivity
+    private lateinit var binding: CameraActivity
 
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
     private lateinit var transaction: FragmentTransaction;
-    private lateinit var documentId : String
+
+    private var documentId: String? = null
+    private var senderId: String? = null
+    private var receiverId: String? = null
+    private var type: String? = null
 
 
 
@@ -56,14 +59,19 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
-        documentId = intent.getStringExtra("documentId")!!
+        documentId = intent.getStringExtra("documentId")
+        senderId = intent.getStringExtra("senderId")
+        receiverId = intent.getStringExtra("receiverId")
+        type = intent.getStringExtra("type")
+
 
         // Request camera permissions
         if (allPermissionsGranted()) {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
-                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
         }
 
         // Set up the listener for take photo button
@@ -72,10 +80,10 @@ class CameraActivity : AppCompatActivity() {
         }
 
         btn_return_camera.setOnClickListener {
-            if(cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA){
+            if (cameraSelector == CameraSelector.DEFAULT_FRONT_CAMERA) {
                 cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-            }else{
+            } else {
                 cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
             }
             startCamera()
@@ -100,8 +108,10 @@ class CameraActivity : AppCompatActivity() {
         // Create time-stamped output file to hold the image
         val photoFile = File(
             outputDirectory,
-            SimpleDateFormat(FILENAME_FORMAT, Locale.US
-            ).format(System.currentTimeMillis()) + ".jpg")
+            SimpleDateFormat(
+                FILENAME_FORMAT, Locale.US
+            ).format(System.currentTimeMillis()) + ".jpg"
+        )
 
         // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
@@ -109,7 +119,9 @@ class CameraActivity : AppCompatActivity() {
         // Set up image capture listener, which is triggered after photo has
         // been taken
         imageCapture.takePicture(
-            outputOptions, ContextCompat.getMainExecutor(this), object : ImageCapture.OnImageSavedCallback {
+            outputOptions,
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     println("failed")
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
@@ -122,11 +134,11 @@ class CameraActivity : AppCompatActivity() {
 
                         val source = ImageDecoder.createSource(contentResolver, savedUri!!)
                         val bitmap = ImageDecoder.decodeBitmap(source)
-                        runCameraFragment(bitmap,savedUri)
+                        runCameraFragment(bitmap, savedUri)
 
                     } else {
                         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, savedUri)
-                        runCameraFragment(bitmap,savedUri)
+                        runCameraFragment(bitmap, savedUri)
 
                     }
 
@@ -168,9 +180,10 @@ class CameraActivity : AppCompatActivity() {
 
                 // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture, imageAnalyzer)
+                    this, cameraSelector, preview, imageCapture, imageAnalyzer
+                )
 
-            } catch(exc: Exception) {
+            } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
 
@@ -179,19 +192,23 @@ class CameraActivity : AppCompatActivity() {
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
-            baseContext, it) == PackageManager.PERMISSION_GRANTED
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
-        IntArray) {
+        IntArray
+    ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -199,7 +216,8 @@ class CameraActivity : AppCompatActivity() {
 
     private fun getOutputDirectory(): File {
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
-            File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
+        }
         return if (mediaDir != null && mediaDir.exists())
             mediaDir else filesDir
     }
@@ -212,24 +230,31 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-         if (supportFragmentManager.findFragmentById(R.id.frameLayout_camera_activity) != null) {
+        if (supportFragmentManager.findFragmentById(R.id.frameLayout_camera_activity) != null) {
             removeSearchFragment()
-        }else{
-             super.onBackPressed()
+        } else {
+            super.onBackPressed()
 
-         }
+        }
     }
 
-    private fun runCameraFragment(bitmap: Bitmap,uri: Uri){
+    private fun runCameraFragment(bitmap: Bitmap, uri: Uri) {
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-        transaction.replace(R.id.frameLayout_camera_activity, CameraFragment(bitmap,uri,documentId))
+
+        transaction.replace(
+            R.id.frameLayout_camera_activity,
+            CameraFragment(uri, documentId!!)
+        )
+
+
         transaction.commit()
     }
 
-    private fun removeSearchFragment(){
+    private fun removeSearchFragment() {
         transaction = supportFragmentManager.beginTransaction()
-        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.frameLayout_camera_activity)
+        val fragment: Fragment? =
+            supportFragmentManager.findFragmentById(R.id.frameLayout_camera_activity)
         transaction.setCustomAnimations(R.anim.fade_out, R.anim.fragment_fade_exit)
         transaction.remove(fragment!!)
         transaction.commit()

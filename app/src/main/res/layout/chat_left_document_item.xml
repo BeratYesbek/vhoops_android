@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="100dp"
+    android:layout_width="250dp"
+    android:layout_height="80dp"
     android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <de.hdodenhof.circleimageview.CircleImageView
@@ -15,12 +15,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_toEndOf="@id/imageView_show_message_ProfileImage"
-        app:cardBackgroundColor="@color/dark_blue_color"
+        app:cardBackgroundColor="@color/orange_color"
         app:cardCornerRadius="10dp"
         android:layout_height="match_parent">
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="right"
             android:layout_margin="5dp"
             android:src="@drawable/ic_document"
@@ -34,9 +34,10 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/btn_document_download"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/ic_circle_arrow_down_orange"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/ic_download_white"
                 />
             <TextView
                 android:layout_width="wrap_content"

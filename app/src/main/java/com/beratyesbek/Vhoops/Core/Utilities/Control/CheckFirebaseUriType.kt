@@ -22,6 +22,10 @@ class CheckFirebaseUriType {
             else if(type.equals("document")){
                 return ExtensionConstants.DOCUMENT
             }
+            else if(type.equals("audio")){
+                return ExtensionConstants.AUDIO
+            }
+
             return null
         }
 

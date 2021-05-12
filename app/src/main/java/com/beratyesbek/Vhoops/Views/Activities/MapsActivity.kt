@@ -47,7 +47,7 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_maps)
         checkGpsProvider()
 
-         receiverId = intent.getStringExtra("receiverId+").toString()
+         receiverId = intent.getStringExtra("receiverId").toString()
 
 
 
@@ -120,6 +120,7 @@ internal class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             override fun onLocationChanged(location: Location) {
                 if(location != null){
+                    mMap.clear()
                     userLocation = LatLng(location.latitude,location.longitude)
                     mMap.addMarker(MarkerOptions().position(userLocation).title("Your Location"))
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,15f))

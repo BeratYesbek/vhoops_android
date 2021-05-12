@@ -9,6 +9,7 @@ import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorDataResult
 import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
+import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
 import com.beratyesbek.Vhoops.Entities.Concrete.Chat
 import com.google.android.gms.maps.model.LatLng
 import com.google.common.collect.Maps
@@ -28,29 +29,31 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
     private lateinit var firebaseStorage: FirebaseStorage
 
     override fun add(entity: Chat, result: (IResult) -> Unit) {
-        val hashMap = HashMap<String,Any>()
+        val hashMap = HashMap<String, Any>()
 
 
-        hashMap.put("SenderId",entity.senderId)
-        hashMap.put("ReceiverId",entity.receiverId)
-        hashMap.put("TimeToSend",entity.timeToSend)
-        hashMap.put("IsSeen",entity.isSeen)
+        hashMap.put("SenderId", entity.senderId)
+        hashMap.put("ReceiverId", entity.receiverId)
+        hashMap.put("TimeToSend", entity.timeToSend)
+        hashMap.put("IsSeen", entity.isSeen)
 
-        if(entity.message is LatLng){
-            hashMap.put("Message",entity.message)
-        }else{
-            hashMap.put("Message",entity.message.toString())
+        if (entity.message is LatLng) {
+            hashMap.put("Message", entity.message)
+        } else {
+            hashMap.put("Message", entity.message.toString())
         }
 
         cloudFirebase = FirebaseFirestore.getInstance()
+
 
         cloudFirebase.collection(FirebaseCollection.CHAT_COLLECTION)
             .document(entity.senderId)
             .collection(entity.senderId)
             .add(hashMap)
             .addOnSuccessListener {
-
+                result(SuccessResult(""))
             }
+
         cloudFirebase.collection(FirebaseCollection.CHAT_COLLECTION)
             .document(entity.receiverId)
             .collection(entity.receiverId)
@@ -87,51 +90,51 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
 
                     val list = setData(value, id)
                     chatList.addAll(list)
-                    iDataResult(SuccessDataResult<ArrayList<Chat>>(chatList,""))
+                    iDataResult(SuccessDataResult<ArrayList<Chat>>(chatList, ""))
 
                 }
             }
 
     }
 
-    override fun uploadFile(uri: Uri,type : String, result: (IDataResult<String>) -> Unit) {
+    override fun uploadFile(uri: Uri, type: String, result: (IDataResult<String>) -> Unit) {
         firebaseStorage = FirebaseStorage.getInstance()
 
         val uuid = UUID.randomUUID()
         var path = "ChatFiles/" + uuid.toString()
 
-        if(type.equals(ExtensionConstants.VIDEO)) {
-            path = path  + "--.video--"
-        }
-        else if (type.equals(ExtensionConstants.IMAGE))  {
+        if (type.equals(ExtensionConstants.VIDEO)) {
+            path = path + "--.video--"
+        } else if (type.equals(ExtensionConstants.IMAGE)) {
             path = path + "--.image--"
-        }
-        else if(type.equals(ExtensionConstants.DOCUMENT)) {
+        } else if (type.equals(ExtensionConstants.DOCUMENT)) {
             path = path + "--.document--"
+        } else if (type.equals(ExtensionConstants.AUDIO)) {
+            path = path + "--.audio--"
         }
 
         firebaseStorage.reference.child(path)
             .putFile(uri)
             .addOnSuccessListener { result ->
-                result(SuccessDataResult(path,""))
+                result(SuccessDataResult(path, ""))
 
-        }
+            }
     }
 
     override fun getFile(path: String, iDataResult: (IDataResult<Uri>) -> Unit) {
         firebaseStorage = FirebaseStorage.getInstance()
-        firebaseStorage.reference.child(path).downloadUrl.
-        addOnSuccessListener {
-            if(it != null){
+        firebaseStorage.reference.child(path).downloadUrl.addOnSuccessListener {uri ->
+            if (uri != null) {
 
-                iDataResult(SuccessDataResult(it,""))
+                iDataResult(SuccessDataResult(uri, ""))
 
+            }else{
+                iDataResult(ErrorDataResult(null, ""))
             }
-            iDataResult(ErrorDataResult(it,""))
 
         }.addOnFailureListener {
 
-            }
+        }
     }
 
 
@@ -157,6 +160,8 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
                 chatList.add(Chat(senderId, receiverId, message, documentId, isSeen, timeToSend))
             }
         }
+
+
 
         return chatList
 
