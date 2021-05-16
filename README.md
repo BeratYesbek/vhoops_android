@@ -22,6 +22,9 @@ Merhaba, bu projeyi yaklaşık olarak 3 haftadır geliştiriyorum. Henüz bitmi�
 
 Arkadaşlarınızla konuşabilir, resim, video, dosya veya konum paylaşabilirsiniz.
 
+![810c3de1-55df-47f7-b3ed-2f703f707847](https://user-images.githubusercontent.com/77804034/118032311-33b2d880-b370-11eb-8340-552628f927b3.png)
+
+![0be31732-b1e1-498a-a3c5-eb7b9c11cf0a](https://user-images.githubusercontent.com/77804034/118032318-357c9c00-b370-11eb-8ac8-539630e25d03.png)
 
 
 ![3](https://user-images.githubusercontent.com/77804034/115157926-70065800-a094-11eb-812c-028ad641cc37.jpg)
