@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.Vhoops.Adapter.FriendViewAdapter
+import com.beratyesbek.Vhoops.Adapter.PersonViewAdapter
 import com.beratyesbek.Vhoops.Business.Concrete.FellowManager
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
 import com.beratyesbek.Vhoops.Core.Constants.Constants
@@ -15,7 +15,6 @@ import com.beratyesbek.Vhoops.DataAccess.Concrete.FellowDal
 import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
 import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.R
 import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.Vhoops.Views.Activities.ChatActivity
 import com.beratyesbek.Vhoops.databinding.FragmentFriendsBinding
@@ -29,7 +28,7 @@ class FriendsFragment : Fragment(), OnItemClickListener {
     private val userList : ArrayList<User> = ArrayList()
     private val fellowList : ArrayList<Fellow> = ArrayList()
 
-    private lateinit var friendViewAdapter : FriendViewAdapter
+    private lateinit var personViewAdapter : PersonViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,8 +48,8 @@ class FriendsFragment : Fragment(), OnItemClickListener {
     fun runRecyclerView(){
         val layoutManager =  LinearLayoutManager(context)
         binding.recyclerViewFriendFragment.layoutManager = layoutManager
-        friendViewAdapter = FriendViewAdapter(userList,fellowList,this)
-        binding.recyclerViewFriendFragment.adapter = friendViewAdapter
+        personViewAdapter = PersonViewAdapter(userList,fellowList,this)
+        binding.recyclerViewFriendFragment.adapter = personViewAdapter
     }
 
 
@@ -92,7 +91,7 @@ class FriendsFragment : Fragment(), OnItemClickListener {
         }
         userList.clear()
         userList.addAll(tempUserList)
-        friendViewAdapter.notifyDataSetChanged()
+        personViewAdapter.notifyDataSetChanged()
 
     }
 
@@ -107,6 +106,10 @@ class FriendsFragment : Fragment(), OnItemClickListener {
 
         startActivity(intentToChatActivity)
 
+    }
+
+    override fun onItemLongClick(position: Int) {
+        TODO("Not yet implemented")
     }
 
 

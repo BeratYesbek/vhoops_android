@@ -14,12 +14,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
 import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.Views.Fragment.CallFragment
-import com.beratyesbek.Vhoops.Views.Fragment.FriendsFragment
-import com.beratyesbek.Vhoops.Views.Fragment.HomeFragment
-import com.beratyesbek.Vhoops.Views.Fragment.SearchFragment
 import com.beratyesbek.Vhoops.R
+import com.beratyesbek.Vhoops.Views.Fragment.*
 import com.beratyesbek.Vhoops.databinding.ActivityNavigationBottomBinding
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -39,21 +37,29 @@ class NavigationBottomActivity : AppCompatActivity() {
         getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
 
            inVisibleSearchBar()
+        binding.bottomNavigation.show(1)
+        val bottomNavigation = binding.bottomNavigation
+        bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
+        bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_people))
+        bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_call))
+
 
 
         val homeFragment = HomeFragment()
-        val friendsFragment = FriendsFragment()
+        val groupFragment = GroupFragment()
         val callFragment = CallFragment()
 
         makeCurrentFragment(homeFragment, "homeFragment")
 
         updateTokenAndUserId()
 
-        binding.bottomMenu.setOnItemSelectedListener { click ->
-            when (click) {
-                R.id.home -> makeCurrentFragment(homeFragment, "homeFragment")
-                R.id.friends -> makeCurrentFragment(friendsFragment, "friendFragment")
-                R.id.call -> makeCurrentFragment(callFragment, "callFragment")
+
+        binding.bottomNavigation.setOnClickMenuListener  { click ->
+            when (click.id) {
+                1 -> makeCurrentFragment(homeFragment, "homeFragment")
+                2 -> makeCurrentFragment(groupFragment, "groupFragment")
+                3-> makeCurrentFragment(callFragment, "callFragment")
+
             }
 
 
@@ -75,6 +81,11 @@ class NavigationBottomActivity : AppCompatActivity() {
         binding.include.btnToolbarNotification.setOnClickListener {
             val intent = Intent(this,NotificationActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnPersons.setOnClickListener {
+            val intentToPersonsActivity = Intent(this,PersonsActivity::class.java)
+            startActivity(intentToPersonsActivity)
         }
 
     }

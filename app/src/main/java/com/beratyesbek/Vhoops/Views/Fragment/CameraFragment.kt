@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.beratyesbek.Vhoops.Business.ChatFileOperations
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
+import com.beratyesbek.Vhoops.Core.Constants.Constants
 import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.databinding.FragmentCameraBinding
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity
@@ -20,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
 
-class CameraFragment(val uri : Uri,val documentId :String) : Fragment() {
+class CameraFragment(var uri : Uri,val receiverId : String?,val documentId :String?,val type:Int) : Fragment() {
 
     private lateinit var binding: FragmentCameraBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,7 +35,11 @@ class CameraFragment(val uri : Uri,val documentId :String) : Fragment() {
 
 
         binding.btnApproveCameraFragment.setOnClickListener {
-            updateUserPofile()
+            when(type){
+                Constants.CHAT_ACTIVITY -> sendPhotoToChat()
+                Constants.CAMERA_ACTIVITY -> updateUserPofile()
+                Constants.PROFILE_ACTIVITY -> updateUserPofile()
+            }
         }
         binding.btnCameraFragmentEdit.setOnClickListener {
             runEditor()
@@ -77,8 +83,6 @@ class CameraFragment(val uri : Uri,val documentId :String) : Fragment() {
                         if(result != null){
                             setImage(result)
                         }
-                    }else{
-                        setImage(uri)
                     }
                 }
 
@@ -89,11 +93,19 @@ class CameraFragment(val uri : Uri,val documentId :String) : Fragment() {
     }
 
     fun setImage(uri : Uri){
+        this.uri = uri
        Picasso.get().load(uri).into(binding.imageViewCameraFragment)
     }
 
+    private fun sendPhotoToChat(){
+        if (receiverId != null){
+            ChatFileOperations.checkUriExtension(uri,context!!,receiverId)
+            activity?.onBackPressed()
+        }
+    }
 
     private fun updateUserPofile(){
+
         val userId = FirebaseAuth.getInstance().currentUser.uid
         val userDal : UserDal = UserDal()
         val userManager = UserManager(userDal)
@@ -103,22 +115,22 @@ class CameraFragment(val uri : Uri,val documentId :String) : Fragment() {
                     userManager.getPhoto(userId){
                         if(it.success()){
 
-                            userManager.updateUserProfileImage(it.data(),documentId){result ->
+                            userManager.updateUserProfileImage(it.data(),documentId!!){result ->
                                 if(result.success()){
-                                    Toast.makeText(context,result.message(),Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this.context,result.message(),Toast.LENGTH_LONG).show()
                                     requireActivity().onBackPressed()
                                 }else{
-                                    Toast.makeText(context,result.message(),Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this.context,result.message(),Toast.LENGTH_LONG).show()
 
                                 }
                             }
                         }else{
-                            Toast.makeText(context,it.message(),Toast.LENGTH_LONG).show()
+                            Toast.makeText(this.context,it.message(),Toast.LENGTH_LONG).show()
                         }
 
                     }
                 }else{
-                    Toast.makeText(context,it.message(),Toast.LENGTH_LONG).show()
+                    Toast.makeText(this.context,it.message(),Toast.LENGTH_LONG).show()
 
                 }
             }

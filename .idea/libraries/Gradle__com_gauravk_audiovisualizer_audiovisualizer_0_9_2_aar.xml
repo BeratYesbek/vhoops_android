@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.gauravk.audiovisualizer:audiovisualizer:0.9.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ddbc46f2e9ae5faee176d0b455fabadc/audiovisualizer-0.9.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ddbc46f2e9ae5faee176d0b455fabadc/audiovisualizer-0.9.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ddbc46f2e9ae5faee176d0b455fabadc/audiovisualizer-0.9.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/352ff4cd34b5773aba4bd39725678c17/jetified-audiovisualizer-0.9.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/352ff4cd34b5773aba4bd39725678c17/jetified-audiovisualizer-0.9.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/352ff4cd34b5773aba4bd39725678c17/jetified-audiovisualizer-0.9.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.gauravk.audiovisualizer/audiovisualizer/0.9.2/d208e74aadfa145e779e9427ed2fb1c7c0e9a347/audiovisualizer-0.9.2-javadoc.jar!/" />

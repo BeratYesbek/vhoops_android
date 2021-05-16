@@ -95,6 +95,10 @@ class SearchFragment : OnItemClickListener, Fragment() {
 
     }
 
+    override fun onItemLongClick(position: Int) {
+        TODO("Not yet implemented")
+    }
+
 
 }
 

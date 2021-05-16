@@ -41,6 +41,10 @@ class ChatManager(val chatDal: IChatDal, val userService: IUserService) : IChatS
         chatDal.getFile(path, iDataResult)
     }
 
+    override fun deleteMulti(arrayList: ArrayList<Chat>, result: (IResult) -> Unit) {
+        chatDal.deleteMulti(arrayList,result)
+    }
+
     override fun getChatDetail(id: String, iDataResult: (IDataResult<ArrayList<ChatDto>>) -> Unit) {
 
         chatDal.getChatDetail(id) { iDataResult ->

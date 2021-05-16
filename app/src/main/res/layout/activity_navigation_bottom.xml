@@ -21,25 +21,20 @@
         android:layout_marginBottom="40dp">
 
     </FrameLayout>
-
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/bottom_menu"
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/custom_background_bottom_navigation"
-        android:clickable="false"
-        android:longClickable="false"
-        app:cnb_addBottomInset="false"
-        app:cnb_addLeftInset="false"
-        app:cnb_addRightInset="false"
+        app:mbn_countBackgroundColor="#ff6f00"
+        app:mbn_countTextColor="#000"
+        app:mbn_defaultIconColor="#fff"
+        android:outlineSpotShadowColor="#fff"
+        app:mbn_backgroundBottomColor="@color/info"
+        app:mbn_rippleColor="#fff"
+        app:mbn_selectedIconColor="#fff"
+        app:mbn_shadowColor="#5000" />
 
-        app:cnb_badgeColor="@color/orange_color"
-        app:cnb_iconSize="24dp"
-        app:cnb_menuResource="@menu/nav_menu"
-        app:cnb_orientationMode="horizontal"
-        app:cnb_radius="8dp"
-        app:cnb_unselectedColor="#fff" />
 
 <RelativeLayout
     android:id="@+id/relative_include_navbar"
@@ -52,6 +47,18 @@
         >
     </include>
 </RelativeLayout>
+    <ImageButton
+        android:id="@+id/btn_persons"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_chat_white"
+        android:background="@drawable/btn_circle_success"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="15dp"
+        android:elevation="10dp"
+        />
     <FrameLayout
         android:id="@+id/search_people_frameLayout"
         android:layout_width="match_parent"
@@ -60,5 +67,6 @@
         >
 
     </FrameLayout>
+
 
 </RelativeLayout>

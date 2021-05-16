@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Vhoops" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange_color</item>
-        <item name="colorPrimaryVariant">@color/orange_color</item>
+        <item name="colorPrimary">@color/info</item>
+        <item name="colorPrimaryVariant">@color/info</item>
         <item name="colorOnPrimary">#fff</item>
         <item name="android:windowNoTitle">true</item>
 
@@ -16,7 +16,7 @@
 
     <style name="AppTheme_NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/orange_color</item>
+        <item name="colorPrimary">@color/info</item>
         <item name="colorPrimaryDark">#fff</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
@@ -24,8 +24,8 @@
 
     <style name="AppTheme_NoActionBar_NonFullscreen" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/orange_color</item>
-        <item name="colorPrimaryDark">#ef3810</item>
+        <item name="colorPrimary">@color/info</item>
+        <item name="colorPrimaryDark">@color/info</item>
         <item name="android:windowNoTitle">true</item>
     </style>
     <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">

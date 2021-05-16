@@ -10,6 +10,8 @@ interface IChatService : IServiceRepository<Chat> {
     fun getChatDetail(id :String,iDataResult: (IDataResult<ArrayList<ChatDto>>) -> Unit)
     fun uploadFile(uri: Uri,type : String, result: (IDataResult<String>) -> Unit)
     fun getFile(path : String,iDataResult: (IDataResult<Uri>) -> Unit)
+    fun deleteMulti(arrayList:ArrayList<Chat>,result: (IResult) -> Unit)
+
 
 
 }

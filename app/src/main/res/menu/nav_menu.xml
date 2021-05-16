@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app = "http://schemas.android.com/apk/res-auto">
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    >
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="Home"
+        app:cnb_iconColor="#3086D9"
+        >
+
+    </item>
+    <item
+        android:id="@+id/call"
+        android:icon="@drawable/ic_call"
+        android:title="call"
         app:cnb_iconColor="#3086D9"
         >
 

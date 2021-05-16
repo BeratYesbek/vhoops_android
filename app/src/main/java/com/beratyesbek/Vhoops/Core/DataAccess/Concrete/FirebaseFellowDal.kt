@@ -68,10 +68,12 @@ open class FirebaseFellowDal : IFirebaseFellowDal<Fellow> {
                         val userId = document.get("UserId").toString()
                         val status = document.get("Status") as Boolean
                         fellowList.add(Fellow(userId,status));
+                        println("fellow list size " + fellowList.size)
                         iDataResult(SuccessDataResult(fellowList, ""))
                     }
+                }else{
+                    iDataResult(ErrorDataResult(fellowList, ""))
                 }
-                iDataResult(ErrorDataResult(fellowList, ""))
 
             }
             .addOnFailureListener {

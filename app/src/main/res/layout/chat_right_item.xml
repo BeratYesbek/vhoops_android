@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="right"
-    android:padding="8dp">
+   >
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:padding="8dp"
         android:layout_alignParentRight="true">
 
         <TextView
@@ -26,6 +27,12 @@
             >
 
         </TextView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/chat_item_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
     </RelativeLayout>
 
 </RelativeLayout>

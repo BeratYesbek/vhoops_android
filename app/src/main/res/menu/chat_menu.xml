@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/deleteChat"
+        android:title="Delete Chat"
+        app:showAsAction="never"
+        >
+
+    </item>
+    <item
+        android:id="@+id/blockUser"
+        android:title="Block User"
+        app:showAsAction="never"
+        >
+
+    </item>
+</menu>

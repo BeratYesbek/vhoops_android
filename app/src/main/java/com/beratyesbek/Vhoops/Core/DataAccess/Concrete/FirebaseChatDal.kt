@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.WriteBatch
 import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 import kotlin.collections.ArrayList
@@ -27,6 +28,7 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
 
     private lateinit var cloudFirebase: FirebaseFirestore
     private lateinit var firebaseStorage: FirebaseStorage
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun add(entity: Chat, result: (IResult) -> Unit) {
         val hashMap = HashMap<String, Any>()
@@ -67,7 +69,11 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
     }
 
     override fun delete(entity: Chat, result: (IResult) -> Unit) {
-        TODO("Not yet implemented")
+        cloudFirebase = FirebaseFirestore.getInstance()
+        val writeBatch = cloudFirebase.batch()
+        cloudFirebase.collection(FirebaseCollection.CHAT_COLLECTION)
+            .document(entity.senderId)
+            .collection(entity.senderId)
     }
 
     override fun getAll(iDataResult: (IDataResult<ArrayList<Chat>>) -> Unit) {
@@ -123,12 +129,12 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
 
     override fun getFile(path: String, iDataResult: (IDataResult<Uri>) -> Unit) {
         firebaseStorage = FirebaseStorage.getInstance()
-        firebaseStorage.reference.child(path).downloadUrl.addOnSuccessListener {uri ->
+        firebaseStorage.reference.child(path).downloadUrl.addOnSuccessListener { uri ->
             if (uri != null) {
 
                 iDataResult(SuccessDataResult(uri, ""))
 
-            }else{
+            } else {
                 iDataResult(ErrorDataResult(null, ""))
             }
 
@@ -165,6 +171,27 @@ open class FirebaseChatDal : IFirebaseChatDal<Chat> {
 
         return chatList
 
+    }
+
+    override fun deleteMulti(arrayList: ArrayList<Chat>, result: (IResult) -> Unit) {
+        cloudFirebase = FirebaseFirestore.getInstance()
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        val userId = firebaseAuth.currentUser.uid
+        val writeBatch = cloudFirebase.batch()
+
+        for (item in arrayList) {
+
+            val documentReference =
+                cloudFirebase.collection(FirebaseCollection.CHAT_COLLECTION)
+                    .document(userId)
+                    .collection(userId).document(item.documentId)
+
+            writeBatch.delete(documentReference)
+        }
+        writeBatch.commit().addOnSuccessListener {
+            result(SuccessResult("Successful"))
+        }
     }
 
 

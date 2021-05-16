@@ -1,6 +1,7 @@
 package com.beratyesbek.Vhoops.Adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
@@ -21,6 +22,7 @@ import com.beratyesbek.Vhoops.Core.Utilities.Control.CheckFirebaseUriType
 import com.beratyesbek.Vhoops.Entities.Concrete.Dtos.ChatDto
 import com.beratyesbek.Vhoops.Entities.Concrete.User
 import com.beratyesbek.Vhoops.R
+import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.Vhoops.Views.Activities.ChatActivity
 import com.beratyesbek.Vhoops.Views.Fragment.ImageViewFragment
 import com.beratyesbek.Vhoops.Views.Fragment.VideoViewFragment
@@ -36,8 +38,12 @@ import java.util.logging.Handler
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
+class ChatViewAdapter(
+    val chatDtoList: ArrayList<ChatDto>,
+    val itemClickListener: OnItemClickListener
+) :
     RecyclerView.Adapter<ChatViewAdapter.ChatViewHolder>() {
+
 
     private val MSG_TYPE_RIGHT = 0
     private val MSG_TYPE_LEFT = 1
@@ -54,6 +60,8 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
     private lateinit var locationListener: LocationListener
     private lateinit var context: Context
     private lateinit var userLocation: LatLng
+
+    private  var itemPosition : Int? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         context = parent.context
@@ -174,12 +182,12 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
 
         val chatDto = chatDtoList.get(position)
 
-        try{
+        try {
             if (viewTypeCheck == MSG_TYPE_IMAGE) {
                 val uri = Uri.parse(chatDto.message.toString())
-                Picasso.get().load(uri).into(holder.imageView_chat)
+                Picasso.get().load(uri).into(holder.imageViewChat)
 
-                holder.imageView_chat?.setOnClickListener {
+                holder.imageViewChat?.setOnClickListener {
                     displayImage(uri)
                 }
 
@@ -216,15 +224,15 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
             if (viewLeftRightType == MSG_TYPE_LEFT) {
                 if (chatDtoList[0].userPicture != null && holder.imageViewUserProfile != null) {
 
-                    Picasso.get().load(chatDtoList.get(0).userPicture).into(holder.imageViewUserProfile)
+                    Picasso.get().load(chatDtoList.get(0).userPicture)
+                        .into(holder.imageViewUserProfile)
 
                 }
             }
 
-        }catch (e :Exception){
+        } catch (e: Exception) {
             println(e.toString())
         }
-
 
 
     }
@@ -325,11 +333,12 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
         return chatDtoList.size
     }
 
-    inner class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view), OnMapReadyCallback {
+    inner class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view), OnMapReadyCallback,
+        View.OnLongClickListener,View.OnClickListener {
 
         val textViewMessage: TextView?
         val imageViewUserProfile: CircleImageView?
-        val imageView_chat: ImageView?
+        val imageViewChat: ImageView?
         val videoView: VideoView?
         var mapView: MapView?
         var map: GoogleMap? = null
@@ -337,11 +346,13 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
         val btnPlayAudio: ImageButton?
         val btnPauseAudio: ImageButton?
         val seekBarAudio: SeekBar?
+        val relativeLayout : RelativeLayout?
+
 
         init {
 
             textViewMessage = view.findViewById(R.id.textView_show_messages)
-            imageView_chat = view.findViewById(R.id.imageView_chat)
+            imageViewChat = view.findViewById(R.id.imageView_chat)
             imageViewUserProfile = view.findViewById(R.id.imageView_show_message_ProfileImage)
             videoView = view.findViewById(R.id.videoView_chat)
             btnPlayAudio = view.findViewById(R.id.btn_play_audio)
@@ -349,6 +360,15 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
             btnStartVideo = view.findViewById(R.id.btn_start_video)
             seekBarAudio = view.findViewById(R.id.seekBar_audio)
             mapView = view.findViewById(R.id.map_chat)
+            relativeLayout = view.findViewById(R.id.chat_item_relativeLayout)
+            if (relativeLayout != null){
+                relativeLayout.setOnLongClickListener(this)
+                relativeLayout.setOnClickListener(this)
+            }
+
+
+
+
 
             if (mapView != null) {
                 mapView!!.onCreate(null);
@@ -356,7 +376,11 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
                 mapView!!.getMapAsync(this);
             }
 
+
+
         }
+
+
 
         override fun onMapReady(googleMap: GoogleMap?) {
             MapsInitializer.initialize(context);
@@ -371,6 +395,34 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
                 }
 
 
+
+
+            }
+            map?.setOnMapLongClickListener {
+            }
+
+        }
+
+
+        override fun onLongClick(p0: View?): Boolean {
+            val position = adapterPosition
+            relativeLayout?.setBackgroundResource(R.drawable.oppocity_background)
+            if (position != RecyclerView.NO_POSITION) {
+
+                itemClickListener.onItemLongClick(position)
+                return true
+            }
+
+            return false
+        }
+
+        override fun onClick(p0: View?) {
+
+            val position = adapterPosition
+            relativeLayout?.setBackgroundResource(0)
+            if (position != RecyclerView.NO_POSITION) {
+
+                itemClickListener.onItemClick(position)
             }
 
         }
@@ -379,4 +431,7 @@ class ChatViewAdapter(val chatDtoList: ArrayList<ChatDto>) :
     }
 
 
+
 }
+
+

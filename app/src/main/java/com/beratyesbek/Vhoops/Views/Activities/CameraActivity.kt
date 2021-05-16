@@ -19,6 +19,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.beratyesbek.Vhoops.Business.Analysis.LuminosityAnalyzer
+import com.beratyesbek.Vhoops.Core.Constants.Constants
 import com.beratyesbek.Vhoops.Views.Fragment.CameraFragment
 import java.io.File
 import java.text.SimpleDateFormat
@@ -244,7 +245,7 @@ class CameraActivity : AppCompatActivity() {
 
         transaction.replace(
             R.id.frameLayout_camera_activity,
-            CameraFragment(uri, documentId!!)
+            CameraFragment(uri,null, documentId!!,Constants.CAMERA_ACTIVITY)
         )
 
 

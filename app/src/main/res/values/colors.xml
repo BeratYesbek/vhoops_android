@@ -7,7 +7,7 @@
     <color name="white">#fff</color>
     <color name="danger">#d9534f</color>
     <color name="warning">#f0ad4e</color>
-    <color name="success">#5cb85c</color>
-    <color name="primary">#0275d8</color>
-    <color name="info">#5bc0de</color>
+    <color name="success">#28a745</color>
+    <color name="primary">#007bff</color>
+    <color name="info">#17a2b8</color>
 </resources>

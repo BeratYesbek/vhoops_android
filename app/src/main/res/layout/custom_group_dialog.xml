@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/custom_background_white_top_radius"
+
+        >
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="10dp"
+            android:background="@drawable/custom_dark_background"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageView_groupIcon"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_profile_blue"
+                    app:civ_border_color="@color/orange_color">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <ImageButton
+                    android:id="@+id/btn_select_group_icon"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="-50dp"
+                    android:layout_marginTop="85dp"
+                    android:layout_toEndOf="@id/imageView_groupIcon"
+                    android:background="@drawable/custom_circle_button"
+                    android:src="@drawable/ic_camera_white">
+
+                </ImageButton>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editText_groupName_groupDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:theme="@style/EditTextTheme_second"
+                android:layout_margin="5dp"
+                android:hint="Enter Group Name"
+                android:textSize="14dp"
+                android:maxLength="20"
+                android:autofillHints=""
+                android:inputType="text" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Members"
+            android:textColor="@color/dark_color"
+            android:textSize="20dp"
+            android:layout_margin="15dp"
+            >
+        </TextView>
+
+        <GridView
+            android:id="@+id/gridView_groupMembers"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:numColumns="5"
+            >
+        </GridView>
+
+        <ImageButton
+            android:id="@+id/btn_create_group"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_circle_success"
+            android:src="@drawable/ic_send"
+            android:layout_gravity="end"
+            android:layout_margin="20dp"
+            android:elevation="15dp"
+            >
+
+        </ImageButton>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

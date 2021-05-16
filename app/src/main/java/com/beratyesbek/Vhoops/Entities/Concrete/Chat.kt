@@ -11,7 +11,7 @@ class Chat(senderId: String, receiverId: String, message: Any, isSeen: Boolean, 
         this.documentId = documentId
     }
 
-    private lateinit var documentId: String
+    lateinit var documentId: String
         get
 
     var isSeen: Boolean = isSeen

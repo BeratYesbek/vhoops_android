@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
+import com.beratyesbek.Vhoops.Core.Constants.Constants
 import com.beratyesbek.Vhoops.Core.Permission.GalleryPermission
 import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.User
@@ -219,7 +220,7 @@ class ProfileActivity : AppCompatActivity() {
         var imageSource: Uri? = null
         var bitmap: Bitmap? = null
 
-        if (resultCode !== RESULT_CANCELED) {
+        if (resultCode != RESULT_CANCELED) {
             if (data != null) {
                 imageSource = data.data!!
                 if (Build.VERSION.SDK_INT >= 28) {
@@ -255,7 +256,7 @@ class ProfileActivity : AppCompatActivity() {
 
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-        transaction.replace(R.id.frameLayout_profile_activity,CameraFragment( uri, user.documentID))
+        transaction.replace(R.id.frameLayout_profile_activity,CameraFragment( uri,null, user.documentID,Constants.PROFILE_ACTIVITY))
         transaction.commit()
     }
 

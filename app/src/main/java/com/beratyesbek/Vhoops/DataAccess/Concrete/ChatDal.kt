@@ -60,7 +60,9 @@ class ChatDal : FirebaseChatDal(), IChatDal {
                                 )
                             }
                         }
-                        iDataResult(SuccessDataResult(chatList, ""))
+                        if (chatList.size >0){
+                            iDataResult(SuccessDataResult(chatList, ""))
+                        }
                     } else {
                         iDataResult(ErrorDataResult(chatList, ""))
                     }

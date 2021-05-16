@@ -5,13 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.beratyesbek.Vhoops.Core.Constants.Constants
@@ -23,11 +22,11 @@ import com.beratyesbek.Vhoops.Views.Activities.ChatActivity
 import com.beratyesbek.Vhoops.Views.Activities.UserActivity
 import com.squareup.picasso.Picasso
 
-class FriendViewAdapter(
+class PersonViewAdapter(
     val userList: ArrayList<User>,
     val fellowList: ArrayList<Fellow>,
     val clickListener: OnItemClickListener
-) : RecyclerView.Adapter<FriendViewAdapter.FriendViewHolder>() {
+) : RecyclerView.Adapter<PersonViewAdapter.FriendViewHolder>() {
 
     private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
@@ -86,24 +85,46 @@ class FriendViewAdapter(
         return userList.size
     }
 
-    inner class FriendViewHolder(view: View) : RecyclerView.ViewHolder(view),View.OnClickListener {
+    inner class FriendViewHolder(view: View) : RecyclerView.ViewHolder(view),View.OnClickListener,View.OnLongClickListener {
         val textViewUserName: TextView
         val textViewAbout: TextView
         val imageViewProfile: ImageView
+        val relativeLayout : RelativeLayout
 
         init {
             textViewUserName = view.findViewById(R.id.textView_friend_item_userName)
             textViewAbout = view.findViewById(R.id.textView_friend_item_about)
             imageViewProfile = view.findViewById(R.id.imageView_friend_item)
+            relativeLayout = view.findViewById(R.id.relativeLayout_custom_person_item)
+
+            relativeLayout.setOnClickListener(this)
+            relativeLayout.setOnLongClickListener(this)
+            itemView.setOnLongClickListener(this)
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(p0: View?) {
             val position = adapterPosition
+            relativeLayout?.setBackgroundResource(R.drawable.custom_transparent_background)
             if (position != RecyclerView.NO_POSITION) {
                 clickListener.onItemClick(position)
             }
         }
+
+        override fun onLongClick(p0: View?): Boolean {
+
+            val position = adapterPosition
+            relativeLayout?.setBackgroundResource(R.drawable.oppocity_background)
+
+            if (position != RecyclerView.NO_POSITION) {
+
+                clickListener.onItemLongClick(position)
+                return true
+            }
+
+            return false
+        }
+
 
     }
 }

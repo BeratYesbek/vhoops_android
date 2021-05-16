@@ -170,7 +170,7 @@ open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {
             .addOnSuccessListener { uri ->
                 result(SuccessDataResult(uri, ""))
             }.addOnFailureListener {
-                result(ErrorDataResult(null!!, "Failed"))
+                result(ErrorDataResult(null, "Failed"))
             }
     }
 

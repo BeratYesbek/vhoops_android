@@ -2,6 +2,7 @@ package com.beratyesbek.Vhoops.Views.Activities
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -14,32 +15,32 @@ import android.os.SystemClock
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewAnimationUtils
-import android.widget.Chronometer
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.view.*
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.beratyesbek.Vhoops.Adapter.ChatViewAdapter
+import com.beratyesbek.Vhoops.Business.ChatFileOperations
 import com.beratyesbek.Vhoops.Business.Concrete.ChatManager
 import com.beratyesbek.Vhoops.Business.Concrete.UserManager
 import com.beratyesbek.Vhoops.Core.Constants.Constants
+import com.beratyesbek.Vhoops.Core.Constants.Messages
 import com.beratyesbek.Vhoops.Core.DataAccess.Constants.ExtensionConstants
 import com.beratyesbek.Vhoops.Core.Permission.DocumentPermission
 import com.beratyesbek.Vhoops.Core.Permission.GalleryPermission
 import com.beratyesbek.Vhoops.Core.Permission.RecordAudioPermission
+import com.beratyesbek.Vhoops.Core.Utilities.Animation.Animation
 import com.beratyesbek.Vhoops.Core.Utilities.Control.CheckAndroidUriType
 import com.beratyesbek.Vhoops.DataAccess.Concrete.ChatDal
 import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.Vhoops.Entities.Concrete.Chat
 import com.beratyesbek.Vhoops.Entities.Concrete.Dtos.ChatDto
 import com.beratyesbek.Vhoops.R
+import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.Vhoops.Views.Fragment.CameraFragment
 import com.beratyesbek.Vhoops.databinding.ActivityChatBinding
 import com.gauravk.audiovisualizer.visualizer.WaveVisualizer
@@ -50,7 +51,7 @@ import com.squareup.picasso.Picasso
 import java.io.File
 
 
-class ChatActivity : AppCompatActivity() {
+class ChatActivity : AppCompatActivity(),OnItemClickListener {
 
     private lateinit var binding: ActivityChatBinding
     private lateinit var mediaRecorder: MediaRecorder
@@ -59,13 +60,25 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var chatViewAdapter: ChatViewAdapter
     private lateinit var transaction: FragmentTransaction;
     private var editTextControl = true
+    private var toolbarAnimControl = false
+    private lateinit var positionArray: ArrayList<Int>
+    private lateinit var selectMessageList : ArrayList<Chat>
+    private lateinit var deleteAlertDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityChatBinding.inflate(layoutInflater)
         val view = binding.root
+
         setContentView(view)
+
+        setSupportActionBar(binding.includeChatActivity.toolbar)
+        getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
+
+        positionArray = ArrayList()
+        selectMessageList = ArrayList()
+
 
         receiverId = intent.getStringExtra(Constants.USER_ID)!!
         val fullName = intent.getStringExtra(Constants.FULL_NAME)
@@ -81,7 +94,11 @@ class ChatActivity : AppCompatActivity() {
         }
         binding.includeChatActivity.textViewUserFullNameChatActivity.text = fullName!!.toUpperCase()
 
+        binding.includeChatActivity.btnDeleteChatToolbar.setOnClickListener {
+            displayAlertDialogForDelete({ multipleDeleteMessage() })
 
+
+        }
 
         binding.editTextEnterMessage.addTextChangedListener(object : TextWatcher {
 
@@ -121,14 +138,12 @@ class ChatActivity : AppCompatActivity() {
     }
 
 
-
-
     fun runRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerViewChatActivity.layoutManager = layoutManager
         layoutManager.setStackFromEnd(true);
         binding.recyclerViewChatActivity.refreshDrawableState();
-        chatViewAdapter = ChatViewAdapter(chatDtoList)
+        chatViewAdapter = ChatViewAdapter(chatDtoList,this)
         binding.recyclerViewChatActivity.adapter = chatViewAdapter
 
     }
@@ -193,7 +208,7 @@ class ChatActivity : AppCompatActivity() {
 
             val file = File(this.getExternalFilesDir("/")!!.absolutePath + "/" + "fileName.3gp")
 
-            uploadFile(file.toUri(),ExtensionConstants.AUDIO)
+            uploadFile(file.toUri(), ExtensionConstants.AUDIO)
         }
 
         alertDialog.show()
@@ -260,23 +275,25 @@ class ChatActivity : AppCompatActivity() {
         chatManager.getChatDetail(receiverId) { iDataResult ->
             if (iDataResult.success()) {
 
-                println(iDataResult.data().size)
                 chatDtoList.clear()
 
                 chatDtoList.addAll(iDataResult.data())
-                println(chatDtoList.size)
                 chatViewAdapter.notifyDataSetChanged()
-
                 chatViewAdapter.notifyItemInserted(chatDtoList.size)
                 binding.recyclerViewChatActivity.scrollToPosition(chatViewAdapter.getItemCount() - 1)
 
+
+            }else{
+
+                chatDtoList.clear()
+                chatViewAdapter.notifyDataSetChanged()
             }
 
         }
 
     }
 
-     fun openTools(view: View) {
+    fun openTools(view: View) {
 
         val alertDialog = BottomSheetDialog(this, R.style.BottonSheetTheme)
 
@@ -323,8 +340,8 @@ class ChatActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+        grantResults: IntArray) {
+
         if (requestCode == 1) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent =
@@ -350,13 +367,13 @@ class ChatActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
 
-        if (resultCode !== RESULT_CANCELED) {
+        if (resultCode !== RESULT_CANCELED ) {
             if (data != null) {
-
-                if (data.data != null){
-                  //  checkUriExtension(uri)
-                    runImageFragment(data.data!!)
-
+                val uri = data.data
+                if(requestCode == 2){
+                        runImageFragment(uri!!)
+                }else{
+                    runChatFileOperations(uri!!)
                 }
 
             }
@@ -364,18 +381,11 @@ class ChatActivity : AppCompatActivity() {
 
 
     }
-
-    private fun checkUriExtension(uri: Uri?) {
-
-        val type = CheckAndroidUriType.checkUriType(uri, this)
-        if (type != null) {
-          //  uploadFile(uri as Any, type)
-
-        }
-
+    private fun runChatFileOperations(uri : Uri){
+        ChatFileOperations.checkUriExtension(uri,this,receiverId)
     }
 
-    private fun uploadFile(message: Any, type: String) {
+    fun uploadFile(message: Any, type: String) {
         val senderId = FirebaseAuth.getInstance().currentUser.uid
         chatDtoList.clear()
         val chatManager = ChatManager(ChatDal(), UserManager(UserDal()))
@@ -426,11 +436,11 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun runImageFragment(uri : Uri){
+    private fun runImageFragment(uri: Uri) {
 
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-        transaction.replace(R.id.frameLayout_chat,CameraFragment( uri,"user.documentID"))
+        transaction.replace(R.id.frameLayout_chat, CameraFragment(uri, receiverId,null,Constants.CHAT_ACTIVITY))
         transaction.commit()
     }
 
@@ -442,6 +452,123 @@ class ChatActivity : AppCompatActivity() {
         transaction.remove(fragment!!)
         transaction.commit()
     }
+
+
+    private fun multipleDeleteMessage(){
+
+        if (selectMessageList.size >0){
+            val chatManager = ChatManager(ChatDal(),UserManager(UserDal()))
+            chatManager.deleteMulti(selectMessageList){
+                selectMessageList.clear()
+                clearToolbar()
+                deleteAlertDialog.dismiss()
+            }
+        }
+    }
+
+
+
+    private fun displayAlertDialogForDelete(function:() -> Unit){
+        deleteAlertDialog= Dialog(this)
+        deleteAlertDialog.setCancelable(false)
+        deleteAlertDialog.setContentView(R.layout.custom_alert_delete_dialog)
+        deleteAlertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val textView = deleteAlertDialog.findViewById<TextView>(R.id.textView_info_alertDeleteDialog)
+        val btnDelete = deleteAlertDialog.findViewById<Button>(R.id.btn_accept_alertDeleteDialog)
+        val btnCancel = deleteAlertDialog.findViewById<Button>(R.id.btn_cancel_alertDeleteDialog)
+        val progressBar = deleteAlertDialog.findViewById<ProgressBar>(R.id.progressBar_alertDialogDelete)
+
+        btnDelete.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            btnDelete.visibility = View.INVISIBLE
+            btnCancel.visibility = View.INVISIBLE
+            textView.text = "Please wait, deleting..."
+
+            function()
+
+        }
+        btnCancel.setOnClickListener {
+            deleteAlertDialog.dismiss()
+        }
+        deleteAlertDialog.show()
+
+
+    }
+    private fun deleteChat(){
+        selectMessageList.clear()
+        chatDtoList.forEachIndexed { index, chatDto ->
+            selectMessageList.add(Chat(chatDto.senderId,chatDto.receiverId,chatDto.message,chatDto.documentId,chatDto.isSeen,chatDto.timeToSend))
+
+        }
+        multipleDeleteMessage()
+        chatDtoList.clear()
+        chatViewAdapter.notifyDataSetChanged()
+    }
+
+    private fun clearToolbar(){
+        Animation.hideAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
+        Animation.revealAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+        toolbarAnimControl = false
+    }
+
+    override fun onItemClick(position: Int) {
+        if (selectMessageList.size > 0){
+
+            positionArray.forEachIndexed { index, i ->
+                if (i == position){
+                    println(position)
+                    selectMessageList.removeAt(index)
+                    binding.includeChatActivity.textViewDeleteItemChatToolbar.text = selectMessageList.size.toString()
+                }
+            }
+
+            if (selectMessageList.size <= 0){
+                Animation.hideAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
+                Animation.revealAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+                toolbarAnimControl = false
+            }
+
+        }else{
+            if (!toolbarAnimControl && selectMessageList.size <= 0 ){
+                Animation.hideAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
+                Animation.revealAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+                toolbarAnimControl = false
+            }
+        }
+
+    }
+
+    override fun onItemLongClick(position: Int) {
+        positionArray.add(position)
+        val chatDto = chatDtoList.get(position)
+        val chat : Chat = Chat(chatDto.senderId,chatDto.receiverId,chatDto.message,chatDto.documentId,chatDto.isSeen,chatDto.timeToSend)
+        println(chat.documentId)
+        selectMessageList.add(chat)
+        binding.includeChatActivity.textViewDeleteItemChatToolbar.text = selectMessageList.size.toString()
+        if (selectMessageList.size > 0 && !toolbarAnimControl){
+            Animation.revealAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
+            Animation.hideAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+            toolbarAnimControl = true
+        }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.chat_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.deleteChat -> displayAlertDialogForDelete({ deleteChat() })
+        }
+        return true
+    }
+
+
+
+
 
 
 }
