@@ -8,6 +8,9 @@
 
 English 
 
+## I will refactor all codes,
+## I will use Hilt,Data binding and MVVM
+
 FIREBASE, VIDEO TALK and more thing
 
 Hello reader, I have been developing this project approximately for 3 week. it did not finish yet. As a database I use Fireebase. 
