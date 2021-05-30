@@ -1,9 +1,9 @@
-package com.beratyesbek.Vhoops.DataAccess.Abstract
+package com.beratyesbek.vhoops.DataAccess.Abstract
 
-import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseChatDal
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Entities.Concrete.Chat
-import com.beratyesbek.Vhoops.Entities.Concrete.Dtos.ChatDto
+import com.beratyesbek.vhoops.Core.DataAccess.Abstract.IFirebaseChatDal
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.entities.concrete.Chat
+import com.beratyesbek.vhoops.entities.concrete.dtos.ChatDto
 
 interface IChatDal : IFirebaseChatDal<Chat> {
 

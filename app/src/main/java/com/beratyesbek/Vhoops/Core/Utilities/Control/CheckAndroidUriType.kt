@@ -1,10 +1,10 @@
-package com.beratyesbek.Vhoops.Core.Utilities.Control
+package com.beratyesbek.vhoops.Core.Utilities.Control
 
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.webkit.MimeTypeMap
-import com.beratyesbek.Vhoops.Core.DataAccess.Constants.ExtensionConstants
+import com.beratyesbek.vhoops.Core.DataAccess.Constants.ExtensionConstants
 
 
 class CheckAndroidUriType {

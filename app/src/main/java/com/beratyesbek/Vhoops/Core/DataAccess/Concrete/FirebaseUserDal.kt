@@ -1,28 +1,22 @@
-package com.beratyesbek.Vhoops.Core.DataAccess.Concrete
+package com.beratyesbek.vhoops.Core.DataAccess.Concrete
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Core.Constants.Messages
-import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseUserDal
-import com.beratyesbek.Vhoops.Core.DataAccess.Constants.FirebaseCollection
-import com.beratyesbek.Vhoops.Core.DataAccess.IEntityRepository
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
-import com.beratyesbek.Vhoops.Entities.Concrete.User
+import com.beratyesbek.vhoops.Core.Constants.Messages
+import com.beratyesbek.vhoops.Core.DataAccess.Abstract.IFirebaseUserDal
+import com.beratyesbek.vhoops.Core.DataAccess.Constants.FirebaseCollection
+import com.beratyesbek.vhoops.Core.DataAccess.IEntityRepository
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.ErrorDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.ErrorResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessResult
+import com.beratyesbek.vhoops.entities.concrete.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.coroutines.android.awaitFrame
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 
 open class FirebaseUserDal : IEntityRepository<User>, IFirebaseUserDal<User> {

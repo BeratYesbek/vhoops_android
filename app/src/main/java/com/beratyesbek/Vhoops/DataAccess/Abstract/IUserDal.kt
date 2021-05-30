@@ -1,8 +1,8 @@
-package com.beratyesbek.Vhoops.DataAccess.Abstract
+package com.beratyesbek.vhoops.DataAccess.Abstract
 
-import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseUserDal
-import com.beratyesbek.Vhoops.Core.DataAccess.IEntityRepository
-import com.beratyesbek.Vhoops.Entities.Concrete.User
+import com.beratyesbek.vhoops.Core.DataAccess.Abstract.IFirebaseUserDal
+import com.beratyesbek.vhoops.Core.DataAccess.IEntityRepository
+import com.beratyesbek.vhoops.entities.concrete.User
 
 interface IUserDal : IEntityRepository<User> , IFirebaseUserDal<User>{
 }

@@ -1,120 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/main_background"
-
-    tools:context=".Views.Activities.LoginActivity">
-
-
-    <ImageView
-        android:id="@+id/app_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/app_title" />
-
-    <ImageView
-        android:id="@+id/text_welcome"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/app_title"
-        android:layout_marginLeft="180dp"
-        android:src="@drawable/text_welcome">
-
-    </ImageView>
-
-    <RelativeLayout
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_height="match_parent"
+        android:background="@drawable/main_background"
 
-        <EditText
-            android:id="@+id/editText_login_email"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:theme="@style/EditTextTheme"
-            android:drawableStart="@drawable/custom_email_icon"
-            android:padding="5dp"
-            android:drawablePadding="5dp"
-            android:inputType="textEmailAddress"
-            android:hint="email"
-            android:textSize="14dp"
-            android:textColor="#fff"
-            />
+        tools:context=".views.activities.LoginActivity">
 
-        <EditText
 
-            android:id="@+id/editText_login_password"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:theme="@style/EditTextTheme"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/editText_login_email"
-            android:drawableStart="@drawable/custom_lock_icon"
-            android:padding="5dp"
-            android:layout_marginTop="15dp"
-            android:inputType="textPassword"
-            android:drawablePadding="5dp"
-            android:hint="password"
-            android:textSize="14dp"
-            android:textColor="#fff"
-            />
-        <TextView
-            android:id="@+id/textView_forget_password"
+        <ImageView
+            android:id="@+id/app_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Parolamı unuttum ?"
-            android:textColor="#fff"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_below="@id/editText_login_password"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="70dp"
-            android:layout_marginTop="5dp"
-            >
-
-        </TextView>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:background="@drawable/custom_buttom"
-            android:layout_below="@id/textView_forget_password"
-            android:layout_centerHorizontal="true"
-            android:drawableStart="@drawable/ic_login"
-            android:text="Giriş"
-            android:textColor="#f34723"
-            android:drawablePadding="-25dp"
-            android:paddingLeft="15dp"
-            android:elevation="15dp"
-            android:layout_marginTop="10dp"
-            >
-        </Button>
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:background="@drawable/custom_button_second"
-            android:layout_below="@id/btn_login"
-            android:layout_centerHorizontal="true"
-            android:drawableStart="@drawable/ic_register"
-            android:text="Kayıt ol"
-            android:textColor="#fff"
-            android:drawablePadding="-15dp"
-            android:paddingLeft="15dp"
-            android:elevation="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
+            android:src="@drawable/app_title" />
+
+        <ImageView
+            android:id="@+id/text_welcome"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_title"
+            android:layout_marginLeft="180dp"
+            android:src="@drawable/text_welcome">
+
+        </ImageView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
             >
-        </Button>
+
+            <EditText
+                android:id="@+id/editText_login_email"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:theme="@style/EditTextTheme"
+                android:drawableStart="@drawable/custom_email_icon"
+                android:padding="5dp"
+                android:drawablePadding="5dp"
+                android:inputType="textEmailAddress"
+                android:hint="email"
+                android:textSize="14dp"
+                android:textColor="#fff"
+                />
+
+            <EditText
+
+                android:id="@+id/editText_login_password"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:theme="@style/EditTextTheme"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/editText_login_email"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:padding="5dp"
+                android:layout_marginTop="15dp"
+                android:inputType="textPassword"
+                android:drawablePadding="5dp"
+                android:hint="password"
+                android:textSize="14dp"
+                android:textColor="#fff"
+                />
+            <TextView
+                android:id="@+id/textView_forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parolamı unuttum ?"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_below="@id/editText_login_password"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="5dp"
+                >
+
+            </TextView>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_buttom"
+                android:layout_below="@id/textView_forget_password"
+                android:layout_centerHorizontal="true"
+                android:drawableStart="@drawable/ic_login"
+                android:text="Giriş"
+                android:textColor="#f34723"
+                android:drawablePadding="-25dp"
+                android:paddingLeft="15dp"
+                android:elevation="15dp"
+                android:layout_marginTop="10dp"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button_second"
+                android:layout_below="@id/btn_login"
+                android:layout_centerHorizontal="true"
+                android:drawableStart="@drawable/ic_register"
+                android:text="Kayıt ol"
+                android:textColor="#fff"
+                android:drawablePadding="-15dp"
+                android:paddingLeft="15dp"
+                android:elevation="15dp"
+                android:layout_marginTop="15dp"
+                >
+            </Button>
+        </RelativeLayout>
+
+
     </RelativeLayout>
-
-
-</RelativeLayout>
+</layout>

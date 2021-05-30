@@ -1,72 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    tools:context=".Views.Activities.NavigationBottomActivity">
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/nav_toolbar">
-
-    </include>
-
-    <FrameLayout
-        android:id="@+id/nav_activity_fragment"
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/include"
-        android:layout_marginBottom="40dp">
 
-    </FrameLayout>
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_countTextColor="#000"
-        app:mbn_defaultIconColor="#fff"
-        android:outlineSpotShadowColor="#fff"
-        app:mbn_backgroundBottomColor="@color/info"
-        app:mbn_rippleColor="#fff"
-        app:mbn_selectedIconColor="#fff"
-        app:mbn_shadowColor="#5000" />
+        tools:context=".views.activities.NavigationBottomActivity">
 
+        <include
+            android:id="@+id/include"
+            layout="@layout/nav_toolbar">
 
-<RelativeLayout
-    android:id="@+id/relative_include_navbar"
-    android:layout_width="match_parent"
-    android:translationZ="150dp"
-    android:layout_height="100dp">
-    <include
-        android:id="@+id/search_include"
-        layout="@layout/custom_search_item"
-        >
-    </include>
-</RelativeLayout>
-    <ImageButton
-        android:id="@+id/btn_persons"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_chat_white"
-        android:background="@drawable/btn_circle_success"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:layout_marginRight="15dp"
-        android:elevation="10dp"
-        />
-    <FrameLayout
-        android:id="@+id/search_people_frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:translationZ="1600dp"
-        >
+        </include>
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/nav_activity_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/include"
+            android:layout_marginBottom="40dp">
+
+        </FrameLayout>
+        <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:mbn_countBackgroundColor="#ff6f00"
+            app:mbn_countTextColor="#000"
+            app:mbn_defaultIconColor="#fff"
+            android:outlineSpotShadowColor="#fff"
+            app:mbn_backgroundBottomColor="@color/info"
+            app:mbn_rippleColor="#fff"
+            app:mbn_selectedIconColor="#fff"
+            app:mbn_shadowColor="#5000" />
 
 
-</RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relative_include_navbar"
+            android:layout_width="match_parent"
+            android:translationZ="150dp"
+            android:layout_height="100dp">
+            <include
+                android:id="@+id/search_include"
+                layout="@layout/custom_search_item"
+                >
+            </include>
+        </RelativeLayout>
+        <ImageButton
+            android:id="@+id/btn_persons"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_chat_white"
+            android:background="@drawable/btn_circle_success"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="80dp"
+            android:layout_marginRight="15dp"
+            android:elevation="10dp"
+            />
+        <FrameLayout
+            android:id="@+id/search_people_frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationZ="1600dp"
+            >
+
+        </FrameLayout>
+
+
+    </RelativeLayout>
+</layout>

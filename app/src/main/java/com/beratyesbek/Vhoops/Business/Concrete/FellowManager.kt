@@ -1,10 +1,10 @@
-package com.beratyesbek.Vhoops.Business.Concrete
+package com.beratyesbek.vhoops.Business.Concrete
 
-import com.beratyesbek.Vhoops.Business.Abstract.IFellowService
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.DataAccess.Concrete.FellowDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
+import com.beratyesbek.vhoops.Business.Abstract.IFellowService
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.DataAccess.Concrete.FellowDal
+import com.beratyesbek.vhoops.entities.concrete.Fellow
 
 class FellowManager(val fellowDal: FellowDal) : IFellowService {
 

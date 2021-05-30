@@ -1,39 +1,38 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-
-import com.beratyesbek.Vhoops.databinding.ActivityLoginBinding
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.databinding.ActivityLoginBinding
 
 
 class LoginActivity() : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var dataBinding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = dataBinding.root
 
         setContentView(view)
 
-        binding.btnRegister.setOnClickListener(View.OnClickListener {
+        dataBinding.btnRegister.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, RegisterActivity::class.java);
             startActivity(intent)
         })
-        binding.btnLogin.setOnClickListener(View.OnClickListener {
+        dataBinding.btnLogin.setOnClickListener(View.OnClickListener {
             login()
         })
     }
 
     private fun login() {
-        val email = binding.editTextLoginEmail.text.toString()
-        val password = binding.editTextLoginPassword.text.toString()
+        val email = dataBinding.editTextLoginEmail.text.toString()
+        val password = dataBinding.editTextLoginPassword.text.toString()
 
         val userDal: UserDal = UserDal()
         val userManager = UserManager(userDal)

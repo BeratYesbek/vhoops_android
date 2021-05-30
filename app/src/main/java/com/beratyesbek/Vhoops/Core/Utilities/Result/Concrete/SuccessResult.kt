@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete
+package com.beratyesbek.vhoops.Core.Utilities.Result.Concrete
 
 class SuccessResult(message :String) : Result(true,message){
 

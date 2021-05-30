@@ -1,7 +1,7 @@
-package com.beratyesbek.Vhoops.Entities.Concrete.Dtos
+package com.beratyesbek.vhoops.entities.concrete.dtos
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Entities.Abstract.IDto
+import com.beratyesbek.vhoops.entities.abstracts.IDto
 import com.google.firebase.Timestamp
 
 class ChatDto(

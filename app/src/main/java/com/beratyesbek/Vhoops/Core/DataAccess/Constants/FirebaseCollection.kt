@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.DataAccess.Constants
+package com.beratyesbek.vhoops.Core.DataAccess.Constants
 
 class FirebaseCollection {
 
@@ -13,5 +13,7 @@ class FirebaseCollection {
         var FRIEND_REQUEST_COLLECTION : String = "FriendRequests"
 
         var GROUP_COLLECTION : String = "Groups"
+
+        var GROUP_CHAT_COLLECTION : String = "GroupChats"
     }
 }

@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Adapter.GridViewAdapter
+package com.beratyesbek.vhoops.Adapter.GridViewAdapter
 
 import android.content.Context
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.R
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.R
 import com.squareup.picasso.Picasso
 
 class GroupMemberViewAdapter(val userList : ArrayList<User>,val context:Context) :BaseAdapter() {

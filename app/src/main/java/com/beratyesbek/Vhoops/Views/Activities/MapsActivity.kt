@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 
 import android.content.Context
@@ -16,13 +16,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.beratyesbek.Vhoops.Business.Concrete.ChatManager
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.Core.Constants.Messages
-import com.beratyesbek.Vhoops.DataAccess.Concrete.ChatDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Chat
-import com.beratyesbek.Vhoops.R
+import com.beratyesbek.vhoops.Business.Concrete.ChatManager
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Constants.Messages
+import com.beratyesbek.vhoops.DataAccess.Concrete.ChatDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.Chat
+import com.beratyesbek.vhoops.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.ViewUtilities
+package com.beratyesbek.vhoops.ViewUtilities
 
 interface OnItemClickListener {
 

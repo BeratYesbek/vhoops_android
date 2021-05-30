@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:background="@android:color/black"
-    tools:context=".Views.Fragment.VideoViewFragment">
-
-
-    <VideoView
-        android:id="@+id/videoView_fragment"
+<layout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="@android:color/black"
+        tools:context=".views.fragment.VideoViewFragment">
 
-        >
-    </VideoView>
-    <ImageButton
-        android:id="@+id/btn_back_videoView_fragment"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/ic_back"
-        android:layout_margin="10dp"
-        android:translationZ="25dp"
-        >
 
-    </ImageButton>
+        <VideoView
+            android:id="@+id/videoView_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
 
-</FrameLayout>
+            >
+        </VideoView>
+        <ImageButton
+            android:id="@+id/btn_back_videoView_fragment"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_back"
+            android:layout_margin="10dp"
+            android:translationZ="25dp"
+            >
+
+        </ImageButton>
+
+    </FrameLayout>
+</layout>

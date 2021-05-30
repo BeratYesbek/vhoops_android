@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Fragment
+package com.beratyesbek.vhoops.views.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,23 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.Vhoops.Adapter.PersonViewAdapter
-import com.beratyesbek.Vhoops.Business.Concrete.FellowManager
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.Core.Constants.Constants
-import com.beratyesbek.Vhoops.DataAccess.Concrete.FellowDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
-import com.beratyesbek.Vhoops.Views.Activities.ChatActivity
-import com.beratyesbek.Vhoops.databinding.FragmentFriendsBinding
+import com.beratyesbek.vhoops.Adapter.PersonViewAdapter
+import com.beratyesbek.vhoops.Business.Concrete.FellowManager
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.DataAccess.Concrete.FellowDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.Fellow
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.views.activities.ChatActivity
+import com.beratyesbek.vhoops.databinding.FragmentFriendsBinding
 import com.google.firebase.auth.FirebaseAuth
 
 
 class FriendsFragment : Fragment(), OnItemClickListener {
 
-    private lateinit var binding: FragmentFriendsBinding
+    private lateinit var dataBinding: FragmentFriendsBinding
 
     private val userList : ArrayList<User> = ArrayList()
     private val fellowList : ArrayList<Fellow> = ArrayList()
@@ -34,8 +34,8 @@ class FriendsFragment : Fragment(), OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFriendsBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = FragmentFriendsBinding.inflate(layoutInflater)
+        val view = dataBinding.root
 
         fellowList.clear()
         userList.clear()
@@ -47,9 +47,9 @@ class FriendsFragment : Fragment(), OnItemClickListener {
 
     fun runRecyclerView(){
         val layoutManager =  LinearLayoutManager(context)
-        binding.recyclerViewFriendFragment.layoutManager = layoutManager
+        dataBinding.recyclerViewFriendFragment.layoutManager = layoutManager
         personViewAdapter = PersonViewAdapter(userList,fellowList,this)
-        binding.recyclerViewFriendFragment.adapter = personViewAdapter
+        dataBinding.recyclerViewFriendFragment.adapter = personViewAdapter
     }
 
 

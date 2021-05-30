@@ -1,7 +1,7 @@
-package com.beratyesbek.Vhoops.DataAccess.Concrete
+package com.beratyesbek.vhoops.DataAccess.Concrete
 
-import com.beratyesbek.Vhoops.Core.DataAccess.Concrete.FirebaseGroupDal
-import com.beratyesbek.Vhoops.DataAccess.Abstract.IGroupDal
+import com.beratyesbek.vhoops.Core.DataAccess.Concrete.FirebaseGroupDal
+import com.beratyesbek.vhoops.DataAccess.Abstract.IGroupDal
 
 class GroupDal : IGroupDal, FirebaseGroupDal() {
 }

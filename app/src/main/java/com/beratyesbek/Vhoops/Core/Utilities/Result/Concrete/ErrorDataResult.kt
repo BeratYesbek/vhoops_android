@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete
+package com.beratyesbek.vhoops.Core.Utilities.Result.Concrete
 
 class ErrorDataResult<T : Any>(data: T?, message:String): DataResult<T>(data,false,message) {
 }

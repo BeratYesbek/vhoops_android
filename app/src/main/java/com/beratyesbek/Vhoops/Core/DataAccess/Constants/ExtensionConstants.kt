@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.DataAccess.Constants
+package com.beratyesbek.vhoops.Core.DataAccess.Constants
 
 class ExtensionConstants {
     companion object {

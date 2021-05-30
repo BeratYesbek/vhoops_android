@@ -1,8 +1,7 @@
-package com.beratyesbek.Vhoops.Core.Utilities.Business
+package com.beratyesbek.vhoops.Core.Utilities.Business
 
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessResult
 
 class BusinessRules {
 

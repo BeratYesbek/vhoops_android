@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Fragment
+package com.beratyesbek.vhoops.views.fragment
 
 import android.net.Uri
 import android.os.Bundle
@@ -7,34 +7,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.MediaController
-import com.beratyesbek.Vhoops.R
-import com.beratyesbek.Vhoops.databinding.FragmentVideoViewBinding
+import com.beratyesbek.vhoops.databinding.FragmentVideoViewBinding
 import kotlinx.android.synthetic.main.chat_video_item.*
 
 
 class VideoViewFragment(val uri : Uri) : Fragment() {
 
 
-    private lateinit var binding: FragmentVideoViewBinding
+    private lateinit var dataBinding : FragmentVideoViewBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
 
-        binding = FragmentVideoViewBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = FragmentVideoViewBinding.inflate(layoutInflater)
+        val view = dataBinding.root
 
         val mediaController = MediaController(context)
         mediaController.setAnchorView(videoView)
 
-        val videView = binding.videoViewFragment
+        val videView = dataBinding.videoViewFragment
         videView.setMediaController(mediaController)
         videView.setVideoURI(uri)
         videView.requestFocus()
         videView.start()
 
-        binding.btnBackVideoViewFragment.setOnClickListener {
+        dataBinding.btnBackVideoViewFragment.setOnClickListener {
             activity?.onBackPressed()
         }
 

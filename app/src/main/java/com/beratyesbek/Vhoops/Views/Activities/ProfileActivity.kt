@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,21 +14,22 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.Core.Constants.Constants
-import com.beratyesbek.Vhoops.Core.Permission.GalleryPermission
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.Views.Fragment.CameraFragment
-import com.beratyesbek.Vhoops.R
-import com.beratyesbek.Vhoops.databinding.ActivityProfileAcitivtyBinding
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.views.fragment.CameraFragment
+import com.beratyesbek.vhoops.R
+import com.beratyesbek.vhoops.databinding.ActivityProfileAcitivtyBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 
 class ProfileActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileAcitivtyBinding
+    private lateinit var dataBinding: ActivityProfileAcitivtyBinding
     private lateinit var user: User
     private lateinit var userDal: UserDal
     private lateinit var userManager: UserManager
@@ -37,26 +38,25 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityProfileAcitivtyBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = ActivityProfileAcitivtyBinding.inflate(layoutInflater)
+        val view = dataBinding.root
         setContentView(view)
 
-        setSupportActionBar(binding.includeProfileActivity.toolbar)
-        getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
+        setSupportActionBar(dataBinding.includeProfileActivity.toolbar)
         getData()
 
-        binding.btnEditFirstName.setOnClickListener {
+        dataBinding.btnEditFirstName.setOnClickListener {
             showDialog(user.firstName!!, "İsim", 1)
         }
-        binding.btnEditLastName.setOnClickListener {
+        dataBinding.btnEditLastName.setOnClickListener {
             showDialog(user.lastName!!, "Soyisim", 2)
 
         }
-        binding.btnEditUserName.setOnClickListener {
+        dataBinding.btnEditUserName.setOnClickListener {
             showDialog(user.userName!!, "Kullanıcı Adı", 3)
 
         }
-        binding.btnEditAbout.setOnClickListener {
+        dataBinding.btnEditAbout.setOnClickListener {
             if (user.about != null) {
                 showDialog(user.about!!, "Hakkında", 4)
 
@@ -66,7 +66,7 @@ class ProfileActivity : AppCompatActivity() {
             }
 
         }
-        binding.btnSelectTool.setOnClickListener {
+        dataBinding.btnSelectTool.setOnClickListener {
             showToolDialog()
         }
 
@@ -80,13 +80,13 @@ class ProfileActivity : AppCompatActivity() {
             if (dataResult.success()) {
                 user = dataResult.data().get(0);
                 if (user.profileImage != null) {
-                    Picasso.get().load(user.profileImage).into(binding.imageViewProfileActivity)
+                    Picasso.get().load(user.profileImage).into(dataBinding.imageViewProfileActivity)
                 }
-                binding.textViewFirstNameProfileActivity.text = user.firstName
-                binding.textViewLastNameProfileActivity.text = user.lastName
-                binding.textViewUserNameProfileActivity.text = user.userName
+                dataBinding.textViewFirstNameProfileActivity.text = user.firstName
+                dataBinding.textViewLastNameProfileActivity.text = user.lastName
+                dataBinding.textViewUserNameProfileActivity.text = user.userName
                 if (user.about != null) {
-                    binding.textViewAboutProfileActivity.text = user.about
+                    dataBinding.textViewAboutProfileActivity.text = user.about
                 }
 
             } else {
@@ -264,7 +264,7 @@ class ProfileActivity : AppCompatActivity() {
         transaction = supportFragmentManager.beginTransaction()
         val fragment: Fragment? =
             supportFragmentManager.findFragmentById(R.id.frameLayout_profile_activity)
-        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fragment_fade_exit)
+        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fade_in_anim)
         transaction.remove(fragment!!)
         transaction.commit()
     }

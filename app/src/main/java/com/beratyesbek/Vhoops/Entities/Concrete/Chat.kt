@@ -1,8 +1,7 @@
-package com.beratyesbek.Vhoops.Entities.Concrete
+package com.beratyesbek.vhoops.entities.concrete
 
-import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
+import com.beratyesbek.vhoops.entities.abstracts.IEntity
 import com.google.firebase.Timestamp
-import java.util.*
 
 class Chat(senderId: String, receiverId: String, message: Any, isSeen: Boolean, timeToSend: Timestamp) : IEntity {
 

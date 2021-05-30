@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Fragment
+package com.beratyesbek.vhoops.views.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,18 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.Vhoops.Views.Activities.UserActivity
-import com.beratyesbek.Vhoops.Adapter.SearchViewAdapter
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
-import com.beratyesbek.Vhoops.databinding.FragmentSearchBinding
+import com.beratyesbek.vhoops.views.activities.UserActivity
+import com.beratyesbek.vhoops.Adapter.SearchViewAdapter
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.databinding.FragmentSearchBinding
 
 
 class SearchFragment : OnItemClickListener, Fragment() {
 
-    private lateinit var binding: FragmentSearchBinding
+    private lateinit var dataBinding: FragmentSearchBinding
     private  var userList = ArrayList<User>()
     private lateinit var adapter : SearchViewAdapter
     override fun onCreateView(
@@ -28,16 +28,16 @@ class SearchFragment : OnItemClickListener, Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
-        binding = FragmentSearchBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = FragmentSearchBinding.inflate(layoutInflater)
+        val view = dataBinding.root
         runRecyclerView()
         searchData()
 
-        binding.btnFragmentSearchBack.setOnClickListener {
+        dataBinding.btnFragmentSearchBack.setOnClickListener {
             activity?.onBackPressed()
         }
 
-        binding.editTextSearchFragment.addTextChangedListener(object : TextWatcher{
+        dataBinding.editTextSearchFragment.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -71,7 +71,7 @@ class SearchFragment : OnItemClickListener, Fragment() {
 
     }
     fun searchData () {
-        var search = binding.editTextSearchFragment.text.toString()
+        var search = dataBinding.editTextSearchFragment.text.toString()
         val userDal: UserDal = UserDal()
         val userManager = UserManager(userDal)
         userManager.getAll { result ->
@@ -80,9 +80,9 @@ class SearchFragment : OnItemClickListener, Fragment() {
     }
     fun runRecyclerView(){
         val layoutManager = LinearLayoutManager(context)
-        binding.recyclerViewSearchFragment.layoutManager = layoutManager;
+        dataBinding.recyclerViewSearchFragment.layoutManager = layoutManager;
         adapter = SearchViewAdapter(userList,this)
-        binding.recyclerViewSearchFragment.adapter = adapter
+        dataBinding.recyclerViewSearchFragment.adapter = adapter
 
 
     }

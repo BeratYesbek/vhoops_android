@@ -1,11 +1,7 @@
-package com.beratyesbek.Vhoops.Entities.Concrete
+package com.beratyesbek.vhoops.entities.concrete
 
 import android.net.Uri
-import android.os.Parcel
-import android.os.Parcelable
-import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
-import com.beratyesbek.Vhoops.Entities.Concrete.Person
-import java.io.Serializable
+import com.beratyesbek.vhoops.entities.abstracts.IEntity
 
 class User(firstName: String, lastName: String, email: String, userName: String, password: String) :
     Person(firstName, lastName, email), IEntity{

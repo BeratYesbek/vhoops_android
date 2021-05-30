@@ -1,17 +1,18 @@
-package com.beratyesbek.Vhoops.Business.Concrete
+package com.beratyesbek.vhoops.Business.Concrete
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Business.Abstract.IUserService
-import com.beratyesbek.Vhoops.Business.Rules.CustomUserRules
-import com.beratyesbek.Vhoops.Core.Utilities.Business.BusinessRules
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
-import com.beratyesbek.Vhoops.DataAccess.Abstract.IUserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.User
+import com.beratyesbek.vhoops.Business.Abstract.IUserService
+import com.beratyesbek.vhoops.Business.Rules.CustomUserRules
+import com.beratyesbek.vhoops.Core.Utilities.Business.BusinessRules
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.ErrorResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessResult
+import com.beratyesbek.vhoops.DataAccess.Abstract.IUserDal
+import com.beratyesbek.vhoops.entities.concrete.User
+import javax.inject.Inject
 
-class UserManager(userDal: IUserDal) : IUserService {
+class UserManager @Inject constructor(private val userDal : IUserDal) : IUserService {
 
     private val _userDal: IUserDal = userDal;
 
@@ -58,7 +59,7 @@ class UserManager(userDal: IUserDal) : IUserService {
     }
 
     override fun delete(entity: User, result: (IResult) -> Unit) {
-        TODO("Not yet implemented")
+        println("user deleted")
     }
 
     override fun getAll(iDataResult: (IDataResult<ArrayList<User>>) -> Unit) {

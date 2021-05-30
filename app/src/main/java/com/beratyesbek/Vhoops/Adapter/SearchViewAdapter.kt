@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Adapter
+package com.beratyesbek.vhoops.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
-import com.beratyesbek.Vhoops.R
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.R
 import com.squareup.picasso.Picasso
 
 

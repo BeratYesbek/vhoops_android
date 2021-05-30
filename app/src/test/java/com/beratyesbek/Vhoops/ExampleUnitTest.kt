@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops
+package com.beratyesbek.vhoops
 
 import org.junit.Test
 

@@ -1,7 +1,4 @@
-package com.beratyesbek.Vhoops.Core.Constants
-
-import com.beratyesbek.Vhoops.Views.Activities.ChatActivity
-import com.beratyesbek.Vhoops.Views.Activities.ProfileActivity
+package com.beratyesbek.vhoops.Core.Constants
 
 open class Constants {
 

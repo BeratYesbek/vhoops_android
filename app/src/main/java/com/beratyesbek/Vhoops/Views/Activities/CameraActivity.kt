@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,14 +18,14 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.beratyesbek.Vhoops.Business.Analysis.LuminosityAnalyzer
-import com.beratyesbek.Vhoops.Core.Constants.Constants
-import com.beratyesbek.Vhoops.Views.Fragment.CameraFragment
+import com.beratyesbek.vhoops.Business.Analysis.LuminosityAnalyzer
+import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.views.fragment.CameraFragment
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
-import com.beratyesbek.Vhoops.R
+import com.beratyesbek.vhoops.R
 import kotlinx.android.synthetic.main.activity_camera.*
 
 
@@ -256,7 +256,7 @@ class CameraActivity : AppCompatActivity() {
         transaction = supportFragmentManager.beginTransaction()
         val fragment: Fragment? =
             supportFragmentManager.findFragmentById(R.id.frameLayout_camera_activity)
-        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fragment_fade_exit)
+        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fade_in_anim)
         transaction.remove(fragment!!)
         transaction.commit()
     }

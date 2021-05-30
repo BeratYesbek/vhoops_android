@@ -1,10 +1,9 @@
-package com.beratyesbek.Vhoops.Core.Permission
+package com.beratyesbek.vhoops.Core.Permission
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 

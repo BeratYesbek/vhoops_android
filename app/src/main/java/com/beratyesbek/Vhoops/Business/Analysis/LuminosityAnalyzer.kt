@@ -1,8 +1,8 @@
-package com.beratyesbek.Vhoops.Business.Analysis
+package com.beratyesbek.vhoops.Business.Analysis
 
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.beratyesbek.Vhoops.Views.Activities.LumaListener
+import com.beratyesbek.vhoops.views.activities.LumaListener
 import java.nio.ByteBuffer
 
 class LuminosityAnalyzer(private val listener: LumaListener) : ImageAnalysis.Analyzer {

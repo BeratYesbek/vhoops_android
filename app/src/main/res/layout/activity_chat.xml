@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical"
-    tools:context=".Views.Activities.ChatActivity">
+<layout  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical"
+        tools:context=".views.activities.ChatActivity">
 
     <include android:id="@+id/include_chat_activity" layout="@layout/chat_toolbar">
 
@@ -115,6 +116,7 @@
         android:translationZ="66dp"
         />
 
+    </RelativeLayout>
+</layout>
 
 
-</RelativeLayout>

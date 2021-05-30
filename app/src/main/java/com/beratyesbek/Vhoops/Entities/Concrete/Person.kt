@@ -1,10 +1,6 @@
-package com.beratyesbek.Vhoops.Entities.Concrete
+package com.beratyesbek.vhoops.entities.concrete
 
-import android.os.Parcel
-import android.os.Parcelable
-import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
-import org.jetbrains.annotations.NotNull
-import java.io.Serializable
+import com.beratyesbek.vhoops.entities.abstracts.IEntity
 
 open class Person(firstName: String, lastName: String, email: String):IEntity {
 

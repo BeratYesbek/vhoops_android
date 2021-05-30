@@ -1,8 +1,7 @@
-package com.beratyesbek.Vhoops.Views.Fragment
+package com.beratyesbek.vhoops.views.fragment
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -11,11 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.beratyesbek.Vhoops.Business.ChatFileOperations
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.Core.Constants.Constants
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.databinding.FragmentCameraBinding
+import com.beratyesbek.vhoops.Business.ChatFileOperations
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.databinding.FragmentCameraBinding
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity
 import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants
 import com.google.firebase.auth.FirebaseAuth
@@ -24,28 +23,28 @@ import com.squareup.picasso.Picasso
 
 class CameraFragment(var uri : Uri,val receiverId : String?,val documentId :String?,val type:Int) : Fragment() {
 
-    private lateinit var binding: FragmentCameraBinding
+    private lateinit var dataBinding: FragmentCameraBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentCameraBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = FragmentCameraBinding.inflate(layoutInflater)
+        val view = dataBinding.root
 
-        binding.btnCancelCameraFragment.setOnClickListener {
+        dataBinding.btnCancelCameraFragment.setOnClickListener {
             activity!!.onBackPressed()
         }
 
 
-        binding.btnApproveCameraFragment.setOnClickListener {
+        dataBinding.btnApproveCameraFragment.setOnClickListener {
             when(type){
                 Constants.CHAT_ACTIVITY -> sendPhotoToChat()
                 Constants.CAMERA_ACTIVITY -> updateUserPofile()
                 Constants.PROFILE_ACTIVITY -> updateUserPofile()
             }
         }
-        binding.btnCameraFragmentEdit.setOnClickListener {
+        dataBinding.btnCameraFragmentEdit.setOnClickListener {
             runEditor()
 
         }
-        Picasso.get().load(uri).into(binding.imageViewCameraFragment)
+        Picasso.get().load(uri).into(dataBinding.imageViewCameraFragment)
 
         return view;
     }
@@ -94,7 +93,7 @@ class CameraFragment(var uri : Uri,val receiverId : String?,val documentId :Stri
 
     fun setImage(uri : Uri){
         this.uri = uri
-       Picasso.get().load(uri).into(binding.imageViewCameraFragment)
+       Picasso.get().load(uri).into(dataBinding.imageViewCameraFragment)
     }
 
     private fun sendPhotoToChat(){

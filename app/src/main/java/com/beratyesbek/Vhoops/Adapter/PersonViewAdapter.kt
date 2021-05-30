@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Adapter
+package com.beratyesbek.vhoops.Adapter
 
 import android.app.Dialog
 import android.content.Context
@@ -13,13 +13,13 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.beratyesbek.Vhoops.Core.Constants.Constants
-import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.R
-import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
-import com.beratyesbek.Vhoops.Views.Activities.ChatActivity
-import com.beratyesbek.Vhoops.Views.Activities.UserActivity
+import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.entities.concrete.Fellow
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.R
+import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.views.activities.ChatActivity
+import com.beratyesbek.vhoops.views.activities.UserActivity
 import com.squareup.picasso.Picasso
 
 class PersonViewAdapter(

@@ -1,7 +1,7 @@
-package com.beratyesbek.Vhoops.Business.Abstract
+package com.beratyesbek.vhoops.Business.Abstract
 
-import com.beratyesbek.Vhoops.Core.DataAccess.IEntityRepository
-import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
+import com.beratyesbek.vhoops.Core.DataAccess.IEntityRepository
+import com.beratyesbek.vhoops.entities.abstracts.IEntity
 
 interface IServiceRepository<T : IEntity> : IEntityRepository<T> {
 }

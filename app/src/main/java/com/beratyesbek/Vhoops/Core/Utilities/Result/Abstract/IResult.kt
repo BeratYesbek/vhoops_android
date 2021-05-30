@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract
+package com.beratyesbek.vhoops.Core.Utilities.Result.Abstract
 
 interface IResult {
 

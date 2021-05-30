@@ -1,10 +1,10 @@
-package com.beratyesbek.Vhoops.Core.DataAccess
+package com.beratyesbek.vhoops.Core.DataAccess
 
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.entities.abstracts.IEntity
 
-interface IEntityRepository<T : IEntity> {
+interface IEntityRepository<T : IEntity>  {
 
     fun add(entity: T, result: (IResult) -> Unit)
 

@@ -1,29 +1,29 @@
-package com.beratyesbek.Vhoops.Business
+package com.beratyesbek.vhoops.Business
 
 import android.content.Context
 import android.net.Uri
-import com.beratyesbek.Vhoops.Business.Concrete.ChatManager
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.Core.Utilities.Control.CheckAndroidUriType
-import com.beratyesbek.Vhoops.DataAccess.Concrete.ChatDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Chat
+import com.beratyesbek.vhoops.Business.Concrete.ChatManager
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Utilities.Control.CheckAndroidUriType
+import com.beratyesbek.vhoops.DataAccess.Concrete.ChatDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.Chat
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 
-class ChatFileOperations (val receiverId : String){
-    companion object{
+class ChatFileOperations(val receiverId: String) {
+    companion object {
 
-        private lateinit var receiverId : String
+        private lateinit var receiverId: String
 
-        fun checkUriExtension(uri: Uri?,context: Context,receiverId: String) {
+        fun checkUriExtension(uri: Uri?, context: Context, receiverId: String) {
 
             val type = CheckAndroidUriType.checkUriType(uri, context)
             if (type != null) {
                 this.receiverId = receiverId
-                println(10)
 
                 uploadFile(uri as Any, type)
+
 
             }
         }
@@ -43,13 +43,11 @@ class ChatFileOperations (val receiverId : String){
         private fun getFiles(path: String) {
             val chatManager = ChatManager(ChatDal(), UserManager(UserDal()))
             chatManager.getFile(path) { iDataResult ->
-                println(30)
                 sendMessage(iDataResult.data())
             }
         }
 
         private fun sendMessage(message: Any) {
-            println(40)
 
             val senderId = FirebaseAuth.getInstance().currentUser.uid
 
@@ -57,7 +55,7 @@ class ChatFileOperations (val receiverId : String){
             val userManager = UserManager(UserDal())
             val chatManager = ChatManager(chatDal, userManager)
 
-            chatManager.add(Chat(senderId, receiverId, message, false, Timestamp.now())) {
+            chatManager.add(Chat(senderId, receiverId!!, message, false, Timestamp.now())) {
 
             }
 

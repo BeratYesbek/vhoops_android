@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="#fff"
-    android:layout_height="match_parent"
-    tools:context=".Views.Activities.PersonsActivity">
-    <include
-        android:id="@+id/toolbar_persons_activity"
-        layout="@layout/toolbar">
-
-    </include>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_friend_activity"
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:background="#fff"
-        android:layout_margin="3dp"
-        android:layout_below="@id/toolbar_persons_activity"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".views.activities.PersonsActivity">
+        <include
+            android:id="@+id/toolbar_persons_activity"
+            layout="@layout/toolbar">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </include>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_friend_activity"
+            android:layout_width="match_parent"
+            android:background="#fff"
+            android:layout_margin="3dp"
+            android:layout_below="@id/toolbar_persons_activity"
+            android:layout_height="match_parent">
 
-</RelativeLayout>
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+</layout>

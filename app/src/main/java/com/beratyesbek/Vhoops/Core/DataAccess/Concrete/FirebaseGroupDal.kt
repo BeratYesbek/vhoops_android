@@ -1,15 +1,15 @@
-package com.beratyesbek.Vhoops.Core.DataAccess.Concrete
+package com.beratyesbek.vhoops.Core.DataAccess.Concrete
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseGroupDal
-import com.beratyesbek.Vhoops.Core.DataAccess.Constants.FirebaseCollection
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
-import com.beratyesbek.Vhoops.Entities.Concrete.Group
+import com.beratyesbek.vhoops.Core.DataAccess.Abstract.IFirebaseGroupDal
+import com.beratyesbek.vhoops.Core.DataAccess.Constants.FirebaseCollection
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.ErrorDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.ErrorResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessResult
+import com.beratyesbek.vhoops.entities.concrete.Group
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,6 +32,7 @@ open class FirebaseGroupDal  : IFirebaseGroupDal {
         hashMapGroup.put("GroupName",entity.groupName!!)
         hashMapGroup.put("CreatedDate",entity.createdDate!!)
         hashMapGroup.put("AdminId",entity.adminId!!)
+        hashMapGroup.put("GroupId",entity.groupId!!)
 
         entity.memberIdList?.add(entity.adminId!!)
 

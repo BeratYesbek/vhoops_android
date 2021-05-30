@@ -1,7 +1,6 @@
-package com.beratyesbek.Vhoops.DataAccess.Abstract
+package com.beratyesbek.vhoops.DataAccess.Abstract
 
-import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseGroupDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Group
+import com.beratyesbek.vhoops.Core.DataAccess.Abstract.IFirebaseGroupDal
 
 interface IGroupDal : IFirebaseGroupDal{
 }

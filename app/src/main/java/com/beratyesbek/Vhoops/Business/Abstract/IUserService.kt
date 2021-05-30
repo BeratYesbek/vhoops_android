@@ -1,10 +1,9 @@
-package com.beratyesbek.Vhoops.Business.Abstract
+package com.beratyesbek.vhoops.Business.Abstract
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Core.DataAccess.IEntityRepository
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Entities.Concrete.User
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.entities.concrete.User
 
 interface IUserService :IServiceRepository<User> {
     fun createUser(entity: User, result: (IResult) -> Unit)

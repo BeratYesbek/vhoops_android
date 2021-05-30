@@ -47,10 +47,10 @@
     </style>
 
     <style name="dialog_animation">
-        <item name="android:windowEnterAnimation">@anim/fragment_fade_enter</item>
+        <item name="android:windowEnterAnimation">@anim/fade_in_anim</item>
 
 
-        <item name="android:windowExitAnimation">@anim/fragment_fade_exit</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
 
 
     </style>

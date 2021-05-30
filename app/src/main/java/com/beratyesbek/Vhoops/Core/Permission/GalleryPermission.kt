@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.Permission
+package com.beratyesbek.vhoops.Core.Permission
 
 import android.app.Activity
 import android.content.Context

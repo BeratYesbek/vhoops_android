@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_gravity="right"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:background="@drawable/custom_background_success"
+        android:layout_margin="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_width="230dp"
+
+
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btn_stop_audio_groupChat"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_pause_white"
+            android:visibility="invisible"
+            >
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/btn_play_audio_groupChat"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_play_white"
+            >
+        </ImageButton>
+
+        <SeekBar
+            android:id="@+id/seekBar_groupChat_audio"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/btn_play_audio_groupChat"
+            android:layout_centerVertical="true"
+            android:theme="@style/SeekBar"
+            >
+
+        </SeekBar>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/chat_item_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+    </RelativeLayout>
+</RelativeLayout>

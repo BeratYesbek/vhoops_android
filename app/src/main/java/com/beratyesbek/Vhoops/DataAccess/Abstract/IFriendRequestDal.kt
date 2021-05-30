@@ -1,7 +1,7 @@
-package com.beratyesbek.Vhoops.DataAccess.Abstract
+package com.beratyesbek.vhoops.DataAccess.Abstract
 
-import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseFriendRequestDal
-import com.beratyesbek.Vhoops.Entities.Concrete.FriendRequest
+import com.beratyesbek.vhoops.Core.DataAccess.Abstract.IFirebaseFriendRequestDal
+import com.beratyesbek.vhoops.entities.concrete.FriendRequest
 
 interface IFriendRequestDal : IFirebaseFriendRequestDal<FriendRequest>{
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.beratyesbek.Vhoops">
+    package="com.beratyesbek.vhoops">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name = ".Core.DependencyInjection.VhoopsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,7 +25,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Vhoops">
-        <activity android:name=".Views.Activities.PersonsActivity"></activity>
+        <activity
+            android:name=".views.activities.GroupChatActivity"
+            android:theme="@style/AppTheme_NoActionBar_NonFullscreen">
+        </activity>
+        <activity android:name=".views.activities.PersonsActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,24 +43,25 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Views.Activities.MapsActivity"
+            android:name=".views.activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Views.Activities.NotificationActivity" />
-        <activity android:name=".Views.Activities.UserActivity" />
-        <activity android:name=".Views.Activities.CameraActivity" />
-        <activity android:name=".Views.Activities.ProfileActivity" />
+        <activity android:name=".views.activities.NotificationActivity" />
+        <activity android:name=".views.activities.UserActivity" />
+        <activity android:name=".views.activities.CameraActivity" />
+        <activity android:name=".views.activities.ProfileActivity" />
+
+        <activity android:name=".views.activities.GroupChatActivity"
+            android:theme="@style/AppTheme_NoActionBar_NonFullscreen"/>
+
         <activity
-            android:name=".Views.Activities.ChatActivity"
-            android:theme="@style/AppTheme_NoActionBar_NonFullscreen" />
-        <activity
-            android:name=".Views.Activities.RegisterActivity"
+            android:name=".views.activities.RegisterActivity"
             android:theme="@style/AppTheme_NoActionBar" />
-        <activity android:name=".Views.Activities.NavigationBottomActivity" />
+        <activity android:name=".views.activities.NavigationBottomActivity" />
         <activity
-            android:name=".Views.Activities.LoginActivity"
+            android:name=".views.activities.LoginActivity"
             android:theme="@style/AppTheme_NoActionBar" />
         <activity
-            android:name=".Views.Activities.MainActivity"
+            android:name=".views.activities.MainActivity"
             android:theme="@style/AppTheme_NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

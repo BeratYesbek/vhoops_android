@@ -1,32 +1,32 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.Vhoops.Adapter.NotificationViewAdapter
-import com.beratyesbek.Vhoops.Business.Concrete.FriendRequestManager
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.Concrete.FriendRequestDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.FriendRequest
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.databinding.ActivityNotificationBinding
+import com.beratyesbek.vhoops.Adapter.NotificationViewAdapter
+import com.beratyesbek.vhoops.Business.Concrete.FriendRequestManager
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.DataAccess.Concrete.FriendRequestDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.FriendRequest
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.databinding.ActivityNotificationBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 class NotificationActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityNotificationBinding
+    private lateinit var dataBinding: ActivityNotificationBinding
     private  var friendRequestList : ArrayList<FriendRequest>  = ArrayList<FriendRequest>()
     private var userList : ArrayList<User> = ArrayList<User>()
     private lateinit var  notificationViewAdapter: NotificationViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNotificationBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = ActivityNotificationBinding.inflate(layoutInflater)
+        val view = dataBinding.root
         setContentView(view)
 
-        setSupportActionBar(binding.includeNotificationActivity.toolbar)
-        getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
+        setSupportActionBar(dataBinding.includeNotificationActivity.toolbar)
 
         runRecyclerView()
         getFriendRequestData()
@@ -37,9 +37,9 @@ class NotificationActivity : AppCompatActivity() {
 
     fun runRecyclerView(){
         val layoutManager = LinearLayoutManager(this)
-        binding.recyclerViewNotificationActivity.layoutManager = layoutManager
+        dataBinding.recyclerViewNotificationActivity.layoutManager = layoutManager
         notificationViewAdapter = NotificationViewAdapter(friendRequestList,userList)
-        binding.recyclerViewNotificationActivity.adapter = notificationViewAdapter
+        dataBinding.recyclerViewNotificationActivity.adapter = notificationViewAdapter
 
     }
 

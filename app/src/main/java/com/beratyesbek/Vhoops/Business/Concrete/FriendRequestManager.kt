@@ -1,10 +1,10 @@
-package com.beratyesbek.Vhoops.Business.Concrete
+package com.beratyesbek.vhoops.Business.Concrete
 
-import com.beratyesbek.Vhoops.Business.Abstract.IFriendRequestService
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.DataAccess.Abstract.IFriendRequestDal
-import com.beratyesbek.Vhoops.Entities.Concrete.FriendRequest
+import com.beratyesbek.vhoops.Business.Abstract.IFriendRequestService
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.DataAccess.Abstract.IFriendRequestDal
+import com.beratyesbek.vhoops.entities.concrete.FriendRequest
 
 class FriendRequestManager(friendRequestDal : IFriendRequestDal) : IFriendRequestService {
 

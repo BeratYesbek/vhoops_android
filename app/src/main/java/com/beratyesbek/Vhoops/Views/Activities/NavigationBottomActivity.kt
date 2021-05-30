@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,34 +11,36 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.R
-import com.beratyesbek.Vhoops.Views.Fragment.*
-import com.beratyesbek.Vhoops.databinding.ActivityNavigationBottomBinding
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.R
+import com.beratyesbek.vhoops.views.fragment.*
+import com.beratyesbek.vhoops.databinding.ActivityNavigationBottomBinding
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.custom_search_item.view.*
+import kotlinx.android.synthetic.main.nav_toolbar.view.*
 
 
 class NavigationBottomActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityNavigationBottomBinding
+    private lateinit var dataBinding: ActivityNavigationBottomBinding
     private lateinit var _nowFragment: String;
     private lateinit var transaction: FragmentTransaction;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNavigationBottomBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = ActivityNavigationBottomBinding.inflate(layoutInflater)
+        val view = dataBinding.root
         setContentView(view);
         //toolbar
-        setSupportActionBar(binding.include.toolbar)
-        getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
+        setSupportActionBar(dataBinding.include.toolbar)
 
-           inVisibleSearchBar()
-        binding.bottomNavigation.show(1)
-        val bottomNavigation = binding.bottomNavigation
+        inVisibleSearchBar()
+
+        dataBinding.bottomNavigation.show(1)
+        val bottomNavigation = dataBinding.bottomNavigation
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_people))
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_call))
@@ -54,7 +56,7 @@ class NavigationBottomActivity : AppCompatActivity() {
         updateTokenAndUserId()
 
 
-        binding.bottomNavigation.setOnClickMenuListener  { click ->
+        dataBinding.bottomNavigation.setOnClickMenuListener  { click ->
             when (click.id) {
                 1 -> makeCurrentFragment(homeFragment, "homeFragment")
                 2 -> makeCurrentFragment(groupFragment, "groupFragment")
@@ -63,27 +65,27 @@ class NavigationBottomActivity : AppCompatActivity() {
             }
 
 
-            if (binding.relativeIncludeNavbar.isVisible) {
+            if (dataBinding.relativeIncludeNavbar.isVisible) {
                 inVisibleSearchBar()
 
             }
         }
 
-        binding.include.toolbarSearchButton.setOnClickListener {
+        dataBinding.include.toolbar_search_button.setOnClickListener {
             visibleSearchBar()
 
 
         }
-        binding.searchInclude.btnSearchBack.setOnClickListener {
+        dataBinding.searchInclude.btn_search_back.setOnClickListener {
             inVisibleSearchBar()
         }
 
-        binding.include.btnToolbarNotification.setOnClickListener {
+        dataBinding.include.btn_toolbar_notification.setOnClickListener {
             val intent = Intent(this,NotificationActivity::class.java)
             startActivity(intent)
         }
 
-        binding.btnPersons.setOnClickListener {
+        dataBinding.btnPersons.setOnClickListener {
             val intentToPersonsActivity = Intent(this,PersonsActivity::class.java)
             startActivity(intentToPersonsActivity)
         }
@@ -129,7 +131,7 @@ class NavigationBottomActivity : AppCompatActivity() {
         }
 
     override fun onBackPressed() {
-        if (binding.relativeIncludeNavbar.isVisible) {
+        if (dataBinding.relativeIncludeNavbar.isVisible) {
             inVisibleSearchBar()
         }
         else if (supportFragmentManager.findFragmentById(R.id.search_people_frameLayout) != null) {
@@ -152,7 +154,7 @@ class NavigationBottomActivity : AppCompatActivity() {
     private fun removeSearchFragment(){
         val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.search_people_frameLayout)
         transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fragment_fade_exit)
+        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fade_in_anim)
         transaction.remove(fragment!!)
         transaction.commit()
     }
@@ -161,10 +163,10 @@ class NavigationBottomActivity : AppCompatActivity() {
     private fun inVisibleSearchBar() {
 
         val slideUp: Animation = AnimationUtils.loadAnimation(this, R.anim.search_bar_anim_exit)
-        binding.relativeIncludeNavbar.startAnimation(slideUp)
-        binding.relativeIncludeNavbar.visibility = View.INVISIBLE
-        binding.searchInclude.editTextSearch.visibility = View.INVISIBLE
-        binding.searchInclude.btnSearchBack.visibility = View.INVISIBLE
+        dataBinding.relativeIncludeNavbar.startAnimation(slideUp)
+        dataBinding.relativeIncludeNavbar.visibility = View.INVISIBLE
+        dataBinding.searchInclude.editText_search.visibility = View.INVISIBLE
+        dataBinding.searchInclude.btn_search_back.visibility = View.INVISIBLE
 
     }
 
@@ -174,10 +176,10 @@ class NavigationBottomActivity : AppCompatActivity() {
         } else {
             val slideUp: Animation =
                 AnimationUtils.loadAnimation(this, R.anim.search_bar_anim_enter)
-            binding.relativeIncludeNavbar.startAnimation(slideUp)
-            binding.relativeIncludeNavbar.visibility = View.VISIBLE
-            binding.searchInclude.editTextSearch.visibility = View.VISIBLE
-            binding.searchInclude.btnSearchBack.visibility = View.VISIBLE
+            dataBinding.relativeIncludeNavbar.startAnimation(slideUp)
+            dataBinding.relativeIncludeNavbar.visibility = View.VISIBLE
+            dataBinding.searchInclude.editText_search.visibility = View.VISIBLE
+            dataBinding.searchInclude.btn_search_back.visibility = View.VISIBLE
         }
     }
 

@@ -1,6 +1,5 @@
-package com.beratyesbek.Vhoops.Adapter
+package com.beratyesbek.vhoops.Adapter
 
-import android.os.UserManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +7,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.beratyesbek.Vhoops.Business.Concrete.FellowManager
-import com.beratyesbek.Vhoops.Business.Concrete.FriendRequestManager
-import com.beratyesbek.Vhoops.DataAccess.Concrete.FellowDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.FriendRequestDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
-import com.beratyesbek.Vhoops.Entities.Concrete.FriendRequest
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.R
+import com.beratyesbek.vhoops.Business.Concrete.FellowManager
+import com.beratyesbek.vhoops.Business.Concrete.FriendRequestManager
+import com.beratyesbek.vhoops.DataAccess.Concrete.FellowDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.FriendRequestDal
+import com.beratyesbek.vhoops.entities.concrete.Fellow
+import com.beratyesbek.vhoops.entities.concrete.FriendRequest
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.R
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*

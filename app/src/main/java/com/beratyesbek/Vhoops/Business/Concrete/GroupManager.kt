@@ -1,12 +1,12 @@
-package com.beratyesbek.Vhoops.Business.Concrete
+package com.beratyesbek.vhoops.Business.Concrete
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Business.Abstract.IGroupService
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
-import com.beratyesbek.Vhoops.DataAccess.Abstract.IGroupDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Group
+import com.beratyesbek.vhoops.Business.Abstract.IGroupService
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
+import com.beratyesbek.vhoops.DataAccess.Abstract.IGroupDal
+import com.beratyesbek.vhoops.entities.concrete.Group
 
 class GroupManager(val groupDal : IGroupDal)  : IGroupService{
 

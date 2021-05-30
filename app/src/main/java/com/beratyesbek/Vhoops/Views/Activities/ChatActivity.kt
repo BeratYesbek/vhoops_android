@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -17,43 +17,40 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.Vhoops.Adapter.ChatViewAdapter
-import com.beratyesbek.Vhoops.Business.ChatFileOperations
-import com.beratyesbek.Vhoops.Business.Concrete.ChatManager
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.Core.Constants.Constants
-import com.beratyesbek.Vhoops.Core.Constants.Messages
-import com.beratyesbek.Vhoops.Core.DataAccess.Constants.ExtensionConstants
-import com.beratyesbek.Vhoops.Core.Permission.DocumentPermission
-import com.beratyesbek.Vhoops.Core.Permission.GalleryPermission
-import com.beratyesbek.Vhoops.Core.Permission.RecordAudioPermission
-import com.beratyesbek.Vhoops.Core.Utilities.Animation.Animation
-import com.beratyesbek.Vhoops.Core.Utilities.Control.CheckAndroidUriType
-import com.beratyesbek.Vhoops.DataAccess.Concrete.ChatDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Chat
-import com.beratyesbek.Vhoops.Entities.Concrete.Dtos.ChatDto
-import com.beratyesbek.Vhoops.R
-import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
-import com.beratyesbek.Vhoops.Views.Fragment.CameraFragment
-import com.beratyesbek.Vhoops.databinding.ActivityChatBinding
-import com.gauravk.audiovisualizer.visualizer.WaveVisualizer
+import com.beratyesbek.vhoops.Adapter.ChatViewAdapter
+import com.beratyesbek.vhoops.Business.ChatFileOperations
+import com.beratyesbek.vhoops.Business.Concrete.ChatManager
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.Core.DataAccess.Constants.ExtensionConstants
+import com.beratyesbek.vhoops.Core.Permission.DocumentPermission
+import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
+import com.beratyesbek.vhoops.Core.Permission.RecordAudioPermission
+import com.beratyesbek.vhoops.Core.Utilities.Animation.Animation
+import com.beratyesbek.vhoops.DataAccess.Concrete.ChatDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.Chat
+import com.beratyesbek.vhoops.entities.concrete.dtos.ChatDto
+import com.beratyesbek.vhoops.R
+import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.views.fragment.CameraFragment
+import com.beratyesbek.vhoops.databinding.ActivityChatBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.chat_toolbar.view.*
 import java.io.File
 
 
 class ChatActivity : AppCompatActivity(),OnItemClickListener {
 
-    private lateinit var binding: ActivityChatBinding
     private lateinit var mediaRecorder: MediaRecorder
     private lateinit var receiverId: String
     private val chatDtoList: ArrayList<ChatDto> = ArrayList()
@@ -65,16 +62,17 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
     private lateinit var selectMessageList : ArrayList<Chat>
     private lateinit var deleteAlertDialog: Dialog
 
+    private lateinit var dataBinding: ActivityChatBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityChatBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = DataBindingUtil.setContentView(this,R.layout.activity_chat)
 
-        setContentView(view)
 
-        setSupportActionBar(binding.includeChatActivity.toolbar)
-        getSupportActionBar()!!.setDisplayShowTitleEnabled(false);
+
+        setSupportActionBar(dataBinding.includeChatActivity.toolbar)
 
         positionArray = ArrayList()
         selectMessageList = ArrayList()
@@ -86,21 +84,21 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
 
         val uri: Uri
 
-        val imageView = binding.includeChatActivity.imageViewProfileChatToolbar
+        val imageView = dataBinding.includeChatActivity.imageView_profile_chat_toolbar
 
         if (profileImage != null) {
             uri = Uri.parse(profileImage)
             Picasso.get().load(uri).into(imageView)
         }
-        binding.includeChatActivity.textViewUserFullNameChatActivity.text = fullName!!.toUpperCase()
+        dataBinding.includeChatActivity.textView_user_fullName_chatActivity.text = fullName!!.toUpperCase()
 
-        binding.includeChatActivity.btnDeleteChatToolbar.setOnClickListener {
+        dataBinding.includeChatActivity.btn_delete_chatToolbar.setOnClickListener {
             displayAlertDialogForDelete({ multipleDeleteMessage() })
 
 
         }
 
-        binding.editTextEnterMessage.addTextChangedListener(object : TextWatcher {
+        dataBinding.editTextEnterMessage.addTextChangedListener(object : TextWatcher {
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -109,16 +107,16 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!p0.isNullOrEmpty()) {
                     if (editTextControl) {
-                        hideAnim(binding.imageButtonMic)
-                        revealAnim(binding.imageButtonSend)
+                        hideAnim(dataBinding.imageButtonMic)
+                        revealAnim(dataBinding.imageButtonSend)
                         editTextControl = false
 
                     }
 
                 } else {
 
-                    hideAnim(binding.imageButtonSend)
-                    revealAnim(binding.imageButtonMic)
+                    hideAnim(dataBinding.imageButtonSend)
+                    revealAnim(dataBinding.imageButtonMic)
                     editTextControl = true
                 }
             }
@@ -127,7 +125,7 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
             }
         })
 
-        binding.imageButtonMic.setOnClickListener {
+        dataBinding.imageButtonMic.setOnClickListener {
             audioRecorder()
         }
 
@@ -140,11 +138,11 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
 
     fun runRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
-        binding.recyclerViewChatActivity.layoutManager = layoutManager
+        dataBinding.recyclerViewChatActivity.layoutManager = layoutManager
         layoutManager.setStackFromEnd(true);
-        binding.recyclerViewChatActivity.refreshDrawableState();
+        dataBinding.recyclerViewChatActivity.refreshDrawableState();
         chatViewAdapter = ChatViewAdapter(chatDtoList,this)
-        binding.recyclerViewChatActivity.adapter = chatViewAdapter
+        dataBinding.recyclerViewChatActivity.adapter = chatViewAdapter
 
     }
 
@@ -243,7 +241,7 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
     fun btnSendMessage(view: View) {
 
 
-        val message = binding.editTextEnterMessage.text.toString()
+        val message = dataBinding.editTextEnterMessage.text.toString()
 
         if (message != null) {
 
@@ -280,7 +278,7 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
                 chatDtoList.addAll(iDataResult.data())
                 chatViewAdapter.notifyDataSetChanged()
                 chatViewAdapter.notifyItemInserted(chatDtoList.size)
-                binding.recyclerViewChatActivity.scrollToPosition(chatViewAdapter.getItemCount() - 1)
+                dataBinding.recyclerViewChatActivity.scrollToPosition(chatViewAdapter.getItemCount() - 1)
 
 
             }else{
@@ -507,8 +505,8 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
     }
 
     private fun clearToolbar(){
-        Animation.hideAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
-        Animation.revealAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+        Animation.hideAnim(dataBinding.includeChatActivity.linearLayout_toolbar_chat_deleteView)
+        Animation.revealAnim(dataBinding.includeChatActivity.btn_videoMeeting_chatToolbar)
         toolbarAnimControl = false
     }
 
@@ -519,20 +517,20 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
                 if (i == position){
                     println(position)
                     selectMessageList.removeAt(index)
-                    binding.includeChatActivity.textViewDeleteItemChatToolbar.text = selectMessageList.size.toString()
+                    dataBinding.includeChatActivity.textView_deleteItem_chatToolbar.text = selectMessageList.size.toString()
                 }
             }
 
             if (selectMessageList.size <= 0){
-                Animation.hideAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
-                Animation.revealAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+                Animation.hideAnim(dataBinding.includeChatActivity.linearLayout_toolbar_chat_deleteView)
+                Animation.revealAnim(dataBinding.includeChatActivity.btn_videoMeeting_chatToolbar)
                 toolbarAnimControl = false
             }
 
         }else{
             if (!toolbarAnimControl && selectMessageList.size <= 0 ){
-                Animation.hideAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
-                Animation.revealAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+                Animation.hideAnim(dataBinding.includeChatActivity.linearLayout_toolbar_chat_deleteView)
+                Animation.revealAnim(dataBinding.includeChatActivity.btn_videoMeeting_chatToolbar)
                 toolbarAnimControl = false
             }
         }
@@ -545,10 +543,10 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
         val chat : Chat = Chat(chatDto.senderId,chatDto.receiverId,chatDto.message,chatDto.documentId,chatDto.isSeen,chatDto.timeToSend)
         println(chat.documentId)
         selectMessageList.add(chat)
-        binding.includeChatActivity.textViewDeleteItemChatToolbar.text = selectMessageList.size.toString()
+        dataBinding.includeChatActivity.textView_deleteItem_chatToolbar.text = selectMessageList.size.toString()
         if (selectMessageList.size > 0 && !toolbarAnimControl){
-            Animation.revealAnim(binding.includeChatActivity.linearLayoutToolbarChatDeleteView)
-            Animation.hideAnim(binding.includeChatActivity.btnVideoMeetingChatToolbar)
+            Animation.revealAnim(dataBinding.includeChatActivity.linearLayout_toolbar_chat_deleteView)
+            Animation.hideAnim(dataBinding.includeChatActivity.btn_videoMeeting_chatToolbar)
             toolbarAnimControl = true
         }
 

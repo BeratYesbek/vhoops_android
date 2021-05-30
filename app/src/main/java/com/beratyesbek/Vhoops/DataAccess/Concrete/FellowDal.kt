@@ -1,8 +1,7 @@
-package com.beratyesbek.Vhoops.DataAccess.Concrete
+package com.beratyesbek.vhoops.DataAccess.Concrete
 
-import com.beratyesbek.Vhoops.Core.DataAccess.Abstract.IFirebaseFellowDal
-import com.beratyesbek.Vhoops.Core.DataAccess.Concrete.FirebaseFellowDal
-import com.beratyesbek.Vhoops.DataAccess.Abstract.IFellowDal
+import com.beratyesbek.vhoops.Core.DataAccess.Concrete.FirebaseFellowDal
+import com.beratyesbek.vhoops.DataAccess.Abstract.IFellowDal
 
 class FellowDal: FirebaseFellowDal(),IFellowDal {
 }

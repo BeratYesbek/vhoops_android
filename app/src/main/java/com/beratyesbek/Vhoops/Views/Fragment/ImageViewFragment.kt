@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Views.Fragment
+package com.beratyesbek.vhoops.views.fragment
 
 import android.net.Uri
 import android.os.Bundle
@@ -6,27 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.beratyesbek.Vhoops.R
-import com.beratyesbek.Vhoops.databinding.FragmentImageViewBinding
+import com.beratyesbek.vhoops.databinding.FragmentImageViewBinding
 import com.squareup.picasso.Picasso
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 
 
 class ImageViewFragment(val uri : Uri) : Fragment() {
 
-    private lateinit var binding: FragmentImageViewBinding
+    private lateinit var dataBinding: FragmentImageViewBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentImageViewBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = FragmentImageViewBinding.inflate(layoutInflater)
+        val view = dataBinding.root
 
 
-        Picasso.get().load(uri).into(binding.imageViewFragment)
+        Picasso.get().load(uri).into(dataBinding.imageViewFragment)
 
-        binding.btnCloseImageViewFragment.setOnClickListener {
+        dataBinding.btnCloseImageViewFragment.setOnClickListener {
             activity?.onBackPressed()
         }
         return view

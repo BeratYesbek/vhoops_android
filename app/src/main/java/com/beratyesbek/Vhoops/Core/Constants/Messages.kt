@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.Constants
+package com.beratyesbek.vhoops.Core.Constants
 
 open class Messages {
     companion object {

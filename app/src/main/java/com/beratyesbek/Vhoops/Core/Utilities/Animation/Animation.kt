@@ -1,4 +1,4 @@
-package com.beratyesbek.Vhoops.Core.Utilities.Animation
+package com.beratyesbek.vhoops.Core.Utilities.Animation
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

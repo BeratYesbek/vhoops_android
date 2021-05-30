@@ -1,7 +1,7 @@
-package com.beratyesbek.Vhoops.Core.DataAccess.Abstract
+package com.beratyesbek.vhoops.Core.DataAccess.Abstract
 
-import com.beratyesbek.Vhoops.Core.DataAccess.IEntityRepository
-import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
+import com.beratyesbek.vhoops.Core.DataAccess.IEntityRepository
+import com.beratyesbek.vhoops.entities.abstracts.IEntity
 
 interface IFirebaseFellowDal<T : IEntity> : IEntityRepository<T> {
 }

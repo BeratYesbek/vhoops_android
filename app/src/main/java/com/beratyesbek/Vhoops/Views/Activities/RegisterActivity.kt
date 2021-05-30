@@ -1,25 +1,25 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.databinding.ActivityRegisterBinding
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
 
 
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var dataBinding: ActivityRegisterBinding
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        val view = binding.root
+        dataBinding = ActivityRegisterBinding.inflate(layoutInflater)
+        val view = dataBinding.root
         setContentView(view)
 
         
@@ -29,12 +29,12 @@ class RegisterActivity : AppCompatActivity() {
 
     fun btnRegister(view: View) {
 
-        val firstName = binding.editTextRegisterFirstName.text.toString()
-        val lastName =  binding.editTextRegisterLastName.text.toString()
-        val email = binding.editTextRegisterEmail.text.toString()
-        val userName = binding.editTextRegisterUserName.text.toString()
-        val password = binding.editTextRegisterPassword.text.toString()
-        val passwordAgain = binding.editTextRegisterPasswordAgain.text.toString()
+        val firstName = dataBinding.editTextRegisterFirstName.text.toString()
+        val lastName =  dataBinding.editTextRegisterLastName.text.toString()
+        val email = dataBinding.editTextRegisterEmail.text.toString()
+        val userName = dataBinding.editTextRegisterUserName.text.toString()
+        val password = dataBinding.editTextRegisterPassword.text.toString()
+        val passwordAgain = dataBinding.editTextRegisterPasswordAgain.text.toString()
 
 
         if(password.equals(passwordAgain)){

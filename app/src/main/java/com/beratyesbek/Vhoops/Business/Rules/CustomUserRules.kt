@@ -1,9 +1,9 @@
-package com.beratyesbek.Vhoops.Business.Rules
+package com.beratyesbek.vhoops.Business.Rules
 
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.ErrorResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessResult
-import com.beratyesbek.Vhoops.Entities.Concrete.User
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.ErrorResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessResult
+import com.beratyesbek.vhoops.entities.concrete.User
 
 class CustomUserRules {
 

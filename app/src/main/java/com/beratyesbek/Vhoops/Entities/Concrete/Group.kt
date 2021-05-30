@@ -1,7 +1,7 @@
-package com.beratyesbek.Vhoops.Entities.Concrete
+package com.beratyesbek.vhoops.entities.concrete
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Entities.Abstract.IEntity
+import com.beratyesbek.vhoops.entities.abstracts.IEntity
 import com.google.firebase.Timestamp
 
 class Group(
@@ -12,7 +12,7 @@ class Group(
     documentId: String?,
     memberIdList: ArrayList<String>,
     createdDate: Timestamp
-) : IEntity {
+) : IEntity  {
 
     val groupId: String? = groupId
         get

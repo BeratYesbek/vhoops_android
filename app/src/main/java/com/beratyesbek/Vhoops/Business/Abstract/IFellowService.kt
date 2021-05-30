@@ -1,6 +1,6 @@
-package com.beratyesbek.Vhoops.Business.Abstract
+package com.beratyesbek.vhoops.Business.Abstract
 
-import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
+import com.beratyesbek.vhoops.entities.concrete.Fellow
 
 interface IFellowService : IServiceRepository<Fellow> {
 }

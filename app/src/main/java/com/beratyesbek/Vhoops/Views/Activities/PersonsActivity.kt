@@ -1,49 +1,47 @@
-package com.beratyesbek.Vhoops.Views.Activities
+package com.beratyesbek.vhoops.views.activities
 
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.ImageDecoder
 import android.graphics.drawable.ColorDrawable
-import android.media.Image
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.Gravity
 import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.Vhoops.Adapter.GridViewAdapter.GroupMemberViewAdapter
-import com.beratyesbek.Vhoops.Adapter.PersonViewAdapter
-import com.beratyesbek.Vhoops.Business.Concrete.FellowManager
-import com.beratyesbek.Vhoops.Business.Concrete.GroupManager
-import com.beratyesbek.Vhoops.Business.Concrete.UserManager
-import com.beratyesbek.Vhoops.Core.Constants.Constants
-import com.beratyesbek.Vhoops.Core.Permission.GalleryPermission
-import com.beratyesbek.Vhoops.Core.Utilities.Animation.Animation
-import com.beratyesbek.Vhoops.DataAccess.Concrete.FellowDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.GroupDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Fellow
-import com.beratyesbek.Vhoops.Entities.Concrete.Group
-import com.beratyesbek.Vhoops.Entities.Concrete.User
-import com.beratyesbek.Vhoops.R
-import com.beratyesbek.Vhoops.ViewUtilities.OnItemClickListener
-import com.beratyesbek.Vhoops.databinding.ActivityPersonsBinding
+import com.beratyesbek.vhoops.Adapter.GridViewAdapter.GroupMemberViewAdapter
+import com.beratyesbek.vhoops.Adapter.PersonViewAdapter
+import com.beratyesbek.vhoops.Business.Concrete.FellowManager
+import com.beratyesbek.vhoops.Business.Concrete.GroupManager
+import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
+import com.beratyesbek.vhoops.Core.Utilities.Animation.Animation
+import com.beratyesbek.vhoops.DataAccess.Concrete.FellowDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.GroupDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.entities.concrete.Fellow
+import com.beratyesbek.vhoops.entities.concrete.Group
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.R
+import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.databinding.ActivityPersonsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.toolbar.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class PersonsActivity : AppCompatActivity(), OnItemClickListener {
 
-    private lateinit var binding: ActivityPersonsBinding
+    private lateinit var dataBinding: ActivityPersonsBinding
 
     private val userList: ArrayList<User> = ArrayList()
     private val fellowList: ArrayList<Fellow> = ArrayList()
@@ -58,14 +56,14 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPersonsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        dataBinding = ActivityPersonsBinding.inflate(layoutInflater)
+        setContentView(dataBinding.root)
 
-        setSupportActionBar(binding.toolbarPersonsActivity.toolbar)
+        setSupportActionBar(dataBinding.toolbarPersonsActivity.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
 
-        binding.toolbarPersonsActivity.btnToolbarNewGroup.setOnClickListener {
+        dataBinding.toolbarPersonsActivity.btn_toolbar_newGroup.setOnClickListener {
             if (selectedUserList.size > 0) {
                 groupCreationDialog()
             }
@@ -87,9 +85,9 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
 
     private fun runRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
-        binding.recyclerViewFriendActivity.layoutManager = layoutManager
+        dataBinding.recyclerViewFriendActivity.layoutManager = layoutManager
         personViewAdapter = PersonViewAdapter(userList, fellowList, this)
-        binding.recyclerViewFriendActivity.adapter = personViewAdapter
+        dataBinding.recyclerViewFriendActivity.adapter = personViewAdapter
     }
 
     private fun groupCreationDialog() {
@@ -128,7 +126,8 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
             groupManager.uploadGroupIcon(groupIcon!!) { iDataResult ->
                 if (iDataResult.success()){
                     val adminId = FirebaseAuth.getInstance().currentUser.uid
-                    groupManager.add(Group(null,groupName,adminId,iDataResult.data(),null,selectedUserId, Timestamp.now())){
+                    val uuid = UUID.randomUUID().toString()
+                    groupManager.add(Group(uuid,groupName,adminId,iDataResult.data(),uuid,selectedUserId, Timestamp.now())){
                         if (it.success()){
                             Toast.makeText(this,"Group has been created",Toast.LENGTH_LONG).show()
                             dialog.dismiss()
@@ -257,7 +256,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
             selectedItemList.clear()
             selectedUserId.clear()
 
-            Animation.hideAnim(binding.toolbarPersonsActivity.btnToolbarNewGroup)
+            Animation.hideAnim(dataBinding.toolbarPersonsActivity.btn_toolbar_newGroup)
         }
 
 
@@ -269,7 +268,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         selectedUserList.add(user)
         selectedUserId.add(user.userID)
         if (selectedItemList.size in 1..1) {
-            Animation.revealAnim(binding.toolbarPersonsActivity.btnToolbarNewGroup)
+            Animation.revealAnim(dataBinding.toolbarPersonsActivity.btn_toolbar_newGroup)
         }
     }
 

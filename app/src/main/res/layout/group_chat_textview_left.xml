@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView_groupChat_ProfileImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_profile_blue">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="7dp"
+            android:layout_toRightOf="@id/imageView_groupChat_ProfileImage"
+            android:background="@drawable/custom_background_chat_left"
+
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textView_userName_groupChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vhoops"
+                android:textSize="10dp"
+                android:textColor="#ffc107"
+                android:paddingLeft="7dp"
+                android:paddingTop="4dp"
+                android:textStyle="bold"
+                android:paddingRight="7dp"
+                    >
+            </TextView>
+            <TextView
+                android:id="@+id/textView_show_messages_groupChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="android"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="#fff"
+                android:textSize="16dp">
+
+            </TextView>
+        </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/chat_item_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="45dp">
+
+    </RelativeLayout>
+
+</RelativeLayout>

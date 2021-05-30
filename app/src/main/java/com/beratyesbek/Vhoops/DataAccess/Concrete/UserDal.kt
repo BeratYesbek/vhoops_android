@@ -1,7 +1,7 @@
-package com.beratyesbek.Vhoops.DataAccess.Concrete
+package com.beratyesbek.vhoops.DataAccess.Concrete
 
-import com.beratyesbek.Vhoops.Core.DataAccess.Concrete.FirebaseUserDal
-import com.beratyesbek.Vhoops.DataAccess.Abstract.IUserDal
+import com.beratyesbek.vhoops.Core.DataAccess.Concrete.FirebaseUserDal
+import com.beratyesbek.vhoops.DataAccess.Abstract.IUserDal
 
 class UserDal : FirebaseUserDal(), IUserDal {
 }

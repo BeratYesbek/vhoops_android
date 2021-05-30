@@ -1,15 +1,14 @@
-package com.beratyesbek.Vhoops.Business.Concrete
+package com.beratyesbek.vhoops.Business.Concrete
 
 import android.net.Uri
-import com.beratyesbek.Vhoops.Business.Abstract.IChatService
-import com.beratyesbek.Vhoops.Business.Abstract.IUserService
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IDataResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Abstract.IResult
-import com.beratyesbek.Vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
-import com.beratyesbek.Vhoops.DataAccess.Abstract.IChatDal
-import com.beratyesbek.Vhoops.DataAccess.Concrete.ChatDal
-import com.beratyesbek.Vhoops.Entities.Concrete.Chat
-import com.beratyesbek.Vhoops.Entities.Concrete.Dtos.ChatDto
+import com.beratyesbek.vhoops.Business.Abstract.IChatService
+import com.beratyesbek.vhoops.Business.Abstract.IUserService
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IDataResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
+import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
+import com.beratyesbek.vhoops.DataAccess.Abstract.IChatDal
+import com.beratyesbek.vhoops.entities.concrete.Chat
+import com.beratyesbek.vhoops.entities.concrete.dtos.ChatDto
 
 class ChatManager(val chatDal: IChatDal, val userService: IUserService) : IChatService {
 
