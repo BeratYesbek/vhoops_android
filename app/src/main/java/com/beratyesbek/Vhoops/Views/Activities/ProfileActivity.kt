@@ -238,7 +238,7 @@ class ProfileActivity : AppCompatActivity() {
 
         super.onActivityResult(requestCode, resultCode, data)
         if (bitmap != null && imageSource != null) {
-            runCameraFragment(bitmap, imageSource)
+            runCameraFragment(imageSource)
         }
     }
 
@@ -252,11 +252,11 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun runCameraFragment(bitmap: Bitmap, uri: Uri) {
+    private fun runCameraFragment(uri: Uri) {
 
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-        transaction.replace(R.id.frameLayout_profile_activity,CameraFragment( uri,null, user.documentID,Constants.PROFILE_ACTIVITY))
+        transaction.replace(R.id.frameLayout_profile_activity,CameraFragment( uri,null, null,user.documentID,Constants.PROFILE_ACTIVITY))
         transaction.commit()
     }
 

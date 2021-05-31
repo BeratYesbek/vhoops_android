@@ -11,5 +11,6 @@ open class Constants {
         val CHAT_ACTIVITY = 1
         val CAMERA_ACTIVITY = 2
         val PROFILE_ACTIVITY = 3
+        val GROUP_CHAT_ACTIVITY = 4
     }
 }

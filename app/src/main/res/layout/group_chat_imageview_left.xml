@@ -9,7 +9,15 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView_groupChat_ProfileImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/ic_profile_blue">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
 
 
         <androidx.cardview.widget.CardView

@@ -49,11 +49,15 @@
         <activity android:name=".views.activities.UserActivity" />
         <activity android:name=".views.activities.CameraActivity" />
         <activity android:name=".views.activities.ProfileActivity" />
+        <activity android:name=".views.activities.ChatActivity"
+            android:theme="@style/AppTheme_NoActionBar_NonFullscreen"/>
 
         <activity android:name=".views.activities.GroupChatActivity"
             android:theme="@style/AppTheme_NoActionBar_NonFullscreen"/>
 
         <activity
+
+
             android:name=".views.activities.RegisterActivity"
             android:theme="@style/AppTheme_NoActionBar" />
         <activity android:name=".views.activities.NavigationBottomActivity" />

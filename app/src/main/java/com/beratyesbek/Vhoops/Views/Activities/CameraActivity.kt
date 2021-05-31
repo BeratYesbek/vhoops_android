@@ -45,8 +45,8 @@ class CameraActivity : AppCompatActivity() {
     private var documentId: String? = null
     private var senderId: String? = null
     private var receiverId: String? = null
-    private var type: String? = null
-
+    private var type: Int? = null
+    private var groupId: String? = null
 
 
     companion object {
@@ -63,7 +63,8 @@ class CameraActivity : AppCompatActivity() {
         documentId = intent.getStringExtra("documentId")
         senderId = intent.getStringExtra("senderId")
         receiverId = intent.getStringExtra("receiverId")
-        type = intent.getStringExtra("type")
+        groupId = intent.getStringExtra("groupId")
+        type = intent.getIntExtra("type", 0)
 
 
         // Request camera permissions
@@ -135,11 +136,11 @@ class CameraActivity : AppCompatActivity() {
 
                         val source = ImageDecoder.createSource(contentResolver, savedUri!!)
                         val bitmap = ImageDecoder.decodeBitmap(source)
-                        runCameraFragment(bitmap, savedUri)
+                        runCameraFragment(savedUri)
 
                     } else {
                         val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, savedUri)
-                        runCameraFragment(bitmap, savedUri)
+                        runCameraFragment(savedUri)
 
                     }
 
@@ -239,16 +240,10 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    private fun runCameraFragment(bitmap: Bitmap, uri: Uri) {
+    private fun runCameraFragment(uri: Uri) {
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-
-        transaction.replace(
-            R.id.frameLayout_camera_activity,
-            CameraFragment(uri,null, documentId!!,Constants.CAMERA_ACTIVITY)
-        )
-
-
+        transaction.replace(R.id.frameLayout_camera_activity, CameraFragment(uri,receiverId,groupId, documentId, type!!))
         transaction.commit()
     }
 

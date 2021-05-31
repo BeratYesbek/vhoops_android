@@ -317,12 +317,15 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
 
         btnCamera!!.setOnClickListener {
             val intentToCamera = Intent(this, CameraActivity::class.java)
+            intentToCamera.putExtra("type",Constants.CHAT_ACTIVITY)
+            intentToCamera.putExtra("receiverId",receiverId)
             startActivity(intentToCamera)
         }
 
         btnLocation!!.setOnClickListener {
             val intentToMaps = Intent(this, MapsActivity::class.java)
             intentToMaps.putExtra("receiverId", receiverId)
+            intentToMaps.putExtra("type",Constants.CHAT_ACTIVITY)
             startActivity(intentToMaps)
         }
 
@@ -438,7 +441,7 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
 
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-        transaction.replace(R.id.frameLayout_chat, CameraFragment(uri, receiverId,null,Constants.CHAT_ACTIVITY))
+        transaction.replace(R.id.frameLayout_chat, CameraFragment(uri, receiverId,null,null,Constants.CHAT_ACTIVITY))
         transaction.commit()
     }
 

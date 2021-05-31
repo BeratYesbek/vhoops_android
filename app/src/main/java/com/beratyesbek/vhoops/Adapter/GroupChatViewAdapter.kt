@@ -21,6 +21,7 @@ import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
 import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
 import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.views.activities.ChatActivity
+import com.beratyesbek.vhoops.views.activities.GroupChatActivity
 import com.beratyesbek.vhoops.views.fragment.ImageViewFragment
 import com.beratyesbek.vhoops.views.fragment.VideoViewFragment
 import com.google.android.gms.maps.*
@@ -241,9 +242,9 @@ class GroupChatViewAdapter(
         videoView.setVideoURI(uri)
         videoView.seekTo(1)
         btnStart.setOnClickListener {
-            val transaction = (context as ChatActivity).supportFragmentManager.beginTransaction()
+            val transaction = (context as GroupChatActivity).supportFragmentManager.beginTransaction()
             transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-            transaction.replace(R.id.frameLayout_chat, VideoViewFragment(uri))
+            transaction.replace(R.id.frameLayout_groupChat, VideoViewFragment(uri))
             transaction.commit()
         }
     }
@@ -343,7 +344,7 @@ class GroupChatViewAdapter(
             textViewMessage = view.findViewById(R.id.textView_show_messages_groupChat)
             imageViewChat = view.findViewById(R.id.imageView_groupChat)
             imageViewUserProfile = view.findViewById(R.id.imageView_groupChat_ProfileImage)
-            videoView = view.findViewById(R.id.videoView_chat)
+            videoView = view.findViewById(R.id.videoView_groupChat)
             btnPauseAudio = view.findViewById(R.id.btn_stop_audio_groupChat)
             btnPlayAudio = view.findViewById(R.id.btn_play_audio_groupChat)
             btnStartVideo = view.findViewById(R.id.btn_start_video_groupChat)

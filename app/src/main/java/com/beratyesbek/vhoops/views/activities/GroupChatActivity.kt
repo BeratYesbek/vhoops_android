@@ -17,17 +17,15 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Chronometer
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.vhoops.Adapter.ChatViewAdapter
 import com.beratyesbek.vhoops.Adapter.GroupChatViewAdapter
-import com.beratyesbek.vhoops.Business.ChatFileOperations
-import com.beratyesbek.vhoops.Business.ChatGroupFileOperations
-import com.beratyesbek.vhoops.Business.Concrete.ChatManager
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Business.GroupChatFileOperations
+import com.beratyesbek.vhoops.Core.Constants.Constants
 import com.beratyesbek.vhoops.Core.DataAccess.Constants.ExtensionConstants
 import com.beratyesbek.vhoops.Core.Permission.DocumentPermission
 import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
@@ -35,14 +33,13 @@ import com.beratyesbek.vhoops.Core.Permission.RecordAudioPermission
 import com.beratyesbek.vhoops.Core.Utilities.Animation.Animation
 import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
 import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
-import com.beratyesbek.vhoops.DataAccess.Concrete.ChatDal
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.vhoops.entities.concrete.GroupChat
 import com.beratyesbek.vhoops.MVMM.GroupChatViewModel
 import com.beratyesbek.vhoops.R
 import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.databinding.ActivityGroupChatBinding
 import com.beratyesbek.vhoops.entities.concrete.dtos.GroupChatDto
+import com.beratyesbek.vhoops.views.fragment.CameraFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -60,6 +57,7 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
     private var editTextControl = true
     private val viewModel: GroupChatViewModel by viewModels()
     private var groupId: String? = null
+    private lateinit var transaction: FragmentTransaction;
 
     private val groupChatList: ArrayList<GroupChatDto> = ArrayList()
 
@@ -107,16 +105,16 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!p0.isNullOrEmpty()) {
                     if (editTextControl) {
-                        Animation.hideAnim(dataBinding.imageButtonMicGroupChat)
-                        Animation.revealAnim(dataBinding.imageButtonSendGroupChat)
+                          Animation.hideAnim(dataBinding.imageButtonMicGroupChat)
+                          Animation.revealAnim(dataBinding.imageButtonSendGroupChat)
                         editTextControl = false
 
                     }
 
                 } else {
 
-                    Animation.hideAnim(dataBinding.imageButtonSendGroupChat)
-                    Animation.revealAnim(dataBinding.imageButtonMicGroupChat)
+                      Animation.hideAnim(dataBinding.imageButtonSendGroupChat)
+                      Animation.revealAnim(dataBinding.imageButtonMicGroupChat)
                     editTextControl = true
                 }
             }
@@ -179,12 +177,15 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
 
         btnCamera!!.setOnClickListener {
             val intentToCamera = Intent(this, CameraActivity::class.java)
+            intentToCamera.putExtra("type",Constants.GROUP_CHAT_ACTIVITY)
+            intentToCamera.putExtra("groupId",groupId)
             startActivity(intentToCamera)
         }
 
         btnLocation!!.setOnClickListener {
             val intentToMaps = Intent(this, MapsActivity::class.java)
             intentToMaps.putExtra("groupId", groupId)
+            intentToMaps.putExtra("type",Constants.GROUP_CHAT_ACTIVITY)
             startActivity(intentToMaps)
         }
 
@@ -327,18 +328,46 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
             if (data != null) {
                 val uri = data.data
                 if(requestCode == 2){
-                    runChatFileOperations(uri!!)
-
-                    // runImageFragment(uri!!)
+                    runImageFragment(uri!!)
                 }else{
+                    runChatFileOperations(uri!!)
                 }
 
             }
         }
     }
 
+    override fun onBackPressed() {
+        if (supportFragmentManager.findFragmentById(R.id.frameLayout_groupChat) != null) {
+            removeFragment()
+        } else {
+            super.onBackPressed()
+
+        }
+    }
+
+    private fun runImageFragment(uri: Uri) {
+
+        transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
+        transaction.replace(R.id.frameLayout_groupChat, CameraFragment(uri, null,groupId,null,
+            Constants.CHAT_ACTIVITY)
+        )
+        transaction.commit()
+    }
+
+    private fun removeFragment() {
+
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.frameLayout_groupChat)
+        transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
+        transaction.remove(fragment!!)
+        transaction.commit()
+    }
+
+
     private fun runChatFileOperations(uri: Uri) {
-        val type = ChatGroupFileOperations.checkUriExtension(uri, this)
+        val type = GroupChatFileOperations.checkUriExtension(uri, this)
 
         if (type != null) {
             viewModel.uploadFile(uri, type)
