@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="chatListDto"
+            type="com.beratyesbek.vhoops.entities.concrete.dtos.ChatListDto" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeLayout_custom_person_item"
+        android:layout_width="match_parent"
+            android:background="@drawable/custom_clickable_background_white"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_userImage_item"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerVertical="true"
+                android:downloadUrl="@{chatListDto.userPicture.toString()}"
+                android:src="@drawable/ic_profile_blue" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:layout_toEndOf="@id/imageView_userImage_item"
+                android:background="@drawable/custom_transparent_background">
+                <TextView
+                    android:id="@+id/textView_home_item_userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+
+                    android:text="@{(chatListDto.userFirstName + ' '+  chatListDto.userLastName).toUpperCase() }"
+                    android:textColor="@color/dark_blue_color"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_friend_item_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView_home_item_userName"
+                    android:layout_marginRight="5dp"
+                    android:maxLength="35"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/dark_color" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

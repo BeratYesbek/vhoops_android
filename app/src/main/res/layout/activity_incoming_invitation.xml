@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_meeting_invitation"
+        tools:context=".views.activities.IncomingInvitationActivity">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_user_incoming_invitation"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/ic_profile"
+
+            >
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            android:id="@+id/textView_userName_incoming_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView TextView"
+            android:layout_below="@id/image_user_incoming_invitation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:textColor="#ffff"
+            android:padding="5dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btn_reject_inComing"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/btn_circle_red"
+                android:src="@drawable/ic_close_white"
+                android:layout_margin="25dp"
+
+                />
+            <ImageButton
+                android:id="@+id/btn_success_inComing"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/btn_circle_success"
+                android:src="@drawable/ic_done_white"
+                android:layout_margin="25dp"
+
+                />
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+</layout>

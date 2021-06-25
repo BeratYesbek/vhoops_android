@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.beratyesbek.vhoops.Business.Concrete.UserManager
 import com.beratyesbek.vhoops.Core.Constants.Constants
 import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
+import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
+import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
 import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.views.fragment.CameraFragment
@@ -79,18 +81,11 @@ class ProfileActivity : AppCompatActivity() {
         userManager.getById(id) { dataResult ->
             if (dataResult.success()) {
                 user = dataResult.data().get(0);
-                if (user.profileImage != null) {
-                    Picasso.get().load(user.profileImage).into(dataBinding.imageViewProfileActivity)
-                }
-                dataBinding.textViewFirstNameProfileActivity.text = user.firstName
-                dataBinding.textViewLastNameProfileActivity.text = user.lastName
-                dataBinding.textViewUserNameProfileActivity.text = user.userName
-                if (user.about != null) {
-                    dataBinding.textViewAboutProfileActivity.text = user.about
-                }
-
-            } else {
-
+                dataBinding.userData = user
+                dataBinding.imageViewProfileActivity.downloadFromUrl(
+                    user.profileImage.toString(),
+                    placeHolderProgressBar(this)
+                )
             }
         }
     }

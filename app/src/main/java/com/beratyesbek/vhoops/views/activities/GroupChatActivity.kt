@@ -82,10 +82,9 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
         dataBinding.includeGroupChatActivity.textView_groupName_chatActivity.text = groupName
 
         if (groupIcon != null) {
-
             val imageView = dataBinding.includeGroupChatActivity.imageView_profile_groupChat_toolbar
             this.let {
-                imageView.downloadFromUrl(groupIcon, placeHolderProgressBar(it))
+                imageView.downloadFromUrl(groupIcon.toString(), placeHolderProgressBar(it))
             }
         }
 

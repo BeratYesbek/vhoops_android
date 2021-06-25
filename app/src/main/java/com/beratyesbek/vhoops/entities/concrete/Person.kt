@@ -1,8 +1,9 @@
 package com.beratyesbek.vhoops.entities.concrete
 
 import com.beratyesbek.vhoops.entities.abstracts.IEntity
+import java.io.Serializable
 
-open class Person(firstName: String, lastName: String, email: String):IEntity {
+open class Person(firstName: String, lastName: String, email: String):IEntity ,Serializable{
 
 
     var firstName: String? = firstName

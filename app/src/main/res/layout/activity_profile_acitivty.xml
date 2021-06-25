@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="UserData"
+            type="com.beratyesbek.vhoops.entities.concrete.User" />
+    </data>
+    <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,8 +42,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_margin="5dp"
                     android:layout_marginBottom="125dp"
-                    android:src="@drawable/ic_profile_blue"
-                    app:civ_border_color="@color/orange_color">
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/info"
+                    android:src="@drawable/ic_profile_blue">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -95,6 +101,7 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/bottom_border"
                     android:padding="5dp"
+                    android:text="@{UserData.firstName}"
                     android:textColor="#000"
                     android:textSize="18dp"
                     android:textStyle="italic">
@@ -108,7 +115,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/ic_edit_blue"></ImageButton>
+                    android:background="@drawable/ic_edit_blue">
+
+                </ImageButton>
             </LinearLayout>
 
             <LinearLayout
@@ -125,6 +134,8 @@
                     android:background="@drawable/bottom_border"
                     android:padding="5dp"
                     android:textColor="#000"
+                    android:text="@{UserData.lastName}"
+
                     android:textSize="18dp"
                     android:textStyle="italic">
 
@@ -137,7 +148,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/ic_edit_blue"></ImageButton>
+                    android:background="@drawable/ic_edit_blue">
+
+                </ImageButton>
 
 
             </LinearLayout>
@@ -155,6 +168,7 @@
                     android:layout_toEndOf="@id/imageView_profile_activity"
                     android:background="@drawable/bottom_border"
                     android:padding="5dp"
+                    android:text="@{UserData.userName}"
                     android:textColor="#000"
                     android:textSize="16dp">
 
@@ -167,7 +181,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/ic_edit_blue"></ImageButton>
+                    android:background="@drawable/ic_edit_blue">
+
+                </ImageButton>
 
             </LinearLayout>
 
@@ -182,7 +198,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_info"></ImageView>
+                    android:src="@drawable/ic_info">
+
+                </ImageView>
 
                 <TextView
                     android:id="@+id/textView_about_text"
@@ -217,6 +235,8 @@
                     android:background="@drawable/bottom_border"
                     android:drawablePadding="15dp"
                     android:padding="5dp"
+                    android:text="@{UserData.about}"
+
                     android:textColor="#000"
                     android:textSize="15dp">
 
@@ -230,7 +250,9 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/ic_edit_blue"
 
-                    ></ImageButton>
+                    >
+
+                </ImageButton>
 
             </LinearLayout>
 

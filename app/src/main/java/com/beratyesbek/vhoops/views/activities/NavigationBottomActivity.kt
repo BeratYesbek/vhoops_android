@@ -1,5 +1,6 @@
 package com.beratyesbek.vhoops.views.activities
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -9,20 +10,23 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.databinding.Observable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.firebaseCloudMessaging.FirebaseTokenOperationService
 import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.R
-import com.beratyesbek.vhoops.views.fragment.*
 import com.beratyesbek.vhoops.databinding.ActivityNavigationBottomBinding
+import com.beratyesbek.vhoops.entities.concrete.User
+import com.beratyesbek.vhoops.views.fragment.*
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_search_item.view.*
 import kotlinx.android.synthetic.main.nav_toolbar.view.*
 
-
+@AndroidEntryPoint
 class NavigationBottomActivity : AppCompatActivity() {
 
     private lateinit var dataBinding: ActivityNavigationBottomBinding
@@ -34,8 +38,10 @@ class NavigationBottomActivity : AppCompatActivity() {
         dataBinding = ActivityNavigationBottomBinding.inflate(layoutInflater)
         val view = dataBinding.root
         setContentView(view);
-        //toolbar
-        setSupportActionBar(dataBinding.include.toolbar)
+
+        val toolbar = dataBinding.include.toolbar
+        setSupportActionBar(toolbar)
+        updateToken()
 
         inVisibleSearchBar()
 
@@ -44,7 +50,6 @@ class NavigationBottomActivity : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
         bottomNavigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_people))
         bottomNavigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_call))
-
 
 
         val homeFragment = HomeFragment()
@@ -56,11 +61,11 @@ class NavigationBottomActivity : AppCompatActivity() {
         updateTokenAndUserId()
 
 
-        dataBinding.bottomNavigation.setOnClickMenuListener  { click ->
+        dataBinding.bottomNavigation.setOnClickMenuListener { click  ->
             when (click.id) {
                 1 -> makeCurrentFragment(homeFragment, "homeFragment")
                 2 -> makeCurrentFragment(groupFragment, "groupFragment")
-                3-> makeCurrentFragment(callFragment, "callFragment")
+                3 -> makeCurrentFragment(callFragment, "callFragment")
 
             }
 
@@ -71,7 +76,7 @@ class NavigationBottomActivity : AppCompatActivity() {
             }
         }
 
-        dataBinding.include.toolbar_search_button.setOnClickListener {
+        dataBinding.include.toolbarSearchButton.setOnClickListener {
             visibleSearchBar()
 
 
@@ -80,46 +85,54 @@ class NavigationBottomActivity : AppCompatActivity() {
             inVisibleSearchBar()
         }
 
-        dataBinding.include.btn_toolbar_notification.setOnClickListener {
-            val intent = Intent(this,NotificationActivity::class.java)
+        dataBinding.include.btnToolbarNotification.setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
             startActivity(intent)
         }
 
         dataBinding.btnPersons.setOnClickListener {
-            val intentToPersonsActivity = Intent(this,PersonsActivity::class.java)
+            val intentToPersonsActivity = Intent(this, PersonsActivity::class.java)
             startActivity(intentToPersonsActivity)
         }
 
     }
-    private fun updateTokenAndUserId(){
+    private fun updateToken(){
+        val  firebaseTokenOperationService = FirebaseTokenOperationService()
+        firebaseTokenOperationService.getToken(this)
+    }
+    private fun updateTokenAndUserId() {
         val email = FirebaseAuth.getInstance().currentUser.email
-        val userDal : UserDal = UserDal()
+        val userDal: UserDal = UserDal()
         val userManager = UserManager(userDal)
-        userManager.getByEmail(email){dataResult ->
-            if(dataResult.success()){
-                val user : User = dataResult.data().get(0);
+        userManager.getByEmail(email) { dataResult ->
+            if (dataResult.success()) {
+                val user: User = dataResult.data().get(0);
                 user.userID = FirebaseAuth.getInstance().currentUser.uid
-                userManager.update(user){
+                userManager.update(user) {
 
                 }
-            }else{
+            } else {
 
             }
         }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
+        menuInflater.inflate(R.menu.menu, menu)
         return true;
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val intentToProfileActivity = Intent(this,ProfileActivity::class.java)
-        when(item.itemId){
+        val intentToProfileActivity = Intent(this, ProfileActivity::class.java)
+        when (item.itemId) {
             R.id.profile -> startActivity(intentToProfileActivity)
+            else -> return super.onOptionsItemSelected(item);
+
         }
         return true
     }
+
     /*---------------------------------set fragment-----------------------------*/
     private fun makeCurrentFragment(fragment: Fragment, nowFragment: String) =
         supportFragmentManager.beginTransaction().apply {
@@ -133,16 +146,15 @@ class NavigationBottomActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (dataBinding.relativeIncludeNavbar.isVisible) {
             inVisibleSearchBar()
-        }
-        else if (supportFragmentManager.findFragmentById(R.id.search_people_frameLayout) != null) {
+        } else if (supportFragmentManager.findFragmentById(R.id.search_people_frameLayout) != null) {
             removeSearchFragment()
-        }
-        else {
+        } else {
             super.onBackPressed()
 
         }
 
     }
+
     /*----------------SearchBar and SearchFragment------------------*/
     private fun setSearchFragment() {
 
@@ -151,8 +163,10 @@ class NavigationBottomActivity : AppCompatActivity() {
         transaction.replace(R.id.search_people_frameLayout, SearchFragment())
         transaction.commit()
     }
-    private fun removeSearchFragment(){
-        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.search_people_frameLayout)
+
+    private fun removeSearchFragment() {
+        val fragment: Fragment? =
+            supportFragmentManager.findFragmentById(R.id.search_people_frameLayout)
         transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_out, R.anim.fade_in_anim)
         transaction.remove(fragment!!)
@@ -182,7 +196,6 @@ class NavigationBottomActivity : AppCompatActivity() {
             dataBinding.searchInclude.btn_search_back.visibility = View.VISIBLE
         }
     }
-
 
 
 }

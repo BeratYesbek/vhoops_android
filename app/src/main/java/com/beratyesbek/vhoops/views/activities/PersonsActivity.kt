@@ -13,6 +13,9 @@ import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.beratyesbek.vhoops.Adapter.GridViewAdapter.GroupMemberViewAdapter
 import com.beratyesbek.vhoops.Adapter.PersonViewAdapter
@@ -31,9 +34,11 @@ import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.R
 import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.databinding.ActivityPersonsBinding
+import com.beratyesbek.vhoops.views.fragment.SearchFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.persons_toolbar.view.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,7 +53,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
     private val selectedItemList: ArrayList<Number> = ArrayList()
     private val selectedUserList: ArrayList<User> = ArrayList()
     private val selectedUserId : ArrayList<String> = ArrayList()
-
+    private lateinit var transaction: FragmentTransaction;
     private lateinit var personViewAdapter: PersonViewAdapter
     private lateinit var groupMembersViewAdapter: GroupMemberViewAdapter
 
@@ -63,11 +68,15 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
 
-        dataBinding.toolbarPersonsActivity.btn_toolbar_newGroup.setOnClickListener {
+        dataBinding.toolbarPersonsActivity.btnToolbarNewGroup.setOnClickListener {
             if (selectedUserList.size > 0) {
                 groupCreationDialog()
             }
         }
+        dataBinding.toolbarPersonsActivity.personToolbarSearchButton.setOnClickListener {
+            setSearchFragment()
+        }
+
 
 
         runRecyclerView()
@@ -180,6 +189,23 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    private fun setSearchFragment() {
+
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
+        transaction.replace(R.id.persons_search_people_frameLayout, SearchFragment())
+        transaction.commit()
+    }
+
+    private fun removeSearchFragment() {
+        val fragment: Fragment? =
+            supportFragmentManager.findFragmentById(R.id.search_people_frameLayout)
+        transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fade_in_anim)
+        transaction.remove(fragment!!)
+        transaction.commit()
+    }
+
 
     private fun getFriendData() {
         val userId = FirebaseAuth.getInstance().currentUser.uid
@@ -242,12 +268,12 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
             val user = userList.get(position)
 
             val intentToChatActivity = Intent(this, ChatActivity::class.java)
-            intentToChatActivity.putExtra(
-                Constants.FULL_NAME,
-                (user.firstName + " " + user.lastName)
-            )
+            intentToChatActivity.putExtra(Constants.FULL_NAME,user.firstName + " " + user.lastName)
+            intentToChatActivity.putExtra(Constants.FIRST_NAME,user.firstName)
+            intentToChatActivity.putExtra(Constants.LAST_NAME,user.lastName)
             intentToChatActivity.putExtra(Constants.USER_ID, user.userID)
             intentToChatActivity.putExtra(Constants.PROFILE_IMAGE, user.profileImage.toString())
+            intentToChatActivity.putExtra(Constants.TOKEN,user.token)
 
             startActivity(intentToChatActivity)
         }
@@ -256,7 +282,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
             selectedItemList.clear()
             selectedUserId.clear()
 
-            Animation.hideAnim(dataBinding.toolbarPersonsActivity.btn_toolbar_newGroup)
+            Animation.hideAnim(dataBinding.toolbarPersonsActivity.btnToolbarNewGroup)
         }
 
 
@@ -268,7 +294,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         selectedUserList.add(user)
         selectedUserId.add(user.userID)
         if (selectedItemList.size in 1..1) {
-            Animation.revealAnim(dataBinding.toolbarPersonsActivity.btn_toolbar_newGroup)
+            Animation.revealAnim(dataBinding.toolbarPersonsActivity.btnToolbarNewGroup)
         }
     }
 

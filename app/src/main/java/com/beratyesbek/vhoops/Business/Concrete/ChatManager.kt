@@ -9,8 +9,12 @@ import com.beratyesbek.vhoops.Core.Utilities.Result.Concrete.SuccessDataResult
 import com.beratyesbek.vhoops.DataAccess.Abstract.IChatDal
 import com.beratyesbek.vhoops.entities.concrete.Chat
 import com.beratyesbek.vhoops.entities.concrete.dtos.ChatDto
+import com.beratyesbek.vhoops.entities.concrete.dtos.ChatListDto
+import javax.inject.Inject
 
-class ChatManager(val chatDal: IChatDal, val userService: IUserService) : IChatService {
+class ChatManager
+@Inject constructor(val chatDal: IChatDal, val userService: IUserService) :
+    IChatService {
 
     override fun add(entity: Chat, result: (IResult) -> Unit) {
         chatDal.add(entity, result)
@@ -41,7 +45,14 @@ class ChatManager(val chatDal: IChatDal, val userService: IUserService) : IChatS
     }
 
     override fun deleteMulti(arrayList: ArrayList<Chat>, result: (IResult) -> Unit) {
-        chatDal.deleteMulti(arrayList,result)
+        chatDal.deleteMulti(arrayList, result)
+    }
+
+    override fun getChatDetailForList(
+        id: String,
+        iDataResult: (IDataResult<ArrayList<ChatListDto>>) -> Unit
+    ) {
+        chatDal.getChatDetailForList(id, iDataResult)
     }
 
     override fun getChatDetail(id: String, iDataResult: (IDataResult<ArrayList<ChatDto>>) -> Unit) {
@@ -54,7 +65,7 @@ class ChatManager(val chatDal: IChatDal, val userService: IUserService) : IChatS
                     val chatDto = iDataResult.data().get(0)
 
                     chatDto.userFullName = user.firstName + user.lastName
-                    chatDto.userPicture = user.profileImage!!
+                    chatDto.userPicture = user.profileImage
 
                     iDataResult(SuccessDataResult(iDataResult.data(), ""))
 

@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/info"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    android:id="@+id/toolbar"
-    android:elevation="15dp">
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="28dp"
-        android:text="Vhoops"
-        android:textColor="#fff"
-        android:textStyle="bold|italic"
+        android:background="@color/info"
+        android:elevation="15dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vhoops"
+            android:textColor="#fff"
+            android:textSize="28dp"
+            android:textStyle="bold|italic"
 
-    </TextView>
-    <ImageButton
-        android:id="@+id/btn_toolbar_notification"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="end"
-        android:background="@drawable/ic_notification"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        >
+            >
 
-    </ImageButton>
-    <ImageButton
-        android:id="@+id/toolbar_search_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="end"
-        android:background="@drawable/ic_search"
-        android:layout_margin="5dp"
+        </TextView>
 
-        >
+        <ImageButton
+            android:id="@+id/btn_toolbar_notification"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_notification">
 
-    </ImageButton>
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/toolbar_search_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_search"
+
+            >
+
+        </ImageButton>
 
 
-</androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
+
+</layout>
+

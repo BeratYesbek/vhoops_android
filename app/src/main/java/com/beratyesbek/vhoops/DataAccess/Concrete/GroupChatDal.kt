@@ -95,14 +95,9 @@ constructor() : IGroupChatDal, FirebaseGroupChatDal(){
                                 }
                                 break
                             }
-
                         }
-
                     }
-
-
                     iDataResult(SuccessDataResult(messageList, ""))
-
                 }
             }
 

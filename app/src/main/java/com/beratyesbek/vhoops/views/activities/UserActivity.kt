@@ -2,6 +2,7 @@ package com.beratyesbek.vhoops.views.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.beratyesbek.vhoops.Business.Concrete.FellowManager
 import com.beratyesbek.vhoops.Business.Concrete.FriendRequestManager
 import com.beratyesbek.vhoops.Business.Concrete.UserManager
@@ -31,7 +32,7 @@ class UserActivity : AppCompatActivity() {
         val userId = intent.getStringExtra(Constants.USER_ID)
 
         getFellowInfo(userId!!);
-
+        Toast.makeText(this,"asdsadasdas",Toast.LENGTH_LONG).show()
         getData(userId)
         println(userId);
         dataBinding.btnAddFriendUserProfile.setOnClickListener {

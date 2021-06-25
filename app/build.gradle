@@ -50,6 +50,7 @@ android {
 
 dependencies {
 
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
     def camerax_version = "1.0.0-beta07"
     def room_version = "2.3.0"
 
@@ -162,7 +163,13 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
+    //jitsimeet
+    implementation ('org.jitsi.react:jitsi-meet-sdk:2.+') { transitive = true }
 
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
 
 

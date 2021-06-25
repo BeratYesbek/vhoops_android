@@ -9,7 +9,7 @@
         tools:context=".views.activities.PersonsActivity">
         <include
             android:id="@+id/toolbar_persons_activity"
-            layout="@layout/toolbar">
+            layout="@layout/persons_toolbar">
 
         </include>
         <androidx.recyclerview.widget.RecyclerView
@@ -21,6 +21,14 @@
             android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
+        <FrameLayout
+            android:id="@+id/persons_search_people_frameLayout"
+            android:layout_width="match_parent"
+            android:translationZ="150dp"
+
+            android:layout_height="match_parent">
+
+        </FrameLayout>
 
     </RelativeLayout>
 </layout>

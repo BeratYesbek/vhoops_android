@@ -34,4 +34,5 @@ class ChatDto(
     var userFullName : String = userFullName
         get
         set
+
 }

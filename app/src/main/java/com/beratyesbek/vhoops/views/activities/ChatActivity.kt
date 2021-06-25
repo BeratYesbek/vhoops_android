@@ -35,12 +35,14 @@ import com.beratyesbek.vhoops.Core.Permission.RecordAudioPermission
 import com.beratyesbek.vhoops.Core.Utilities.Animation.Animation
 import com.beratyesbek.vhoops.DataAccess.Concrete.ChatDal
 import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.Listener.JitsimeetListener
 import com.beratyesbek.vhoops.entities.concrete.Chat
 import com.beratyesbek.vhoops.entities.concrete.dtos.ChatDto
 import com.beratyesbek.vhoops.R
 import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.views.fragment.CameraFragment
 import com.beratyesbek.vhoops.databinding.ActivityChatBinding
+import com.beratyesbek.vhoops.entities.concrete.User
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -49,7 +51,7 @@ import kotlinx.android.synthetic.main.chat_toolbar.view.*
 import java.io.File
 
 
-class ChatActivity : AppCompatActivity(),OnItemClickListener {
+class ChatActivity : AppCompatActivity(),OnItemClickListener,JitsimeetListener {
 
     private lateinit var mediaRecorder: MediaRecorder
     private lateinit var receiverId: String
@@ -81,8 +83,11 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
         receiverId = intent.getStringExtra(Constants.USER_ID)!!
         val fullName = intent.getStringExtra(Constants.FULL_NAME)
         val profileImage = intent.getStringExtra(Constants.PROFILE_IMAGE)
+        val token = intent.getStringExtra(Constants.TOKEN);
+        val firstName = intent.getStringExtra(Constants.FIRST_NAME);
+        val lastName = intent.getStringExtra(Constants.LAST_NAME);
 
-        val uri: Uri
+        var uri: Uri? = null
 
         val imageView = dataBinding.includeChatActivity.imageView_profile_chat_toolbar
 
@@ -96,6 +101,10 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
             displayAlertDialogForDelete({ multipleDeleteMessage() })
 
 
+        }
+        dataBinding.includeChatActivity.btn_videoMeeting_chatToolbar.setOnClickListener {
+
+            initiateVideoMeeting(User(firstName!!,lastName!!,"","","",receiverId,token!!,uri,"",""))
         }
 
         dataBinding.editTextEnterMessage.addTextChangedListener(object : TextWatcher {
@@ -567,9 +576,21 @@ class ChatActivity : AppCompatActivity(),OnItemClickListener {
         return true
     }
 
+    override fun initiateVideoMeeting(user: User) {
+       val intentToOutGoingInvitation = Intent(this,OutgoingInvitationActivity::class.java)
+        intentToOutGoingInvitation.putExtra(Constants.FIRST_NAME,user.firstName)
+        intentToOutGoingInvitation.putExtra(Constants.LAST_NAME,user.lastName)
+        intentToOutGoingInvitation.putExtra(Constants.PROFILE_IMAGE,user.profileImage.toString())
+        intentToOutGoingInvitation.putExtra(Constants.TOKEN,user.token)
+        intentToOutGoingInvitation.putExtra(Constants.USER_ID,user.userID)
+        startActivity(intentToOutGoingInvitation)
 
 
+    }
 
+    override fun initiateAudioMeeting(user: User) {
+        TODO("Not yet implemented")
+    }
 
 
 }
