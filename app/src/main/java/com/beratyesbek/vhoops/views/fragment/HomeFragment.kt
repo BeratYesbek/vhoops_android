@@ -63,6 +63,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         recyclerView.layoutManager = layoutManager
         homeViewAdapter = HomeViewAdapter(chatList, this)
         recyclerView.adapter = homeViewAdapter
+
     }
 
     override fun onItemClick(position: Int) {
@@ -70,12 +71,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intentToChatActivity = Intent(context, ChatActivity::class.java)
         intentToChatActivity.putExtra(Constants.USER_ID, chatList.userId)
         intentToChatActivity.putExtra(Constants.PROFILE_IMAGE, chatList.userPicture.toString())
-        intentToChatActivity.putExtra(Constants.FULL_NAME, chatList.userFirstName + " " + chatList.userLastName)
-        intentToChatActivity.putExtra(Constants.FIRST_NAME,chatList.userFirstName)
-        intentToChatActivity.putExtra(Constants.LAST_NAME,chatList.userLastName)
-        intentToChatActivity.putExtra(Constants.TOKEN,chatList.userToken)
-        intentToChatActivity.putExtra(Constants.MEETING_TYPE,"video")
-        println("Token " +chatList.userToken )
+        intentToChatActivity.putExtra(
+            Constants.FULL_NAME,
+            chatList.userFirstName + " " + chatList.userLastName
+        )
+        intentToChatActivity.putExtra(Constants.FIRST_NAME, chatList.userFirstName)
+        intentToChatActivity.putExtra(Constants.LAST_NAME, chatList.userLastName)
+        intentToChatActivity.putExtra(Constants.TOKEN, chatList.userToken)
+        intentToChatActivity.putExtra(Constants.MEETING_TYPE, "video")
         startActivity(intentToChatActivity)
 
     }

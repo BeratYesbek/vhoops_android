@@ -41,6 +41,7 @@ class NavigationBottomActivity : AppCompatActivity() {
 
         val toolbar = dataBinding.include.toolbar
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         updateToken()
 
         inVisibleSearchBar()
@@ -128,7 +129,6 @@ class NavigationBottomActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.profile -> startActivity(intentToProfileActivity)
             else -> return super.onOptionsItemSelected(item);
-
         }
         return true
     }

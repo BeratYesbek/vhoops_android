@@ -29,9 +29,11 @@ open class FirebaseFriendRequestDal : IFirebaseFriendRequestDal<FriendRequest> {
             .document(entity.documentId)
             .set(hashMap)
             .addOnSuccessListener {
+                result(SuccessResult(""))
 
              }
             .addOnFailureListener {
+                result(ErrorResult(""))
 
             }
 
@@ -55,7 +57,19 @@ open class FirebaseFriendRequestDal : IFirebaseFriendRequestDal<FriendRequest> {
     }
 
     override fun delete(entity: FriendRequest, result: (IResult) -> Unit) {
-        TODO("Not yet implemented")
+        cloudFirebase = FirebaseFirestore.getInstance()
+        cloudFirebase.collection(FirebaseCollection.FRIEND_REQUEST_COLLECTION)
+            .whereEqualTo("ReceiverId",entity.receiverId)
+            .whereEqualTo("SenderId",entity.senderId).get().addOnSuccessListener {
+                for (item in it){
+                     cloudFirebase.collection(FirebaseCollection.FRIEND_REQUEST_COLLECTION).document(item.id)
+                         .delete()
+                         .addOnSuccessListener {
+                             result(SuccessResult(""))
+
+                         }
+                }
+            }
     }
 
     override fun getAll(iDataResult: (IDataResult<ArrayList<FriendRequest>>) -> Unit) {
@@ -93,5 +107,29 @@ open class FirebaseFriendRequestDal : IFirebaseFriendRequestDal<FriendRequest> {
 
         }
         return friendRequestList
+    }
+
+    override fun getBySenderAndReceiverId(
+        senderId: String,
+        receiverId: String,
+        iDataResult: (IDataResult<FriendRequest>) -> Unit
+    ) {
+        cloudFirebase = FirebaseFirestore.getInstance()
+        cloudFirebase.collection(FirebaseCollection.FRIEND_REQUEST_COLLECTION)
+            .whereEqualTo("ReceiverId",receiverId)
+            .whereEqualTo("SenderId",senderId)
+            .get()
+            .addOnSuccessListener {
+                for (document in it){
+                    val documentId = document.id as String
+                    val receiverId = document.get("ReceiverId") as String
+                    val senderId = document.get("SenderId") as String
+                    val status = document.get("Status") as Boolean
+                    val timeToSend = document.get("TimeToSend") as Timestamp
+                    iDataResult(SuccessDataResult(FriendRequest(senderId,receiverId,documentId,status,timeToSend),""))
+                }
+            }.addOnFailureListener {
+
+            }
     }
 }

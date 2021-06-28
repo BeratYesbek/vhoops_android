@@ -241,7 +241,6 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
 
             for (user in userList) {
                 if (friend.userId == user.userID) {
-                    println(12385)
                     tempUserList.add(user)
                 }
             }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.beratyesbek.vhoops.views.activities.UserActivity
 import com.beratyesbek.vhoops.Adapter.SearchViewAdapter
 import com.beratyesbek.vhoops.Business.Concrete.UserManager
+import com.beratyesbek.vhoops.Core.Constants.Constants
 import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
@@ -90,7 +91,7 @@ class SearchFragment : OnItemClickListener, Fragment() {
     override fun onItemClick(position: Int) {
         val user : User = userList.get(position);
         val intentToUserProfile = Intent(context,UserActivity::class.java)
-        intentToUserProfile.putExtra("userId",user.userID)
+        intentToUserProfile.putExtra(Constants.USER_ID,user.userID)
         startActivity(intentToUserProfile)
 
     }

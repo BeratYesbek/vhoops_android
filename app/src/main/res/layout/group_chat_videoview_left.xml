@@ -20,7 +20,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:background="@drawable/custom_background_chat_left"
-            app:cardBackgroundColor="@color/primary"
+            app:cardBackgroundColor="#2C2F33"
             app:cardCornerRadius="8dp"
             android:layout_toEndOf="@id/imageView_groupChat_ProfileImage"
             android:layout_height="match_parent">
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="Vhoops"
                 android:textSize="10dp"
-                android:textColor="#ffc107"
+                android:textColor="#fff"
                 android:paddingLeft="7dp"
                 android:paddingTop="4dp"
                 >
@@ -53,8 +53,8 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@drawable/btn_circle_blue"
-                android:src="@drawable/ic_play_blue"
+                android:background="@drawable/btn_circle_orange"
+                android:src="@drawable/ic_play_white"
                 />
 
         </androidx.cardview.widget.CardView>

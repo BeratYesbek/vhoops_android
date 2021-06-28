@@ -9,6 +9,10 @@ import com.beratyesbek.vhoops.entities.concrete.Fellow
 class FellowManager(val fellowDal: FellowDal) : IFellowService {
 
     private val _fellowDal : FellowDal = fellowDal;
+    override fun getByUserId(userId: String, iDataResult: (IDataResult<Fellow>) -> Unit) {
+        _fellowDal.getByUserId(userId,iDataResult)
+    }
+
     override fun add(entity: Fellow, result: (IResult) -> Unit) {
 
        _fellowDal.add(entity,result);

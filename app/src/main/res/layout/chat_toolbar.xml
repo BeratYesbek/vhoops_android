@@ -28,7 +28,7 @@
             android:layout_width="70dp"
             android:layout_height="60dp"
             android:layout_margin="5dp"
-            app:civ_border_color="@color/orange_color"
+            app:civ_border_color="#fff"
             app:civ_border_width="1dp"
             android:layout_gravity="center_vertical"
 

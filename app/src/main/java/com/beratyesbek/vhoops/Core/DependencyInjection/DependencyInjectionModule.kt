@@ -3,9 +3,11 @@ package com.beratyesbek.vhoops.Core.DependencyInjection
 import android.app.Application
 import com.beratyesbek.vhoops.Business.Abstract.IChatService
 import com.beratyesbek.vhoops.Business.Abstract.IGroupChatService
+import com.beratyesbek.vhoops.Business.Abstract.IInvitationService
 import com.beratyesbek.vhoops.Business.Abstract.IUserService
 import com.beratyesbek.vhoops.Business.Concrete.ChatManager
 import com.beratyesbek.vhoops.Business.Concrete.GroupChatManager
+import com.beratyesbek.vhoops.Business.Concrete.InvitationManager
 import com.beratyesbek.vhoops.Business.Concrete.UserManager
 import com.beratyesbek.vhoops.DataAccess.Concrete.GroupChatDal
 import com.beratyesbek.vhoops.entities.concrete.GroupChat
@@ -19,8 +21,10 @@ import javax.inject.Singleton
 import com.beratyesbek.vhoops.Core.DataAccess.IEntityRepository
 import com.beratyesbek.vhoops.DataAccess.Abstract.IChatDal
 import com.beratyesbek.vhoops.DataAccess.Abstract.IGroupChatDal
+import com.beratyesbek.vhoops.DataAccess.Abstract.IInvitationDal
 import com.beratyesbek.vhoops.DataAccess.Abstract.IUserDal
 import com.beratyesbek.vhoops.DataAccess.Concrete.ChatDal
+import com.beratyesbek.vhoops.DataAccess.Concrete.InvitationDal
 import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
 import com.beratyesbek.vhoops.entities.abstracts.IEntity
 import dagger.hilt.components.SingletonComponent
@@ -63,6 +67,18 @@ class DependencyInjectionModule {
     @Provides
     fun chatDalProvider(): IChatDal {
         return ChatDal()
+    }
+
+    @Singleton
+    @Provides
+    fun invitationDalProvider(): IInvitationDal {
+        return InvitationDal()
+    }
+
+    @Singleton
+    @Provides
+    fun invitationManagerProvider() : IInvitationService {
+        return InvitationManager(invitationDalProvider())
     }
 
 

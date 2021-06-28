@@ -32,7 +32,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:background="@drawable/btn_circle_orange"
-                android:src="@drawable/ic_play_orange"
+                android:src="@drawable/ic_play_white"
 
                 />
         </androidx.cardview.widget.CardView>

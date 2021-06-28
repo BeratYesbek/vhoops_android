@@ -20,7 +20,7 @@
            <ImageButton
                android:id="@+id/btn_document"
                android:layout_width="50dp"
-               android:background="@drawable/custom_oval_background_primary"
+               android:background="@drawable/custom_circle_button"
                android:src="@drawable/ic_document"
                android:layout_height="50dp">
 
@@ -74,7 +74,7 @@
                android:id="@+id/btn_gallery"
                android:layout_width="50dp"
                android:layout_height="50dp"
-               android:background="@drawable/custom_oval_background_success"
+               android:background="@drawable/custom_circle_button"
                android:src="@drawable/ic_photo_library"
                >
 
@@ -111,7 +111,7 @@
               android:layout_height="50dp"
               android:layout_marginRight="30dp"
               android:layout_below="@id/btn_document"
-              android:background="@drawable/custom_oval_danger_background"
+              android:background="@drawable/custom_circle_button"
               android:src="@drawable/ic_audio"
               >
 
@@ -137,7 +137,7 @@
           <ImageButton
               android:id="@+id/btn_location"
               android:layout_width="50dp"
-              android:background="@drawable/custom_circle_button_blue"
+              android:background="@drawable/custom_circle_button"
               android:src="@drawable/ic_location"
               android:layout_height="50dp">
 

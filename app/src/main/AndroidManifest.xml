@@ -63,7 +63,7 @@
         <activity
             android:name=".views.activities.RegisterActivity"
             android:theme="@style/AppTheme_NoActionBar" />
-        <activity android:name=".views.activities.NavigationBottomActivity" />
+        <activity android:name=".views.activities.NavigationBottomActivity"  />
         <activity
             android:name=".views.activities.LoginActivity"
             android:theme="@style/AppTheme_NoActionBar" />

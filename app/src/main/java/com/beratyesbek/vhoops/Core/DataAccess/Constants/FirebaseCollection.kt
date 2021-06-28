@@ -15,5 +15,8 @@ class FirebaseCollection {
         var GROUP_COLLECTION : String = "Groups"
 
         var GROUP_CHAT_COLLECTION : String = "GroupChats"
+
+        var INVITATION_COLLECTION : String = "Invitations"
+
     }
 }

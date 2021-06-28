@@ -231,9 +231,9 @@ class GroupChatViewAdapter(
     }
 
     private fun displayImage(uri: Uri) {
-        val transaction = (context as ChatActivity).supportFragmentManager.beginTransaction()
+        val transaction = (context as GroupChatActivity).supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.fade_out)
-        transaction.replace(R.id.frameLayout_chat, ImageViewFragment(uri))
+        transaction.replace(R.id.frameLayout_groupChat, ImageViewFragment(uri))
         transaction.commit()
     }
 

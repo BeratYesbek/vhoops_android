@@ -54,7 +54,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_chat_white"
-            android:background="@drawable/btn_circle_success"
+            android:background="@drawable/custom_circle_button"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="80dp"

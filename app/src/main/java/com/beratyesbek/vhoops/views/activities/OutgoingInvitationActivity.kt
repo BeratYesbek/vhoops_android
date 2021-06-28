@@ -9,15 +9,19 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.beratyesbek.vhoops.Business.Abstract.IInvitationService
 import com.beratyesbek.vhoops.Business.Abstract.IUserService
+import com.beratyesbek.vhoops.Business.Concrete.InvitationManager
 import com.beratyesbek.vhoops.Core.Constants.Constants
 import com.beratyesbek.vhoops.Core.DataAccess.Constants.MeetingConstants
 import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
 import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
 import com.beratyesbek.vhoops.databinding.ActivityOutgoingInvitationBinding
+import com.beratyesbek.vhoops.entities.concrete.Invitation
 import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.network.ApiClient
 import com.beratyesbek.vhoops.network.ApiService
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,9 +42,12 @@ class OutgoingInvitationActivity : AppCompatActivity() {
 
     private lateinit var dataBinding: ActivityOutgoingInvitationBinding
     private var inviterToken : String? = null
+    private var receiverId :String? =null
     private var meetingRoom = ""
     @Inject
     protected lateinit var userService  :IUserService;
+    @Inject
+    protected lateinit var invitationService: IInvitationService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +61,7 @@ class OutgoingInvitationActivity : AppCompatActivity() {
         val token = intent.getStringExtra(Constants.TOKEN)
         val profileImage = intent.getStringExtra(Constants.PROFILE_IMAGE)
         val meetingType = intent.getStringExtra(Constants.MEETING_TYPE)
+        receiverId = intent.getStringExtra(Constants.USER_ID)
         getInviterToken(meetingType,token)
 
         dataBinding.textViewUserNameOutgoingActivity.text = "$firstName $lastName".toUpperCase()
@@ -65,12 +73,21 @@ class OutgoingInvitationActivity : AppCompatActivity() {
         }
 
         dataBinding.btnReject.setOnClickListener {
+
             cancelInvitation(token)
         }
 
 
-
     }
+
+    private fun addIncomingInvitationDate(){
+        val senderId = FirebaseAuth.getInstance().currentUser.uid
+
+        invitationService.add(Invitation(senderId,receiverId, Timestamp.now(),"outGoing")){
+
+        }
+    }
+
     private fun getUserData(meetingType: String?,token: String?){
         val id = FirebaseAuth.getInstance().currentUser.uid
         userService.getById(id){iDataResult ->
@@ -131,6 +148,7 @@ class OutgoingInvitationActivity : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.isSuccessful){
                     if (type.equals(MeetingConstants.REMOTE_MSG_INVITATION)){
+                        addIncomingInvitationDate()
                         Toast.makeText(applicationContext,"Invitation send successfully",Toast.LENGTH_LONG).show()
                     }else if(type.equals(MeetingConstants.REMOTE_MSG_INVITATION_RESPONSE)){
                         Toast.makeText(applicationContext,"Invitation Cancelled",Toast.LENGTH_LONG).show()

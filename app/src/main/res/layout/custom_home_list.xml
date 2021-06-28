@@ -39,7 +39,7 @@
                     android:padding="5dp"
 
                     android:text="@{(chatListDto.userFirstName + ' '+  chatListDto.userLastName).toUpperCase() }"
-                    android:textColor="@color/dark_blue_color"
+                    android:textColor="#2C2F33"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 

@@ -211,7 +211,7 @@
                     android:elevation="5dp"
                     android:padding="5dp"
                     android:text="About"
-                    android:textColor="@color/orange_color"
+                    android:textColor="#2C2F33"
                     android:textSize="18dp"
                     android:textStyle="bold">
 

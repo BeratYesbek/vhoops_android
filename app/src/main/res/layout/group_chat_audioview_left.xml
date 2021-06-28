@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:padding="2dp"
-                android:textColor="#ffc107"
+                android:textColor="#ffff"
                 android:textSize="10dp"></TextView>
 
             <RelativeLayout

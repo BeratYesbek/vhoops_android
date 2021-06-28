@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/android-studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/done/baseline_done_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/attach_file/baseline_attach_file_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_done_white" />
+                            <entry key="color" value="2c2f33" />
+                            <entry key="outputName" value="ic_attach_dark" />
                             <entry key="sourceFile" value="C:\Users\berat\Documents\AndroidStudioProject\Vhoops" />
                           </map>
                         </option>

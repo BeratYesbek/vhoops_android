@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="invitationDto"
+            type="com.beratyesbek.vhoops.entities.concrete.dtos.InvitationDto" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_invitation_item"
+                android:layout_width="65dp"
+                android:layout_height="70dp"
+                android:downloadUrl="@{invitationDto.userPicture.toString()}"
+                android:src="@drawable/ic_profile_blue" />
+
+            <TextView
+                android:id="@+id/textView_custom_invitation_item"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/imageView_invitation_item"
+                android:padding="5dp"
+                android:text="@{(invitationDto.firstName  +' '+ invitationDto.lastName)}"
+                android:textColor="@color/dark_color" />
+
+            <TextView
+                android:id="@+id/textView_date_invitation"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_custom_invitation_item"
+                android:layout_toEndOf="@id/imageView_invitation_item"
+                android:padding="5dp"
+                android:setDate="@{invitationDto.invitationToDate}"
+                android:textColor="@color/dark_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{invitationDto.type}"
+                android:layout_below="@+id/btn_video_talk_invitationItem"
+                android:layout_toEndOf="@+id/textView_date_invitation"
+                android:textColor="@color/av_red"
+                android:layout_marginLeft="10dp"
+                android:textSize="10dp"
+                >
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/btn_video_talk_invitationItem"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="35dp"
+                android:background="@drawable/transparent_background"
+                android:src="@drawable/ic_videocam_blue" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

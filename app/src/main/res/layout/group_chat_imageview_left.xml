@@ -28,7 +28,7 @@
             app:cardCornerRadius="8dp"
 
             android:background="@drawable/custom_background_chat_left"
-            app:cardBackgroundColor="@color/primary"
+            app:cardBackgroundColor="#2C2F33"
             app:cardElevation="10dp">
             <TextView
                 android:id="@+id/textView_userName_groupChat"
@@ -37,7 +37,7 @@
                 android:text="Vhoops"
                 android:textSize="10dp"
                 android:padding="5dp"
-                android:textColor="#ffc107"
+                android:textColor="#ffff"
                 >
             </TextView>
 

@@ -63,8 +63,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="Hesap bilgileri"
-                    android:textColor="@color/dark_blue_color"
+                    android:text="Account Information"
+                    android:textColor="#2C2F33"
                     android:textSize="16dp"
 
                     >
@@ -159,7 +159,7 @@
                     android:elevation="5dp"
                     android:padding="5dp"
                     android:text="About"
-                    android:textColor="@color/orange_color"
+                    android:textColor="#2C2F33"
                     android:textSize="18dp"
                     android:textStyle="bold">
 
@@ -191,21 +191,53 @@
             </LinearLayout>
 
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_add_friend_user_profile"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:background="@drawable/custom_button_blue"
-            android:text="Arkadaşlık isteği gönder"
-            android:textSize="12dp"
-            android:textColor="#fff"
-            android:drawableStart="@drawable/ic_person_add"
-            android:paddingLeft="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_add_friend_user_profile"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button_blue"
+                android:text="Send Friend Request"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:drawableStart="@drawable/ic_person_add"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                >
 
-        </Button>
+            </Button>
+            <Button
+                android:id="@+id/btn_cancel_friend_user_profile"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button_danger"
+                android:text="Cancel Friend Request"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:drawableStart="@drawable/ic_person_remove"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:visibility="invisible"
+                >
+
+            </Button>
+            <ProgressBar
+                android:id="@+id/progressBar_activity_user"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_toEndOf="@+id/btn_add_friend_user_profile"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/Widget.AppCompat.ProgressBar"
+                android:visibility="invisible"
+                />
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 </layout>

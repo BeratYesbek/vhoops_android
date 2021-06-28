@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="Vhoops"
                 android:textSize="10dp"
-                android:textColor="#ffc107"
+                android:textColor="#ffff"
                 android:paddingLeft="7dp"
                 android:paddingTop="4dp"
                 android:textStyle="bold"

@@ -23,7 +23,7 @@
                 android:id="@+id/btn_delete_photo"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:background="@drawable/custom_button_circle_orange"
+                android:background="@drawable/custom_circle_button"
                 android:src="@drawable/ic_delete"
                 >
             </ImageButton>
@@ -52,7 +52,7 @@
                 android:id="@+id/btn_gallery_photo"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:background="@drawable/custom_circle_button_blue"
+                android:background="@drawable/custom_circle_button"
                 android:src="@drawable/ic_photo_library"
                 >
             </ImageButton>

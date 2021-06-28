@@ -9,7 +9,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/ic_profile_blue"
-        app:civ_border_color="@color/success"
+        app:civ_border_color="#7289DA"
         app:civ_border_width="1dp"
         android:layout_gravity="center_horizontal"
         >

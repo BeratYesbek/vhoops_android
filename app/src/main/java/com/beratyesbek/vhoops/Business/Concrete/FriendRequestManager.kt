@@ -6,21 +6,28 @@ import com.beratyesbek.vhoops.Core.Utilities.Result.Abstract.IResult
 import com.beratyesbek.vhoops.DataAccess.Abstract.IFriendRequestDal
 import com.beratyesbek.vhoops.entities.concrete.FriendRequest
 
-class FriendRequestManager(friendRequestDal : IFriendRequestDal) : IFriendRequestService {
+class FriendRequestManager(friendRequestDal: IFriendRequestDal) : IFriendRequestService {
 
     private val _friendRequestDal: IFriendRequestDal = friendRequestDal
+    override fun getBySenderAndReceiverId(
+        senderId: String,
+        receiverId: String,
+        iDataResult: (IDataResult<FriendRequest>) -> Unit
+    ) {
+        _friendRequestDal.getBySenderAndReceiverId(senderId, receiverId, iDataResult)
+    }
 
 
     override fun add(entity: FriendRequest, result: (IResult) -> Unit) {
-        _friendRequestDal.add(entity,result)
+        _friendRequestDal.add(entity, result)
     }
 
     override fun update(entity: FriendRequest, result: (IResult) -> Unit) {
-        _friendRequestDal.add(entity,result)
+        _friendRequestDal.add(entity, result)
     }
 
     override fun delete(entity: FriendRequest, result: (IResult) -> Unit) {
-        TODO("Not yet implemented")
+        _friendRequestDal.delete(entity, result)
     }
 
     override fun getAll(iDataResult: (IDataResult<ArrayList<FriendRequest>>) -> Unit) {
@@ -28,6 +35,6 @@ class FriendRequestManager(friendRequestDal : IFriendRequestDal) : IFriendReques
     }
 
     override fun getById(id: String, iDataResult: (IDataResult<ArrayList<FriendRequest>>) -> Unit) {
-        _friendRequestDal.getById(id,iDataResult);
+        _friendRequestDal.getById(id, iDataResult);
     }
 }
