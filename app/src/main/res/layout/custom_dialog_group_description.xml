@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_background_white"
+
+        >
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/btn_close_custom_groupDescriptionDialog"
+            android:background="@drawable/ic_close"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            >
+
+        </ImageButton>
+        <TextView
+            android:id="@+id/textView_group_description"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:text="dsakondıasndıuasjdosjaıodjasojdasıjdsıadjsıajıdsaıodıoasjodas"
+            android:layout_margin="10dp"
+            android:textColor="@color/dark_blue_color"
+            android:layout_below="@id/btn_close_custom_groupDescriptionDialog"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_edit_groupDescription"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:text="Edit"
+            android:layout_below="@+id/textView_group_description"
+            android:layout_margin="8dp"
+            android:textColor="#fff"
+            android:paddingStart="15dp"
+            android:paddingRight="30dp"
+            android:drawableStart="@drawable/ic_edit"
+           android:background="@drawable/custom_button_second"
+            android:layout_centerHorizontal="true"
+
+            />
+    </RelativeLayout>
+</LinearLayout>

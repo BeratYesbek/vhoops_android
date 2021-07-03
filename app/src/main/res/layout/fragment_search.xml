@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:clickable="true"
         android:background="#fff"
@@ -13,19 +13,19 @@
             android:background="@drawable/bottom_border"
             android:layout_margin="10dp"
             android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/editText_search_fragment"
                 android:layout_width="260dp"
                 android:layout_height="40dp"
-                android:padding="5dp"
-                android:background="@drawable/custom_input"
-                android:layout_toEndOf="@id/btn_fragment_search_back"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/btn_fragment_search_back"
+                android:background="@drawable/custom_input"
                 android:elevation="10dp"
 
-                >
-            </EditText>
+                android:padding="5dp"></EditText>
 
             <ImageButton
                 android:id="@+id/btn_search_fragment"
@@ -60,10 +60,11 @@
             android:id="@+id/recyclerView_search_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layoutAnimation="@anim/recycler_view_animation_fade_top"
             android:layout_below="@+id/relative_search_fragment"
             >
-
         </androidx.recyclerview.widget.RecyclerView>
+
         <FrameLayout
             android:id="@+id/frameLayout_search_fragment"
             android:layout_width="match_parent"

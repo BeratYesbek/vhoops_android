@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/custom_background_white"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/email_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:src="@drawable/custom_email_icon"
+            >
+
+        </ImageView>
+        <TextView
+            android:id="@+id/textView_info_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email_icon"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:textColor="@color/dark_color"
+            android:layout_marginBottom="15dp"
+            android:padding="5dp"
+            android:text="A verification email was sent to your email. Please verify your email"
+            >
+
+        </TextView>
+
+        <Button
+            android:id="@+id/btn_verification_email"
+
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:layout_below="@id/textView_info_verification"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_button_second"
+            android:text="Close"
+            android:textColor="#fff"
+           >
+
+        </Button>
+
+    </RelativeLayout>
+</LinearLayout>

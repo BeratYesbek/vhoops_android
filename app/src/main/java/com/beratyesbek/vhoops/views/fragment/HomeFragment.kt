@@ -6,22 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.vhoops.Adapter.HomeViewAdapter
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.MVMM.HomeFragmentViewModel
-import com.beratyesbek.vhoops.R
-import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.adapter.HomeViewAdapter
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.core.utilities.animations.Animation
+import com.beratyesbek.vhoops.mvvm.HomeFragmentViewModel
+import com.beratyesbek.vhoops.viewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.databinding.FragmentHomeBinding
 import com.beratyesbek.vhoops.entities.concrete.dtos.ChatListDto
 import com.beratyesbek.vhoops.views.activities.ChatActivity
-import dagger.Component
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.FragmentScoped
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -51,6 +47,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
             chatList.clear()
             chatList.addAll(dataList)
             homeViewAdapter.notifyDataSetChanged()
+            dataBinding.recyclerViewHomeFragment.scheduleLayoutAnimation()
         })
 
 
@@ -63,6 +60,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
         recyclerView.layoutManager = layoutManager
         homeViewAdapter = HomeViewAdapter(chatList, this)
         recyclerView.adapter = homeViewAdapter
+        recyclerView.refreshDrawableState()
+        recyclerView.setItemAnimator(DefaultItemAnimator())
+        Animation.listItemAnimation(recyclerView)
 
     }
 

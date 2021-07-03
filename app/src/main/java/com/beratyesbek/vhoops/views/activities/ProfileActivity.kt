@@ -11,31 +11,34 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
-import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
-import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.beratyesbek.vhoops.business.concretes.UserManager
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.core.permission.GalleryPermission
+import com.beratyesbek.vhoops.core.utilities.extensions.downloadFromUrl
+import com.beratyesbek.vhoops.dataAccess.concretes.UserDal
+import com.beratyesbek.vhoops.mvvm.ProfileViewModel
 import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.views.fragment.CameraFragment
 import com.beratyesbek.vhoops.R
 import com.beratyesbek.vhoops.databinding.ActivityProfileAcitivtyBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.toolbar.view.*
 
-
+@AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityProfileAcitivtyBinding
     private lateinit var user: User
     private lateinit var userDal: UserDal
     private lateinit var userManager: UserManager
     private lateinit var transaction: FragmentTransaction;
+
+    private val viewModel : ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,49 +48,50 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(view)
 
         setSupportActionBar(dataBinding.includeProfileActivity.toolbar)
-        getData()
+
 
         dataBinding.btnEditFirstName.setOnClickListener {
-            showDialog(user.firstName!!, "İsim", 1)
+            showDialog(user.firstName!!, "First Name", 1)
         }
+
         dataBinding.btnEditLastName.setOnClickListener {
-            showDialog(user.lastName!!, "Soyisim", 2)
+            showDialog(user.lastName!!, "Last Name", 2)
 
         }
+
         dataBinding.btnEditUserName.setOnClickListener {
-            showDialog(user.userName!!, "Kullanıcı Adı", 3)
+            showDialog(user.userName!!, "User Name", 3)
 
         }
+
         dataBinding.btnEditAbout.setOnClickListener {
             if (user.about != null) {
-                showDialog(user.about!!, "Hakkında", 4)
-
+                showDialog(user.about!!, "About", 4)
             } else {
-                showDialog("", "Hakkında", 4)
-
+                showDialog("", "About", 4)
             }
-
         }
+
         dataBinding.btnSelectTool.setOnClickListener {
             showToolDialog()
         }
 
-    }
+        viewModel.context = applicationContext
+        viewModel.getData()
+        viewModel.userLiveData.observe(this,{ dataResult ->
+            user = dataResult
+            dataBinding.userData = user
 
-    private fun getData() {
-        val id = FirebaseAuth.getInstance().currentUser.uid
-        val userDal: UserDal = UserDal()
-        val userManager = UserManager(userDal)
-        userManager.getById(id) { dataResult ->
-            if (dataResult.success()) {
-                user = dataResult.data().get(0);
-                dataBinding.userData = user
-                dataBinding.imageViewProfileActivity.downloadFromUrl(
-                    user.profileImage.toString(),
-                    placeHolderProgressBar(this)
+            dataBinding.imageViewProfileActivity.downloadFromUrl(user.profileImage.toString(),
+                CircularProgressDrawable(this)
                 )
-            }
+        })
+        dataBinding.includeProfileActivity.btn_back_toolbar.setOnClickListener {
+            onBackPressed()
         }
+
+
+
     }
 
     private fun showDialog(value: String, title: String, editTextId: Int) {
@@ -108,9 +112,9 @@ class ProfileActivity : AppCompatActivity() {
 
             val textValue = editText.text.toString()
             if (editTextId == 3) {
-                updateUserName(textValue)
+                viewModel.updateUserName(textValue)
             } else {
-                updateData(textValue, editTextId)
+                viewModel.updateData(textValue, editTextId)
             }
 
         }
@@ -121,38 +125,7 @@ class ProfileActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    private fun updateUserName(userName: String) {
-        val documentId = user.documentID
-        userDal = UserDal()
-        userManager = UserManager(userDal)
-        userManager.updateUserName(userName, documentId) { result ->
-            if (result.success()) {
-                Toast.makeText(this, result.message(), Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, result.message(), Toast.LENGTH_LONG).show()
-            }
-        }
-    }
 
-    private fun updateData(textValue: String, editTextId: Int) {
-        when (editTextId) {
-            1 -> user.firstName = textValue
-            2 -> user.lastName = textValue
-            4 -> user.about = textValue
-
-        }
-        userDal = UserDal()
-        userManager = UserManager(userDal)
-        userManager.update(user) { result ->
-
-            if (result.success()) {
-                Toast.makeText(this, result.message(), Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, result.message(), Toast.LENGTH_LONG).show()
-            }
-
-        }
-    }
 
     private fun showToolDialog() {
         val alertDialog = BottomSheetDialog(this, R.style.BottonSheetTheme)
@@ -171,6 +144,8 @@ class ProfileActivity : AppCompatActivity() {
         btnCamera!!.setOnClickListener {
             val intentToCamera = Intent(this, CameraActivity::class.java)
             intentToCamera.putExtra("documentId", user.documentID)
+            intentToCamera.putExtra("type", Constants.PROFILE_ACTIVITY)
+
             startActivity(intentToCamera)
         }
         btnRemove!!.setOnClickListener {

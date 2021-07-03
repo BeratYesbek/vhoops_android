@@ -11,9 +11,17 @@
 
         />
     <item
-        android:id="@+id/accountSettings"
-        android:title="Account settings"
+        android:id="@+id/feedBack"
+        android:title="Feedback"
         app:showAsAction="never"
+        tools:ignore="AppCompatResource"
+
+        />
+    <item
+        android:id="@+id/exitAccount"
+        android:title="Exit Account"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_exit"
         tools:ignore="AppCompatResource"
 
         />

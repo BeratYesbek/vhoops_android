@@ -9,13 +9,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.beratyesbek.vhoops.Business.Abstract.IInvitationService
-import com.beratyesbek.vhoops.Business.Abstract.IUserService
-import com.beratyesbek.vhoops.Business.Concrete.InvitationManager
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.Core.DataAccess.Constants.MeetingConstants
-import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
-import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
+import com.beratyesbek.vhoops.business.abstracts.IInvitationService
+import com.beratyesbek.vhoops.business.abstracts.IUserService
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.core.dataAccess.constants.MeetingConstants
+import com.beratyesbek.vhoops.core.utilities.extensions.downloadFromUrl
+import com.beratyesbek.vhoops.core.utilities.extensions.placeHolderProgressBar
 import com.beratyesbek.vhoops.databinding.ActivityOutgoingInvitationBinding
 import com.beratyesbek.vhoops.entities.concrete.Invitation
 import com.beratyesbek.vhoops.entities.concrete.User
@@ -25,7 +24,6 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ApplicationContext
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
 import org.json.JSONArray
@@ -92,7 +90,7 @@ class OutgoingInvitationActivity : AppCompatActivity() {
         val id = FirebaseAuth.getInstance().currentUser.uid
         userService.getById(id){iDataResult ->
             if (iDataResult.success()){
-                val user = iDataResult.data()[0]
+                val user = iDataResult.data()!![0]
                 initiateMeeting(meetingType,user,token)
             }
         }

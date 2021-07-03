@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
+        android:background="@drawable/main_background"
         android:orientation="vertical"
         tools:context=".views.activities.GroupChatActivity">
 
@@ -20,6 +20,7 @@
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/include_groupChat_activity"
             android:layout_marginBottom="50dp"
+            android:layoutAnimation="@anim/recyclerview_animation_bottom"
             >
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -40,7 +41,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/custom_chat_input"
                 android:layout_toEndOf="@id/imageButton_camera"
-                android:hint="Mesaj yaz"
+                android:hint="Type a message..."
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="14dp"
@@ -50,6 +51,7 @@
                 android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
                 android:maxEms="4"
+
                 android:singleLine="true"
                 >
             </EditText>
@@ -110,6 +112,16 @@
 
 
         </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progressBar_groupChat_activity"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/progress"
+            >
+
+        </ProgressBar>
         <FrameLayout
             android:id="@+id/frameLayout_groupChat"
             android:layout_width="match_parent"

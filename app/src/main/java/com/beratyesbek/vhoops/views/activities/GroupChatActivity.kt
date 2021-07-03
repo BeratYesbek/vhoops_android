@@ -7,46 +7,49 @@ import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Chronometer
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.vhoops.Adapter.GroupChatViewAdapter
-import com.beratyesbek.vhoops.Business.GroupChatFileOperations
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.Core.DataAccess.Constants.ExtensionConstants
-import com.beratyesbek.vhoops.Core.Permission.DocumentPermission
-import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
-import com.beratyesbek.vhoops.Core.Permission.RecordAudioPermission
-import com.beratyesbek.vhoops.Core.Utilities.Animation.Animation
-import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
-import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
-import com.beratyesbek.vhoops.entities.concrete.GroupChat
-import com.beratyesbek.vhoops.MVMM.GroupChatViewModel
+import com.beratyesbek.vhoops.adapter.GroupChatViewAdapter
+import com.beratyesbek.vhoops.business.GroupChatFileOperations
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.core.dataAccess.constants.ExtensionConstants
+import com.beratyesbek.vhoops.core.permission.DocumentPermission
+import com.beratyesbek.vhoops.core.permission.GalleryPermission
+import com.beratyesbek.vhoops.core.permission.RecordAudioPermission
+import com.beratyesbek.vhoops.core.utilities.animations.Animation
+import com.beratyesbek.vhoops.core.utilities.extensions.downloadFromUrl
+import com.beratyesbek.vhoops.core.utilities.extensions.placeHolderProgressBar
+import com.beratyesbek.vhoops.mvvm.GroupChatViewModel
 import com.beratyesbek.vhoops.R
-import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.viewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.databinding.ActivityGroupChatBinding
+import com.beratyesbek.vhoops.entities.concrete.Group
+import com.beratyesbek.vhoops.entities.concrete.GroupChat
 import com.beratyesbek.vhoops.entities.concrete.dtos.GroupChatDto
 import com.beratyesbek.vhoops.views.fragment.CameraFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.group_chat_toolbar.view.*
 import java.io.File
-
 
 @AndroidEntryPoint
 class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
@@ -58,7 +61,7 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
     private val viewModel: GroupChatViewModel by viewModels()
     private var groupId: String? = null
     private lateinit var transaction: FragmentTransaction;
-
+    private lateinit var group :Group
     private val groupChatList: ArrayList<GroupChatDto> = ArrayList()
 
     private lateinit var groupChatViewAdapter: GroupChatViewAdapter
@@ -70,7 +73,9 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
         val view = dataBinding.root
         setContentView(view)
 
-        setSupportActionBar(dataBinding.includeGroupChatActivity.toolbar)
+        val toolbar = dataBinding.includeGroupChatActivity.toolbarGroupChat
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
 
         val groupIcon = intent.getStringExtra("GroupIcon")
@@ -79,21 +84,35 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
         val adminId = intent.getStringExtra("AdminId")
         val createdDate = intent.getStringExtra("CreatedDate")
         viewModel.groupId = groupId!!
-        dataBinding.includeGroupChatActivity.textView_groupName_chatActivity.text = groupName
+
+        viewModel.getGroupData(groupId!!)
+
+        viewModel.group.observe(this,{
+            group = it!!.get(0)
+        })
+
+        dataBinding.includeGroupChatActivity.textViewGroupNameChatActivity.text = groupName
 
         if (groupIcon != null) {
-            val imageView = dataBinding.includeGroupChatActivity.imageView_profile_groupChat_toolbar
+            val imageView = dataBinding.includeGroupChatActivity.imageViewProfileGroupChatToolbar
             this.let {
                 imageView.downloadFromUrl(groupIcon.toString(), placeHolderProgressBar(it))
             }
         }
-
+        dataBinding.includeGroupChatActivity.imageButtonBackGroupChatToolbar.setOnClickListener {
+            onBackPressed()
+        }
         dataBinding.imageButtonAttachFileGroupChat.setOnClickListener {
             toolsDialog()
         }
 
         dataBinding.imageButtonMicGroupChat.setOnClickListener {
             audioRecorder()
+        }
+        dataBinding.includeGroupChatActivity.imageViewProfileGroupChatToolbar.setOnClickListener {
+            val intentToGroupInfo = Intent(this,GroupInfoActivity::class.java)
+            intentToGroupInfo.putExtra(Constants.GROUP_ID,groupId)
+            startActivity(intentToGroupInfo)
         }
 
         dataBinding.editTextEnterMessageGroupChat.addTextChangedListener(object : TextWatcher {
@@ -123,13 +142,18 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
             }
 
         })
+
         runRecyclerView()
+
         viewModel.getData(groupId!!)
 
         viewModel.messageList.observe(this, androidx.lifecycle.Observer { groupChatDtoList ->
+            dataBinding.progressBarGroupChatActivity.visibility = View.INVISIBLE
             groupChatList.clear()
             groupChatList.addAll(groupChatDtoList)
             groupChatViewAdapter.notifyDataSetChanged()
+            dataBinding.recyclerViewChatActivity.scrollToPosition(groupChatViewAdapter.itemCount - 1)
+            dataBinding.recyclerViewChatActivity.scheduleLayoutAnimation()
         })
     }
 
@@ -141,7 +165,11 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
         dataBinding.recyclerViewChatActivity.refreshDrawableState();
         groupChatViewAdapter = GroupChatViewAdapter(groupChatList, this)
         dataBinding.recyclerViewChatActivity.adapter = groupChatViewAdapter
+        dataBinding.recyclerViewChatActivity.refreshDrawableState()
+        dataBinding.recyclerViewChatActivity.setItemAnimator(DefaultItemAnimator())
+        Animation.listItemAnimation(dataBinding.recyclerViewChatActivity)
     }
+
 
 
     fun btnSendMessage(view: View) {
@@ -149,6 +177,7 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
         if (message.isNotEmpty()) {
             val userId = FirebaseAuth.getInstance().currentUser.uid
             viewModel.sendMessage(GroupChat(userId, groupId!!, message, false, Timestamp.now()))
+            dataBinding.editTextEnterMessageGroupChat.text = null
         }
     }
 
@@ -364,6 +393,45 @@ class GroupChatActivity : AppCompatActivity(), OnItemClickListener {
         transaction.commit()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.group_chat_menu,menu)
+
+        return true
+    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.groupInfo -> {
+                val intentToGroupInfo = Intent(this,GroupInfoActivity::class.java)
+                intentToGroupInfo.putExtra(Constants.GROUP_ID,groupId)
+                startActivity(intentToGroupInfo)
+            }
+            R.id.leaveGroup -> {
+                leaveGroup()
+            }
+            else -> return super.onOptionsItemSelected(item);
+        }
+        return true
+    }
+
+    private fun leaveGroup(){
+        val currentUserId = FirebaseAuth.getInstance().currentUser.uid
+        group.memberIdList!!.remove(currentUserId)
+        viewModel.leaveGroup(group)
+
+        viewModel.leaveGroupResult.observe(this,{
+            if (it){
+                val intent = Intent(this,NavigationBottomActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            }else{
+                Toast.makeText(this,"Failed",Toast.LENGTH_LONG).show()
+            }
+        })
+    }
 
     private fun runChatFileOperations(uri: Uri) {
         val type = GroupChatFileOperations.checkUriExtension(uri, this)

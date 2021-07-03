@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.vhoops.Adapter.GroupViewAdapter
-import com.beratyesbek.vhoops.Business.Concrete.GroupManager
-import com.beratyesbek.vhoops.DataAccess.Concrete.GroupDal
+import com.beratyesbek.vhoops.adapter.GroupViewAdapter
+import com.beratyesbek.vhoops.business.concretes.GroupManager
+import com.beratyesbek.vhoops.core.utilities.animations.Animation
+import com.beratyesbek.vhoops.dataAccess.concretes.GroupDal
 import com.beratyesbek.vhoops.entities.concrete.Group
-import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.viewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.views.activities.GroupChatActivity
 import com.beratyesbek.vhoops.databinding.FragmentGroupBinding
 
@@ -34,14 +36,18 @@ class GroupFragment : Fragment() ,OnItemClickListener{
         dataBinding.recyclerViewGroupFragment.layoutManager = layoutManager
         groupViewAdapter = GroupViewAdapter(groupList,this)
         dataBinding.recyclerViewGroupFragment.adapter = groupViewAdapter
+        dataBinding.recyclerViewGroupFragment.refreshDrawableState()
+        dataBinding.recyclerViewGroupFragment.setItemAnimator(DefaultItemAnimator())
+        Animation.listItemAnimation(dataBinding.recyclerViewGroupFragment)
     }
     private fun getGroups(){
         val groupManager = GroupManager(GroupDal())
         groupManager.getAll { iDataResult ->
             if (iDataResult.success()) {
                 groupList.clear()
-                groupList.addAll(iDataResult.data())
+                groupList.addAll(iDataResult.data()!!)
                 groupViewAdapter.notifyDataSetChanged()
+                dataBinding.recyclerViewGroupFragment.scheduleLayoutAnimation()
             }
         }
 

@@ -7,6 +7,7 @@ import com.google.firebase.Timestamp
 class Group(
     groupId: String?,
     groupName:String?,
+    description : String?,
     adminId : String?,
     groupImage : Uri?,
     documentId: String?,
@@ -16,12 +17,18 @@ class Group(
 
     val groupId: String? = groupId
         get
-    val groupName: String? = groupName
+    var groupName: String? = groupName
         get
+        set
+    var groupDescription :String? = description
+        get
+        set
+
     val adminId: String? = adminId
         get
-    val groupImage: Uri? = groupImage
+    var groupImage: Uri? = groupImage
         get
+        set
     val documentId: String? = documentId
         get
     val memberIdList: ArrayList<String>? = memberIdList

@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="UserData"
+            name="userData"
             type="com.beratyesbek.vhoops.entities.concrete.User" />
     </data>
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffff"
+        android:background="@drawable/main_background"
         android:orientation="vertical"
         tools:context=".views.activities.ProfileActivity">
 
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="Hesap bilgileri"
+                    android:text="Account Information"
                     android:textColor="@color/dark_blue_color"
                     android:textSize="16dp"
 
@@ -101,7 +101,7 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/bottom_border"
                     android:padding="5dp"
-                    android:text="@{UserData.firstName}"
+                    android:text="@{userData.firstName}"
                     android:textColor="#000"
                     android:textSize="18dp"
                     android:textStyle="italic">
@@ -134,7 +134,7 @@
                     android:background="@drawable/bottom_border"
                     android:padding="5dp"
                     android:textColor="#000"
-                    android:text="@{UserData.lastName}"
+                    android:text="@{userData.lastName}"
 
                     android:textSize="18dp"
                     android:textStyle="italic">
@@ -168,7 +168,7 @@
                     android:layout_toEndOf="@id/imageView_profile_activity"
                     android:background="@drawable/bottom_border"
                     android:padding="5dp"
-                    android:text="@{UserData.userName}"
+                    android:text="@{userData.userName}"
                     android:textColor="#000"
                     android:textSize="16dp">
 
@@ -235,7 +235,7 @@
                     android:background="@drawable/bottom_border"
                     android:drawablePadding="15dp"
                     android:padding="5dp"
-                    android:text="@{UserData.about}"
+                    android:text="@{userData.about}"
 
                     android:textColor="#000"
                     android:textSize="15dp">

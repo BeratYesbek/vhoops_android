@@ -1,106 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/info"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    android:id="@+id/toolbar"
-
-    android:elevation="15dp">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageButton
-            android:id="@+id/imageButton_back_chat_toolbar"
-            android:layout_width="35dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_back"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center_vertical"
-            >
-
-        </ImageButton>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView_profile_chat_toolbar"
-            android:layout_width="70dp"
-            android:layout_height="60dp"
-            android:layout_margin="5dp"
-            app:civ_border_color="#fff"
-            app:civ_border_width="1dp"
-            android:layout_gravity="center_vertical"
-
-            android:src="@drawable/ic_profile"
-            >
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-        <TextView
-            android:id="@+id/textView_user_fullName_chatActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-
-            android:text="Vhoops"
-            android:textColor="#fff"
-            android:padding="5dp"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            >
-        </TextView>
-
-
-    </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="20dp"
-        >
+
+        android:background="@color/info"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:id="@+id/toolbar_chat"
+
+        android:elevation="15dp">
         <LinearLayout
-            android:id="@+id/linearLayout_toolbar_chat_deleteView"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/textView_deleteItem_chatToolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"
-                android:textColor="#fff"
-                android:layout_gravity="center_vertical"
-                android:textSize="18dp"
-
-                />
             <ImageButton
-                android:id="@+id/btn_delete_chatToolbar"
+                android:id="@+id/imageButton_back_chat_toolbar"
                 android:layout_width="35dp"
-                android:layout_gravity="right"
-                android:layout_height="35dp"
-
-                android:background="@drawable/ic_delete"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_back"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center_vertical"
                 >
 
             </ImageButton>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_profile_chat_toolbar"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
+                app:civ_border_color="#fff"
+                app:civ_border_width="1dp"
+                android:layout_gravity="center_vertical"
+
+                android:src="@drawable/ic_profile"
+                >
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/textView_user_fullName_chatActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+                android:text="Vhoops"
+                android:textColor="#fff"
+                android:padding="5dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                >
+            </TextView>
+
+
         </LinearLayout>
 
 
-        <ImageButton
-            android:id="@+id/btn_videoMeeting_chatToolbar"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:foregroundGravity="right"
-            android:layout_gravity="center_vertical|end"
-
-            android:background="@drawable/ic_videocam"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
             >
+            <LinearLayout
+                android:id="@+id/linearLayout_toolbar_chat_deleteView"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/textView_deleteItem_chatToolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="#fff"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18dp"
 
-        </ImageButton>
+                    />
+                <ImageButton
+                    android:id="@+id/btn_delete_chatToolbar"
+                    android:layout_width="35dp"
+                    android:layout_gravity="right"
+                    android:layout_height="35dp"
+
+                    android:background="@drawable/ic_delete"
+                    >
+
+                </ImageButton>
+            </LinearLayout>
 
 
-    </RelativeLayout>
-</androidx.appcompat.widget.Toolbar>
+            <ImageButton
+                android:id="@+id/btn_videoMeeting_chatToolbar"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:foregroundGravity="right"
+                android:layout_gravity="center_vertical|end"
+
+                android:background="@drawable/ic_videocam"
+                >
+
+            </ImageButton>
+
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+</layout>

@@ -4,14 +4,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
+        android:background="@drawable/main_background"
         tools:context=".views.fragment.GroupFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_groupFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff"
+            android:layoutAnimation="@anim/recycler_view_animation_fade_top"
+            android:background="@drawable/main_background"
             />
     </RelativeLayout>
 </layout>

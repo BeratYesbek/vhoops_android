@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.beratyesbek.vhoops.views.activities.GroupChatActivity"
+
+    >
+<item
+    android:id="@+id/groupInfo"
+    android:title="Group Info"
+    app:showAsAction="never"
+    tools:ignore="AppCompatResource"
+
+
+    />
+    <item
+        android:id="@+id/leaveGroup"
+        android:title="Leave From Group"
+        app:showAsAction="never"
+        tools:ignore="AppCompatResource"
+
+        />
+</menu>

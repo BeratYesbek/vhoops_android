@@ -12,31 +12,23 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.beratyesbek.vhoops.Business.Concrete.ChatManager
-import com.beratyesbek.vhoops.Business.Concrete.GroupChatManager
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.Core.Constants.Messages
-import com.beratyesbek.vhoops.DataAccess.Concrete.ChatDal
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.vhoops.entities.concrete.Chat
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.mvvm.MapsViewModel
 import com.beratyesbek.vhoops.R
-import com.beratyesbek.vhoops.entities.concrete.GroupChat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -49,10 +41,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var groupId: String? = null
     private var type: Int? = null
 
-    @Inject
-    lateinit var groupChatManager: GroupChatManager
-
-    lateinit var chatManager: ChatManager
+    private val viewModel : MapsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,18 +52,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         groupId = intent.getStringExtra("groupId")
         type = intent.getIntExtra("type", 0)
 
+        viewModel.liveResult.observe(this,{
+            if (it.success()){
+                onBackPressed()
+                Toast.makeText(this,"location was sent successfully",Toast.LENGTH_LONG)
+            }else{
+                Toast.makeText(this,"location wasn't sent",Toast.LENGTH_LONG)
 
+            }
+        })
     }
 
     fun shareLocation(view: View) {
         val senderId = FirebaseAuth.getInstance().currentUser.uid
         when(type){
-            Constants.CHAT_ACTIVITY -> shareLocationWithChat(senderId)
-            Constants.GROUP_CHAT_ACTIVITY -> shareLocationWithGroupChat(senderId)
+            Constants.CHAT_ACTIVITY -> viewModel.shareLocationWithChat(senderId,receiverId!!,userLocation)
+            Constants.GROUP_CHAT_ACTIVITY -> viewModel.shareLocationWithGroupChat(senderId,groupId!!,userLocation)
         }
 
     }
-
+/*
     private fun shareLocationWithChat(senderId: String) {
         if (receiverId != null) {
             chatManager = ChatManager(ChatDal(),UserManager(UserDal()))
@@ -114,7 +111,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
-
+*/
     fun checkGpsProvider() {
         val service = getSystemService(LOCATION_SERVICE) as LocationManager
         val enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -249,7 +246,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 userLocation = p0
                 mMap.addMarker(MarkerOptions().position(p0).title(address))
             } else {
-                Toast.makeText(applicationContext, Messages.LOCATION_FAILED, Toast.LENGTH_LONG)
+                Toast.makeText(applicationContext, "Location Failed", Toast.LENGTH_LONG)
                     .show()
             }
 

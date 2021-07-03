@@ -1,11 +1,18 @@
 package com.beratyesbek.vhoops.views.activities
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.Toast
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.business.concretes.UserManager
+import com.beratyesbek.vhoops.core.EmailVerification
+import com.beratyesbek.vhoops.dataAccess.concretes.UserDal
+import com.beratyesbek.vhoops.R
 import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.databinding.ActivityRegisterBinding
 
@@ -22,8 +29,9 @@ class RegisterActivity : AppCompatActivity() {
         val view = dataBinding.root
         setContentView(view)
 
-        
-
+        dataBinding.btnBackRegister.setOnClickListener {
+            finish()
+        }
     }
 
 
@@ -45,7 +53,8 @@ class RegisterActivity : AppCompatActivity() {
                 if(result.success()){
                     userManager.createUser(User(firstName,lastName,email,userName,password)){ createResult ->
                         if(createResult.success()){
-                            Toast.makeText(this,createResult.message(),Toast.LENGTH_LONG).show()
+                            EmailVerification.sendEmail()
+                            showCustomDialog()
                         }else{
                             Toast.makeText(this,createResult.message(),Toast.LENGTH_LONG).show();
                         }
@@ -59,6 +68,20 @@ class RegisterActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this,"passwords are not equals each other",Toast.LENGTH_LONG).show();
         }
+    }
+    private fun showCustomDialog(){
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.custom_email_verfication_dialog)
+
+        val btnClose = dialog.findViewById<Button>(R.id.btn_verification_email)
+
+        btnClose?.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
 

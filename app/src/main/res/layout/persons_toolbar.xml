@@ -10,7 +10,14 @@
         android:elevation="15dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <ImageButton
+            android:id="@+id/btn_back_toolbar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/ic_back"
 
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,17 +48,6 @@
                 >
 
             </Button>
-            <ImageButton
-                android:id="@+id/person_toolbar_search_button"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_gravity="end"
-                android:background="@drawable/ic_search"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
-                >
-
-            </ImageButton>
         </RelativeLayout>
 
 

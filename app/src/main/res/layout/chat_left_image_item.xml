@@ -17,7 +17,7 @@
             android:layout_centerHorizontal="true"
             app:cardCornerRadius="8dp"
             android:background="@drawable/custom_background_chat_left"
-            app:cardBackgroundColor="@color/primary"
+            app:cardBackgroundColor="@color/dark_blue_color"
             app:cardElevation="10dp">
 
             <ImageView

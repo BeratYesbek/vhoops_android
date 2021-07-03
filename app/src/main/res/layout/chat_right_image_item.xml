@@ -17,7 +17,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:cardCornerRadius="8dp"
-                    app:cardBackgroundColor="@color/success"
+                    app:cardBackgroundColor="#99AAB5"
                     android:background="@drawable/custom_background_chat_right"
                     app:cardElevation="10dp">
 

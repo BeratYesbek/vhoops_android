@@ -8,14 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.beratyesbek.vhoops.views.activities.UserActivity
-import com.beratyesbek.vhoops.Adapter.SearchViewAdapter
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.adapter.SearchViewAdapter
+import com.beratyesbek.vhoops.business.concretes.UserManager
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.core.utilities.animations.Animation
+import com.beratyesbek.vhoops.dataAccess.concretes.UserDal
 import com.beratyesbek.vhoops.entities.concrete.User
-import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.viewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.databinding.FragmentSearchBinding
 
 
@@ -68,23 +70,27 @@ class SearchFragment : OnItemClickListener, Fragment() {
              filterUserList.add(item);
            }
        }
-        adapter.filterList(filterUserList)
+        adapter.filterList(filterUserList,dataBinding.recyclerViewSearchFragment)
 
     }
+
     fun searchData () {
         var search = dataBinding.editTextSearchFragment.text.toString()
         val userDal: UserDal = UserDal()
         val userManager = UserManager(userDal)
         userManager.getAll { result ->
-           userList.addAll(result.data())
+           userList.addAll(result.data()!!)
         }
     }
+
     fun runRecyclerView(){
         val layoutManager = LinearLayoutManager(context)
         dataBinding.recyclerViewSearchFragment.layoutManager = layoutManager;
         adapter = SearchViewAdapter(userList,this)
         dataBinding.recyclerViewSearchFragment.adapter = adapter
-
+        dataBinding.recyclerViewSearchFragment.refreshDrawableState()
+        dataBinding.recyclerViewSearchFragment.setItemAnimator(DefaultItemAnimator())
+        Animation.listItemAnimation(dataBinding.recyclerViewSearchFragment)
 
     }
 

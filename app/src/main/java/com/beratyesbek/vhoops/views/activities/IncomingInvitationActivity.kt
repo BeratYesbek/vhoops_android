@@ -8,14 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.beratyesbek.vhoops.Core.DataAccess.Constants.MeetingConstants
-import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
-import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
-import com.beratyesbek.vhoops.R
+import com.beratyesbek.vhoops.core.dataAccess.constants.MeetingConstants
+import com.beratyesbek.vhoops.core.utilities.extensions.downloadFromUrl
+import com.beratyesbek.vhoops.core.utilities.extensions.placeHolderProgressBar
 import com.beratyesbek.vhoops.databinding.ActivityIncomingInvitationBinding
 import com.beratyesbek.vhoops.network.ApiClient
 import com.beratyesbek.vhoops.network.ApiService
-import com.google.gson.JsonArray
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
 import org.json.JSONArray

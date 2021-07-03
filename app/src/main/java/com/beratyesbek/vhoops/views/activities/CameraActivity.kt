@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -18,8 +17,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.beratyesbek.vhoops.Business.Analysis.LuminosityAnalyzer
-import com.beratyesbek.vhoops.Core.Constants.Constants
+import com.beratyesbek.vhoops.business.analysis.LuminosityAnalyzer
 import com.beratyesbek.vhoops.views.fragment.CameraFragment
 import java.io.File
 import java.text.SimpleDateFormat

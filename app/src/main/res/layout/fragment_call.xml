@@ -3,14 +3,15 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:background="#fff"
+        android:background="@drawable/main_background"
         android:layout_height="match_parent"
         tools:context=".views.fragment.CallFragment">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_call_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff"
+            android:background="@drawable/main_background"
+            android:layoutAnimation="@anim/recycler_view_animation_fade_top"
             />
 
     </FrameLayout>

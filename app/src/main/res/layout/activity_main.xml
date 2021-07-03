@@ -4,38 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/second_background"
+    android:background="@drawable/main_background"
     tools:context=".views.activities.MainActivity">
 
     <ImageView
         android:id="@+id/imageView_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:src="@drawable/icon"
+        android:src="@drawable/logo"
         >
-    </ImageView>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="130dp"
-        android:src="@drawable/app_title"
-        android:layout_below="@+id/imageView_icon"
-        >
-
     </ImageView>
 
     <ProgressBar
+        android:id="@+id/progress_main_activity"
         android:layout_width="70dp"
         android:layout_height="60dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="400dp"
         android:layout_centerHorizontal="true"
-        android:indeterminateDrawable="@drawable/progressbar"
+        android:indeterminateDrawable="@drawable/progress"
         >
     </ProgressBar>
+
+    <TextView
+        android:id="@+id/text_main_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="please wait... \n connection is being controlled..."
+        android:textColor="@color/dark_color"
+        android:layout_below="@id/progress_main_activity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        >
+
+    </TextView>
 
 </RelativeLayout>
 

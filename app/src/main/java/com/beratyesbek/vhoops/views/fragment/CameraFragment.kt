@@ -10,14 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.beratyesbek.vhoops.Business.ChatFileOperations
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
-import com.beratyesbek.vhoops.Business.GroupChatFileOperations
-import com.beratyesbek.vhoops.Business.GroupChatFileOperations.Companion.groupId
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.Core.Utilities.Extension.downloadFromUrl
-import com.beratyesbek.vhoops.Core.Utilities.Extension.placeHolderProgressBar
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.business.ChatFileOperations
+import com.beratyesbek.vhoops.business.concretes.UserManager
+import com.beratyesbek.vhoops.business.GroupChatFileOperations
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.core.utilities.extensions.downloadFromUrl
+import com.beratyesbek.vhoops.core.utilities.extensions.placeHolderProgressBar
+import com.beratyesbek.vhoops.dataAccess.concretes.UserDal
 import com.beratyesbek.vhoops.databinding.FragmentCameraBinding
 import com.dsphotoeditor.sdk.activity.DsPhotoEditorActivity
 import com.dsphotoeditor.sdk.utils.DsPhotoEditorConstants
@@ -77,7 +76,7 @@ class CameraFragment(
         )
         dsPhotoEditorIntent.putExtra(
             DsPhotoEditorConstants.DS_TOOL_BAR_BACKGROUND_COLOR,
-            Color.parseColor("#db330f")
+            Color.parseColor("#7289DA")
         )
 
         dsPhotoEditorIntent.setData(uri);
@@ -158,12 +157,12 @@ class CameraFragment(
                                 }
                             }
                         } else {
-                            Toast.makeText(this.context, it.message(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, it.message(), Toast.LENGTH_LONG).show()
                         }
 
                     }
                 } else {
-                    Toast.makeText(this.context, it.message(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, it.message(), Toast.LENGTH_LONG).show()
 
                 }
             }

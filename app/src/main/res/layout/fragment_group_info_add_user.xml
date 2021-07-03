@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clickable="false"
+        android:background="@drawable/main_background"
+        tools:context=".views.fragment.GroupInfoAddUserFragment">
+        <include android:id="@+id/includeFragmentGroupInfoAddUser"
+            layout="@layout/toolbar"></include>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_groupInfoAddUserFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layoutAnimation="@anim/recycler_view_animation_fade_top"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+</layout>

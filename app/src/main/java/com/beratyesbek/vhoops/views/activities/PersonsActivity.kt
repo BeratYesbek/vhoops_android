@@ -13,51 +13,48 @@ import android.widget.EditText
 import android.widget.GridView
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
+import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.vhoops.Adapter.GridViewAdapter.GroupMemberViewAdapter
-import com.beratyesbek.vhoops.Adapter.PersonViewAdapter
-import com.beratyesbek.vhoops.Business.Concrete.FellowManager
-import com.beratyesbek.vhoops.Business.Concrete.GroupManager
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.Core.Permission.GalleryPermission
-import com.beratyesbek.vhoops.Core.Utilities.Animation.Animation
-import com.beratyesbek.vhoops.DataAccess.Concrete.FellowDal
-import com.beratyesbek.vhoops.DataAccess.Concrete.GroupDal
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
-import com.beratyesbek.vhoops.entities.concrete.Fellow
+import com.beratyesbek.vhoops.adapter.gridViewAdapter.GroupMemberViewAdapter
+import com.beratyesbek.vhoops.adapter.PersonViewAdapter
+import com.beratyesbek.vhoops.business.concretes.GroupManager
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.core.permission.GalleryPermission
+import com.beratyesbek.vhoops.core.utilities.animations.Animation
+import com.beratyesbek.vhoops.dataAccess.concretes.GroupDal
+import com.beratyesbek.vhoops.mvvm.PersonsViewModel
 import com.beratyesbek.vhoops.entities.concrete.Group
 import com.beratyesbek.vhoops.entities.concrete.User
 import com.beratyesbek.vhoops.R
-import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.viewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.databinding.ActivityPersonsBinding
-import com.beratyesbek.vhoops.views.fragment.SearchFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.persons_toolbar.view.*
-import kotlinx.android.synthetic.main.toolbar.view.*
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+@AndroidEntryPoint
 class PersonsActivity : AppCompatActivity(), OnItemClickListener {
 
     private lateinit var dataBinding: ActivityPersonsBinding
 
     private val userList: ArrayList<User> = ArrayList()
-    private val fellowList: ArrayList<Fellow> = ArrayList()
+
     private val selectedItemList: ArrayList<Number> = ArrayList()
     private val selectedUserList: ArrayList<User> = ArrayList()
     private val selectedUserId : ArrayList<String> = ArrayList()
+
     private lateinit var transaction: FragmentTransaction;
+
     private lateinit var personViewAdapter: PersonViewAdapter
     private lateinit var groupMembersViewAdapter: GroupMemberViewAdapter
 
     private var groupIcon: Uri? = null
+
+    private val viewModel : PersonsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,16 +70,29 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
                 groupCreationDialog()
             }
         }
-        dataBinding.toolbarPersonsActivity.personToolbarSearchButton.setOnClickListener {
-            setSearchFragment()
+
+        dataBinding.toolbarPersonsActivity.btnBackToolbar.setOnClickListener {
+            onBackPressed()
         }
 
-
-
         runRecyclerView()
-        getFriendData()
+        viewModel.getFriendData()
+        viewModel.friendList.observe( this,{ friendList ->
+            userList.clear()
+            userList.addAll(friendList)
+            personViewAdapter.notifyDataSetChanged()
+
+        } )
 
 
+    }
+
+
+    private fun runRecyclerView() {
+        val layoutManager = LinearLayoutManager(this)
+        dataBinding.recyclerViewFriendActivity.layoutManager = layoutManager
+        personViewAdapter = PersonViewAdapter(userList, this)
+        dataBinding.recyclerViewFriendActivity.adapter = personViewAdapter
     }
 
     private fun runGridView(gridView: GridView) {
@@ -90,13 +100,6 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         gridView.adapter = groupMembersViewAdapter
         groupMembersViewAdapter.notifyDataSetChanged()
 
-    }
-
-    private fun runRecyclerView() {
-        val layoutManager = LinearLayoutManager(this)
-        dataBinding.recyclerViewFriendActivity.layoutManager = layoutManager
-        personViewAdapter = PersonViewAdapter(userList, fellowList, this)
-        dataBinding.recyclerViewFriendActivity.adapter = personViewAdapter
     }
 
     private fun groupCreationDialog() {
@@ -108,6 +111,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         val btnChoseImage = dialog.findViewById<ImageButton>(R.id.btn_select_group_icon)
         val btnCreate = dialog.findViewById<ImageButton>(R.id.btn_create_group)
         val editTextGroupName = dialog.findViewById<EditText>(R.id.editText_groupName_groupDialog)
+        val editTextGroupDescription = dialog.findViewById<EditText>(R.id.editText_groupDescription_groupDialog)
 
 
         btnChoseImage?.setOnClickListener {
@@ -116,7 +120,11 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         }
         btnCreate?.setOnClickListener {
             val groupName = editTextGroupName?.text.toString()
-            createGroup(groupName,dialog)
+            val description = editTextGroupDescription?.text.toString()
+            if(!groupName.isNullOrEmpty() && !description.isNullOrEmpty()){
+                createGroup(groupName,description,dialog)
+
+            }
 
         }
 
@@ -126,7 +134,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
 
     }
 
-    private fun createGroup(groupName: String,dialog: Dialog) {
+    private fun createGroup(groupName: String,groupDescription : String ,dialog: Dialog) {
 
         if (selectedUserList.size > 0 && groupIcon != null){
 
@@ -136,7 +144,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
                 if (iDataResult.success()){
                     val adminId = FirebaseAuth.getInstance().currentUser.uid
                     val uuid = UUID.randomUUID().toString()
-                    groupManager.add(Group(uuid,groupName,adminId,iDataResult.data(),uuid,selectedUserId, Timestamp.now())){
+                    groupManager.add(Group(uuid,groupName,groupDescription,adminId,iDataResult.data(),uuid,selectedUserId, Timestamp.now())){
                         if (it.success()){
                             Toast.makeText(this,"Group has been created",Toast.LENGTH_LONG).show()
                             dialog.dismiss()
@@ -189,73 +197,12 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun setSearchFragment() {
-
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.fade_in_anim, R.anim.slide_out_anim)
-        transaction.replace(R.id.persons_search_people_frameLayout, SearchFragment())
-        transaction.commit()
-    }
-
-    private fun removeSearchFragment() {
-        val fragment: Fragment? =
-            supportFragmentManager.findFragmentById(R.id.search_people_frameLayout)
-        transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.fade_out, R.anim.fade_in_anim)
-        transaction.remove(fragment!!)
-        transaction.commit()
-    }
 
 
-    private fun getFriendData() {
-        val userId = FirebaseAuth.getInstance().currentUser.uid
-        val fellowDal = FellowDal()
-        val fellowManager = FellowManager(fellowDal)
-        fellowManager.getById(userId) { iDataResult ->
-            fellowList.clear()
-            if (iDataResult.success()) {
-
-                fellowList.addAll(iDataResult.data())
-                getUserData()
-            }
-        }
-    }
-
-
-    private fun getUserData() {
-        val userDal = UserDal()
-        val userManager = UserManager(userDal)
-        userManager.getAll { iDataResult ->
-            userList.clear()
-            if (iDataResult.success()) {
-                userList.addAll(iDataResult.data())
-                setAllDataByFriend()
-            }
-        }
-    }
-
-    private fun setAllDataByFriend() {
-        val tempUserList = ArrayList<User>()
-        println(fellowList.size)
-        for (friend in fellowList) {
-
-            for (user in userList) {
-                if (friend.userId == user.userID) {
-                    tempUserList.add(user)
-                }
-            }
-        }
-        userList.clear()
-        userList.addAll(tempUserList)
-        println(userList.size)
-        personViewAdapter.notifyDataSetChanged()
-
-    }
 
     override fun onItemClick(position: Int) {
         if (selectedItemList.size > 0) {
             selectedItemList.forEachIndexed { index, number ->
-                println(number)
                 if (number == position) {
                     selectedItemList.removeAt(index)
                     selectedUserList.removeAt(index)
@@ -264,7 +211,7 @@ class PersonsActivity : AppCompatActivity(), OnItemClickListener {
                 }
             }
         } else {
-            val user = userList.get(position)
+            val user = userList[position]
 
             val intentToChatActivity = Intent(this, ChatActivity::class.java)
             intentToChatActivity.putExtra(Constants.FULL_NAME,user.firstName + " " + user.lastName)

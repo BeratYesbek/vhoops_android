@@ -2,14 +2,14 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="true" android:state_focused="true">
         <shape android:shape="rectangle">
-            <gradient android:startColor="@color/info" android:endColor="@color/info"></gradient>
+            <gradient android:startColor="#2A2D32" android:endColor="#2A2D32"></gradient>
             <corners android:radius="10dp"/>
-            <stroke android:color="@color/orange_color"/>
+            <stroke android:color="@color/info"/>
         </shape>
     </item>
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <gradient android:startColor="@color/info" android:endColor="@color/info"></gradient>
+            <gradient android:startColor="#2A2D32" android:endColor="#2A2D32"></gradient>
             <corners android:radius="10dp"/>
             <stroke android:color="#AEAEAE" android:width="1dp"/>
         </shape>

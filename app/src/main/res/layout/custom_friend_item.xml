@@ -1,43 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/relativeLayout_custom_person_item"
-    android:background="@drawable/custom_transparent_background">
-
-    <RelativeLayout
+<layout >
+    <data>
+        <variable
+            name="user"
+            type="com.beratyesbek.vhoops.entities.concrete.User" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:id="@+id/relativeLayout_custom_person_item"
+ >
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView_friend_item"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-
-            android:src="@drawable/ic_profile_blue" />
-
-        <TextView
-            android:id="@+id/textView_friend_item_userName"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/imageView_friend_item"
-            android:padding="5dp"
-            android:textColor="#2C2F33"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/textView_friend_item_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView_friend_item_userName"
-            android:layout_marginRight="5dp"
-            android:layout_toEndOf="@id/imageView_friend_item"
-            android:maxLength="35"
-            android:paddingLeft="5dp"
-            android:textColor="@color/dark_color" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_friend_item"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+
+                android:src="@drawable/ic_profile_blue" />
+            <RelativeLayout
+                android:layout_toEndOf="@id/imageView_friend_item"
+
+                android:layout_width="wrap_content"
+                android:background="@drawable/custom_transparent_background"
+                android:layout_height="63dp">
+                <TextView
+                    android:id="@+id/textView_friend_item_userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@{(user.firstName + ' ' + user.lastName).toUpperCase()}"
+                    android:textColor="#2C2F33"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_friend_item_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView_friend_item_userName"
+                    android:layout_marginRight="5dp"
+                    android:text="@{user.about}"
+                    android:maxLength="35"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/dark_color" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
-
-</RelativeLayout>
+</layout>

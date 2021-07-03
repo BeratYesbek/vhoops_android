@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout_custom_person_item"
-    android:background="@drawable/custom_transparent_background">
+
+>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,31 +15,40 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView_group_item"
             android:layout_width="60dp"
+            app:civ_border_color="#2C2F33"
+            app:civ_border_width="1dp"
             android:layout_height="60dp"
 
             android:src="@drawable/ic_profile_blue" />
-
-        <TextView
-            android:id="@+id/textView_group_item_groupName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="63dp"
             android:layout_toEndOf="@id/imageView_group_item"
-            android:padding="5dp"
-            android:textColor="#2C2F33"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-<!--
-        <TextView
-            android:id="@+id/textView_friend_item_about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView_friend_item_userName"
-            android:layout_marginRight="5dp"
-            android:layout_toEndOf="@id/imageView_friend_item"
-            android:maxLength="35"
-            android:paddingLeft="5dp"
-            android:textColor="@color/dark_color" />
--->
+            android:background="@drawable/custom_transparent_background"
+
+            >
+            <TextView
+                android:id="@+id/textView_group_item_groupName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="#2C2F33"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_groupDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView_group_item_groupName"
+                android:layout_marginRight="5dp"
+                android:maxLength="35"
+                android:padding="5dp"
+                android:textColor="@color/dark_color" />
+        </RelativeLayout>
+
+
+
     </RelativeLayout>
 
 </RelativeLayout>

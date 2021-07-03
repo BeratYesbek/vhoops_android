@@ -4,12 +4,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:background="@drawable/main_background"
+
         android:layout_height="match_parent"
-        android:background="#fff"
         android:orientation="vertical"
         tools:context=".views.activities.ChatActivity">
 
-    <include android:id="@+id/include_chat_activity" layout="@layout/chat_toolbar">
+    <include android:id="@+id/include_chat_activity"
+        layout="@layout/chat_toolbar">
 
     </include>
     <androidx.recyclerview.widget.RecyclerView
@@ -19,6 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/include_chat_activity"
         android:layout_marginBottom="50dp"
+        android:layoutAnimation="@anim/recyclerview_animation_bottom"
         >
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -39,7 +42,7 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/custom_chat_input"
             android:layout_toEndOf="@id/imageButton_camera"
-            android:hint="Mesaj yaz"
+            android:hint="Type a message"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="14dp"
@@ -109,6 +112,16 @@
 
 
     </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/progressBar_chat_activity"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/progress"
+            >
+
+        </ProgressBar>
     <FrameLayout
         android:id="@+id/frameLayout_chat"
         android:layout_width="match_parent"

@@ -22,30 +22,51 @@
             >
 
         </TextView>
-
-        <ImageButton
-            android:id="@+id/btn_toolbar_notification"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/ic_notification">
-
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/toolbar_search_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="end"
-            android:layout_margin="5dp"
-            android:background="@drawable/ic_search"
-
             >
 
-        </ImageButton>
+            <ImageButton
+                android:id="@+id/btn_toolbar_notification"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+
+                android:background="@drawable/ic_notification">
+
+            </ImageButton>
+            <RelativeLayout
+                android:id="@+id/relativeLayout_red_point_noti"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/btn_circle_red"
+                android:layout_gravity="end"
+                android:layout_toEndOf="@id/btn_toolbar_notification"
+                android:layout_marginLeft="-16dp"
+                android:visibility="invisible"
+                />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/toolbar_add_friend_button"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_gravity="end"
+            android:layout_margin="5dp"
+            android:drawableStart="@drawable/ic_add_persons"
+            android:text="add friend"
+            android:background="@drawable/custom_button_second"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            >
+
+        </Button>
+
 
 
     </androidx.appcompat.widget.Toolbar>

@@ -4,36 +4,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:background="#fff"
+        android:background="@drawable/main_background"
 
         android:layout_height="match_parent"
         tools:context=".views.activities.NotificationActivity">
         <include
             android:id="@+id/include_notification_activity"
             layout="@layout/toolbar" />
-        <TextView
-            android:id="@+id/textView_text_notification_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/include_notification_activity"
-            android:text="Friend Requests"
-            android:padding="5dp"
-            android:textSize="18dp"
-            android:background="@drawable/bottom_border"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:textColor="@color/dark_blue_color"
-            android:textStyle="bold"
-            android:textAlignment="center"
 
-            >
-
-        </TextView>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_notification_activity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/textView_text_notification_activity"
+            android:layout_below="@id/include_notification_activity"
             android:layout_marginTop="10dp"
             android:background="#fff"
             >

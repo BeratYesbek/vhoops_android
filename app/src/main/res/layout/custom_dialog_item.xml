@@ -29,6 +29,19 @@
             android:layout_marginTop="10dp"
             android:theme="@style/EditTextTheme_second"
             />
+        <EditText
+            android:id="@+id/editText_customDialog_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView_custom_dialog_title"
+            android:layout_marginLeft="20dp"
+            android:maxLength="100"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:visibility="invisible"
+            android:theme="@style/EditTextTheme_second"
+            />
         <Button
             android:id="@+id/btn_save_customDialog"
             android:layout_width="70dp"

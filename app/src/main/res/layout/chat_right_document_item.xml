@@ -11,7 +11,7 @@
         android:padding="8dp">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            app:cardBackgroundColor="@color/success"
+            app:cardBackgroundColor="#99AAB5"
             android:background="@drawable/custom_background_chat_right"
             app:cardCornerRadius="10dp"
             android:layout_height="match_parent">

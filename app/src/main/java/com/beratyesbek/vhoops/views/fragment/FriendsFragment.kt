@@ -7,15 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.beratyesbek.vhoops.Adapter.PersonViewAdapter
-import com.beratyesbek.vhoops.Business.Concrete.FellowManager
-import com.beratyesbek.vhoops.Business.Concrete.UserManager
-import com.beratyesbek.vhoops.Core.Constants.Constants
-import com.beratyesbek.vhoops.DataAccess.Concrete.FellowDal
-import com.beratyesbek.vhoops.DataAccess.Concrete.UserDal
+import com.beratyesbek.vhoops.adapter.PersonViewAdapter
+import com.beratyesbek.vhoops.business.concretes.FellowManager
+import com.beratyesbek.vhoops.business.concretes.UserManager
+import com.beratyesbek.vhoops.core.constants.Constants
+import com.beratyesbek.vhoops.dataAccess.concretes.FellowDal
+import com.beratyesbek.vhoops.dataAccess.concretes.UserDal
 import com.beratyesbek.vhoops.entities.concrete.Fellow
 import com.beratyesbek.vhoops.entities.concrete.User
-import com.beratyesbek.vhoops.ViewUtilities.OnItemClickListener
+import com.beratyesbek.vhoops.viewUtilities.OnItemClickListener
 import com.beratyesbek.vhoops.views.activities.ChatActivity
 import com.beratyesbek.vhoops.databinding.FragmentFriendsBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -48,7 +48,7 @@ class FriendsFragment : Fragment(), OnItemClickListener {
     fun runRecyclerView(){
         val layoutManager =  LinearLayoutManager(context)
         dataBinding.recyclerViewFriendFragment.layoutManager = layoutManager
-        personViewAdapter = PersonViewAdapter(userList,fellowList,this)
+        personViewAdapter = PersonViewAdapter(userList,this)
         dataBinding.recyclerViewFriendFragment.adapter = personViewAdapter
     }
 
@@ -60,7 +60,7 @@ class FriendsFragment : Fragment(), OnItemClickListener {
         fellowManager.getById(userId) { iDataResult ->
             if(iDataResult.success()){
 
-                fellowList.addAll(iDataResult.data())
+                fellowList.addAll(iDataResult.data()!!)
                 getUserData()
             }
         }
@@ -73,7 +73,7 @@ class FriendsFragment : Fragment(), OnItemClickListener {
         userManager.getAll { iDataResult ->
 
             if(iDataResult.success()){
-                userList.addAll(iDataResult.data())
+                userList.addAll(iDataResult.data()!!)
                 setAllDataByFriend()
             }
         }

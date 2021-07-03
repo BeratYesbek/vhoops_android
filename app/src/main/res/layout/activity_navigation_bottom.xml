@@ -7,6 +7,7 @@
         android:layout_height="match_parent"
         android:theme="@style/Theme.Vhoops"
         tools:viewBindingIgnore="true"
+        android:background="@drawable/main_background"
         tools:context=".views.activities.NavigationBottomActivity">
 
         <include
@@ -38,17 +39,7 @@
             app:mbn_shadowColor="#5000" />
 
 
-        <RelativeLayout
-            android:id="@+id/relative_include_navbar"
-            android:layout_width="match_parent"
-            android:translationZ="150dp"
-            android:layout_height="100dp">
-            <include
-                android:id="@+id/search_include"
-                layout="@layout/custom_search_item"
-                >
-            </include>
-        </RelativeLayout>
+
         <ImageButton
             android:id="@+id/btn_persons"
             android:layout_width="48dp"
