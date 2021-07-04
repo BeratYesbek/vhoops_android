@@ -2,7 +2,7 @@
 
                                       #Welcome To Vhoops
 #### Description
-Vhoops developed with android Sdk and Kotlin. What can you do in Vhoops. You can chat with your friends. You can share location, image,file video or sound recording. Also you are able to customize your profile and your groups chat. 
+Vhoops developed with android Sdk and Kotlin. What can you do in Vhoops. You can chat with your friends. You can share location, image,file video or sound recording. Also you are able to customize your profile and your groups chat. You are able to video call with your friends
 
 
 - message
