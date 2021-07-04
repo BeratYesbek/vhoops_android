@@ -38,25 +38,27 @@ if you would like to download project you must add your databe firebase json fil
 
 ### Images 
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (7)](https://user-images.githubusercontent.com/77804034/124397304-d9067f00-dd17-11eb-9fd3-92a7585677a3.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397304-d9067f00-dd17-11eb-9fd3-92a7585677a3.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (8)](https://user-images.githubusercontent.com/77804034/124397306-d99f1580-dd17-11eb-8532-3c9a848053dd.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397306-d99f1580-dd17-11eb-8532-3c9a848053dd.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (9)](https://user-images.githubusercontent.com/77804034/124397308-dad04280-dd17-11eb-8c39-b403d8024951.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397308-dad04280-dd17-11eb-8c39-b403d8024951.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (10)](https://user-images.githubusercontent.com/77804034/124397311-db68d900-dd17-11eb-9c80-93aa243d42b6.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397311-db68d900-dd17-11eb-9c80-93aa243d42b6.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09](https://user-images.githubusercontent.com/77804034/124397313-dc016f80-dd17-11eb-87df-4d0649cc6226.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397313-dc016f80-dd17-11eb-87df-4d0649cc6226.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (1)](https://user-images.githubusercontent.com/77804034/124397315-dc9a0600-dd17-11eb-919e-3422d73d4fe8.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397315-dc9a0600-dd17-11eb-919e-3422d73d4fe8.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (2)](https://user-images.githubusercontent.com/77804034/124397316-dc9a0600-dd17-11eb-8fda-e7b5bc3e2680.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397316-dc9a0600-dd17-11eb-8fda-e7b5bc3e2680.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (3)](https://user-images.githubusercontent.com/77804034/124397317-ddcb3300-dd17-11eb-9e73-f7605185b158.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397317-ddcb3300-dd17-11eb-9e73-f7605185b158.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (4)](https://user-images.githubusercontent.com/77804034/124397319-de63c980-dd17-11eb-8e91-c4fdee2b8b0d.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397319-de63c980-dd17-11eb-8e91-c4fdee2b8b0d.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (5)](https://user-images.githubusercontent.com/77804034/124397321-defc6000-dd17-11eb-90b4-dad388cf8d49.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397321-defc6000-dd17-11eb-90b4-dad388cf8d49.jpeg" width="500" height="850">
 
-![WhatsApp Image 2021-07-04 at 14 56 09 (6)](https://user-images.githubusercontent.com/77804034/124397322-df94f680-dd17-11eb-86ec-4e0079eada9a.jpeg)
+<img src="https://user-images.githubusercontent.com/77804034/124397322-df94f680-dd17-11eb-86ec-4e0079eada9a.jpeg" width="500" height="850">
+
+
 
