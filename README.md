@@ -30,3 +30,7 @@ In Entities package, exist my database objects and Dtos
 ###### Core Package</br>
 In Core package, I managed firebase operations. For example, I would like to add, update, delete  user, I should do that in this layer. The purpose of the layer save mixing database object and dto object. dto is not database object
 
+</br>
+</br>
+NOTE
+if you would like to download project you must add your databe firebase json file.
