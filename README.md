@@ -35,11 +35,11 @@ In Core package, I managed firebase operations. For example, I would like to add
 NOTE
 if you would like to download project you must add your databe firebase json file.
 
-### Video
+### *********************************************---------Video-------************************************************************
 
 https://user-images.githubusercontent.com/77804034/124397519-e1ab8500-dd18-11eb-9e0c-3d614f2423ce.mp4
 
-### Images 
+### *********************************************---------Images-------************************************************************
 
 <img src="https://user-images.githubusercontent.com/77804034/124397304-d9067f00-dd17-11eb-9fd3-92a7585677a3.jpeg" width="500" height="850">
 
