@@ -21,7 +21,7 @@ While developing Vhoops was used Kotlin, Firebase,Dagger Hilt, JitsiMeet,Mvvm, J
  Business package is my business rules package I code in here my app rules.
         for example password cannot be less than 8 characters 
         
-DataAccess Package</br>
+##### DataAccess Package</br>
   I used a diffrent purpose to DataAccess package . For example I would like to get data details if I do that in the core/dataAccess packages dto object (detail objects) can mixed. I only used database object in core/data access layer so If I would like to get Details I should use  this layer If I would like to get Single data I should use core/dataAccess layer. In this technic I tried to blocked mixing dto object and data access object
  
  ##### Entities Package </br>
