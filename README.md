@@ -10,6 +10,7 @@ Vhoops developed with android Sdk and Kotlin. What can you do in Vhoops. You can
 - share location,file sound recording,image,video
 - customize your profile
 - add your friends
+- video call 
 
 ### Languages and Tools
 
